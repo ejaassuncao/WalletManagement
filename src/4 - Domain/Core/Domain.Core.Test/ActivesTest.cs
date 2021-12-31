@@ -3,7 +3,6 @@ using Domain.Core.Model.Actives;
 using Domain.Core.Test.Mock;
 using Domain.Core.Validate;
 using FluentAssertions;
-using System;
 using Xunit;
 using Action = System.Action;
 

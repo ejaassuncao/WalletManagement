@@ -1,7 +1,4 @@
-﻿using Domain.Core.Model;
-using System;
-
-namespace Application.Core.Wallat
+﻿namespace Application.Core.Wallat
 {
     public class Mappper<T>
     {        

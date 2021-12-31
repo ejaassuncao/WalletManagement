@@ -1,9 +1,9 @@
-using System;
-using Xunit;
 using Domain.Core.Model;
 using Domain.Core.Test;
 using FluentAssertions;
 using Service.Core;
+using System;
+using Xunit;
 
 namespace Domain.Service.Test
 {

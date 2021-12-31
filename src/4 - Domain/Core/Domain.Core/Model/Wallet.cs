@@ -1,6 +1,5 @@
 ﻿using Domain.Core.Model.Actives;
 using Domain.Core.Validate;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 

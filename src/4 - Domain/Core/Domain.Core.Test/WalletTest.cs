@@ -20,19 +20,33 @@ namespace Domain.Core.Test
             cenario.Should().NotThrow<Exception>();
         }
 
+
+        /// <summary>
+        /// verificando o total do patrimonio
+        /// </summary>
+        [Fact]        
+        public void TotalCostWallate()
+        {
+            Wallet wallet =  NewWallet();
+            double expect = 7280;
+            Assert.Equal(expect, wallet.TotalCost());
+        }
+
+
+
         public static Wallet NewWallet()
         {
             var wallet = new Wallet(1, "Ativos BR");
 
             var magazine = CompanyTest.GetMagazineLuiza();
 
-            wallet.Buy(new Actions(magazine, magazine.GettTiker(EnumActionTypeTicker.Ordinaria), 60, 16, DateTime.Now));
+            wallet.Buy(new Actions(magazine, magazine.GettTiker(EnumActionTypeTicker.Ordinaria), 60, 16, DateTime.Now)); 
 
             var petrobras = CompanyTest.GetPetrobras();
             wallet.Buy(new Actions(petrobras, petrobras.GettTiker(EnumActionTypeTicker.Preferencial), 60, 22, DateTime.Now));
 
             var habt11 = CompanyTest.GetHabt11();
-            wallet.Buy(new Fiis(habt11, habt11.GettTiker(),  50, 100, DateTime.Now));
+            wallet.Buy(new Fiis(habt11, habt11.GettTiker(),  50, 100, DateTime.Now)); 
 
             return wallet;
         }        

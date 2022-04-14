@@ -35,7 +35,7 @@ namespace Domain.Core.Test.Mock
         public void GetTiker()
         {
             Action cene = () => {
-                GetPetrobras().GettTiker(EnumTypeTicker.Preferencial);
+                GetPetrobras().GettTiker(EnumActionTypeTicker.Preferencial);
             };
 
             cene.Should().NotThrow<Exception>();         

@@ -29,7 +29,7 @@ namespace Domain.Core.Test
             wallet.Actives.Add(new Actions(magazine, magazine.GettTiker(), 60, 16));
 
             var petrobras = CompanyTest.GetPetrobras();
-            wallet.Actives.Add(new Actions(petrobras, petrobras.GettTiker(EnumTypeTicker.Preferencial), 60, 22));
+            wallet.Actives.Add(new Actions(petrobras, petrobras.GettTiker(EnumActionTypeTicker.Preferencial), 60, 22));
 
             var habt11 = CompanyTest.GetHabt11();
             wallet.Actives.Add(new Fiis(habt11, habt11.GettTiker(),  50, 100));

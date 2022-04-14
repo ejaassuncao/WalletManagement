@@ -10,7 +10,7 @@ namespace Domain.Core.Model
 
         public string CNPJ { get; private set; }
 
-        private readonly IDictionary<EnumTypeTicker, string> _ticker = new Dictionary<EnumTypeTicker, string>();
+        private readonly IDictionary<EnumActionTypeTicker, string> _ticker = new Dictionary<EnumActionTypeTicker, string>();
 
         public Company(int id, string name, List<string> tickers, string cnpj = null)
         {
@@ -24,7 +24,7 @@ namespace Domain.Core.Model
             ValidateDomain(name, tickers, cnpj);
         }       
 
-        public string GettTiker(EnumTypeTicker type)
+        public string GettTiker(EnumActionTypeTicker type)
         {            
             ExceptionDomainValidation.When(!_ticker.ContainsKey(type), "Ticker not found");
             return _ticker[type];
@@ -58,23 +58,23 @@ namespace Domain.Core.Model
                 ExceptionDomainValidation.When(ticker.Length > 6, "Name is max length 5");
 
                 
-                var lastCharacter = (ticker.Length == 5)? ticker.Substring(ticker.Length - 1): ticker.Substring(ticker.Length - 2);
+                var lastCharacter = (ticker.Length == 5)? ticker[^1..] : ticker[^2..];
                
                 ExceptionDomainValidation.When(!lastCharacter.All(char.IsDigit), "Ticker invalid");
 
                 switch (lastCharacter)
                 {
                     case "3":
-                        _ticker.Add(EnumTypeTicker.Ordinaria, ticker.ToUpper());
+                        _ticker.Add(EnumActionTypeTicker.Ordinaria, ticker.ToUpper());
                         break;
                     case "4":
-                        _ticker.Add(EnumTypeTicker.Preferencial, ticker.ToUpper());
+                        _ticker.Add(EnumActionTypeTicker.Preferencial, ticker.ToUpper());
                         break;
                     case "11":
-                        _ticker.Add(EnumTypeTicker.Units, ticker.ToUpper());
+                        _ticker.Add(EnumActionTypeTicker.Units, ticker.ToUpper());
                         break;
                     case "6":
-                        _ticker.Add(EnumTypeTicker.ClasseB, ticker.ToUpper());
+                        _ticker.Add(EnumActionTypeTicker.ClasseB, ticker.ToUpper());
                         break;
                 }
             }
@@ -83,12 +83,5 @@ namespace Domain.Core.Model
             CNPJ = cnpj;
         }       
     }
-
-    public enum EnumTypeTicker
-    { 
-        Ordinaria=0, //Final 3 
-        Preferencial=1, // final 4
-        Units=3, //final 11
-        ClasseB=4  // final 6   
-    }
+    
 }

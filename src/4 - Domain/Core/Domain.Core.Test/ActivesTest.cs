@@ -51,10 +51,10 @@ namespace Domain.Core.Test
         }
 
         [Theory]
-        [InlineData(EnumTypeTicker.Ordinaria, "petr3")]
-        [InlineData(EnumTypeTicker.Preferencial, "petr4")]
-        [InlineData(EnumTypeTicker.Units, "petr11")]
-        public void GetTikersLengtMaxZero(EnumTypeTicker type, string ticker)
+        [InlineData(EnumActionTypeTicker.Ordinaria, "petr3")]
+        [InlineData(EnumActionTypeTicker.Preferencial, "petr4")]
+        [InlineData(EnumActionTypeTicker.Units, "petr11")]
+        public void GetTikersLengtMaxZero(EnumActionTypeTicker type, string ticker)
         {
             var company = CompanyTest.GetPetrobras();
             Assert.Equal(ticker.ToUpper(), company.GettTiker(type));
@@ -72,11 +72,11 @@ namespace Domain.Core.Test
 
 
         [Theory]
-        [InlineData(EnumTypeTicker.Ordinaria, "CPLE3")]
-        [InlineData(EnumTypeTicker.Preferencial, "CPLE4")]
-        [InlineData(EnumTypeTicker.ClasseB, "CPLE6")]
-        [InlineData(EnumTypeTicker.Units, "CPLE11")]
-        public void CheckTickersClassA(EnumTypeTicker type, string ticker)
+        [InlineData(EnumActionTypeTicker.Ordinaria, "CPLE3")]
+        [InlineData(EnumActionTypeTicker.Preferencial, "CPLE4")]
+        [InlineData(EnumActionTypeTicker.ClasseB, "CPLE6")]
+        [InlineData(EnumActionTypeTicker.Units, "CPLE11")]
+        public void CheckTickersClassA(EnumActionTypeTicker type, string ticker)
         {
             var company = CompanyTest.GetCopel();
             Assert.Equal(ticker.ToUpper(), company.GettTiker(type));

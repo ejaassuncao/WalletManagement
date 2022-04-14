@@ -3,6 +3,7 @@ using Domain.Core.Model.Actives;
 using Domain.Core.Test.Mock;
 using Domain.Core.Validate;
 using FluentAssertions;
+using System;
 using Xunit;
 using Action = System.Action;
 
@@ -14,7 +15,7 @@ namespace Domain.Core.Test
         public void TickerIsNotFound()
         {
             var company = CompanyTest.GetMagazineLuiza();
-            Action action = () => new Stocks(company, "egi3", 52, 39.79);
+            Action action = () => new Stocks(company, "egi3", 52, 39.79, DateTime.Now);
             action.Should().Throw<ExceptionDomainValidation>().WithMessage("Ticker not found");
         }
 
@@ -23,7 +24,7 @@ namespace Domain.Core.Test
         {
             var company = CompanyTest.GetPetrobras();
 
-            Action action = () => new Stocks(company, "Petr4", 52, 39.79);
+            Action action = () => new Stocks(company, "Petr4", 52, 39.79, DateTime.Now);
 
             action.Should().NotThrow<ExceptionDomainValidation>();
 
@@ -34,7 +35,7 @@ namespace Domain.Core.Test
         {
             var magazine = CompanyTest.GetMagazineLuiza();
 
-            Action action = () => new Stocks(magazine, null, 52, 39.79);
+            Action action = () => new Stocks(magazine, null, 52, 39.79, DateTime.Now);
 
             action.Should().Throw<ExceptionDomainValidation>();
         }
@@ -44,7 +45,7 @@ namespace Domain.Core.Test
         {
             var magazine = CompanyTest.GetMagazineLuiza();
 
-            Action action = () => new Stocks(null, "MGLU3", 52, 39.79);
+            Action action = () => new Stocks(null, "MGLU3", 52, 39.79, DateTime.Now);
 
             action.Should().Throw<ExceptionDomainValidation>().WithMessage("company is null");
 
@@ -88,10 +89,10 @@ namespace Domain.Core.Test
         [InlineData(50, 100, 5000)]
         public static void SuccessTotalCost(int amount, double unitCost, double expected)
         {
-            var wallet = new Wallet("Ativos BR");
+            var wallet = new Wallet(1, "Ativos BR");
             var magazine = CompanyTest.GetMagazineLuiza();
 
-            var actions = new Actions(magazine, magazine.GettTiker(), amount, unitCost);          
+            var actions = new Actions(magazine, magazine.GettTiker(), amount, unitCost, DateTime.Now);          
 
             Assert.Equal(expected, actions.TotalCost);
 

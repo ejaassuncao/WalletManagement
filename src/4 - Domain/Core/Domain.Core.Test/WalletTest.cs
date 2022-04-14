@@ -19,20 +19,20 @@ namespace Domain.Core.Test
             Action cenario = () => NewWallet(); 
             cenario.Should().NotThrow<Exception>();
         }
-        
 
         public static Wallet NewWallet()
         {
-            var wallet = new Wallet("Ativos BR");
+            var wallet = new Wallet(1, "Ativos BR");
 
-            var magazine = CompanyTest.GetMagazineLuiza();          
-            wallet.Actives.Add(new Actions(magazine, magazine.GettTiker(), 60, 16));
+            var magazine = CompanyTest.GetMagazineLuiza();
+
+            wallet.Buy(new Actions(magazine, magazine.GettTiker(EnumActionTypeTicker.Ordinaria), 60, 16, DateTime.Now));
 
             var petrobras = CompanyTest.GetPetrobras();
-            wallet.Actives.Add(new Actions(petrobras, petrobras.GettTiker(EnumActionTypeTicker.Preferencial), 60, 22));
+            wallet.Buy(new Actions(petrobras, petrobras.GettTiker(EnumActionTypeTicker.Preferencial), 60, 22, DateTime.Now));
 
             var habt11 = CompanyTest.GetHabt11();
-            wallet.Actives.Add(new Fiis(habt11, habt11.GettTiker(),  50, 100));
+            wallet.Buy(new Fiis(habt11, habt11.GettTiker(),  50, 100, DateTime.Now));
 
             return wallet;
         }        

@@ -2,7 +2,6 @@
 using Domain.Core.Model.Actives;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Service.Core
 {

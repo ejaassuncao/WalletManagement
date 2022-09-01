@@ -1,19 +1,19 @@
 ﻿using Domain.Core.Validate;
+using System;
 
 namespace Domain.Core.Model.Actives
 {
     public abstract class AbstractActives: EntityBase
     {
-        public AbstractActives(int id, Company company, string ticker, int amount, double unitCost)
-        {
-            ExceptionDomainValidation.When(id <= 0, "Id is min or egual 0");
-            Id = id;
-            ValidateDomain(company, ticker, amount, unitCost);
+        public AbstractActives(int id, Company company, string ticker, int amount,
+            double unitCost, DateTime dateBuy):base(id)
+        {        
+            ValidateDomain(company, ticker, amount, unitCost, dateBuy);
         }
 
-        public AbstractActives(Company company, string ticker, int amount, double unitCost)
+        public AbstractActives(Company company, string ticker, int amount, double unitCost, DateTime dateBuy)
         {
-            ValidateDomain(company, ticker, amount, unitCost);
+            ValidateDomain(company, ticker, amount, unitCost, dateBuy);
         }
 
         public Company Company { get; protected set; }
@@ -49,9 +49,9 @@ namespace Domain.Core.Model.Actives
         public abstract TypeActives TypeActives { get; }
 
         /// <summary>
-        /// Validaões do modelo
+        /// Validações do modelo
         /// </summary>        
-        private void ValidateDomain(Company company, string tiker, int amount, double unitCost)
+        private void ValidateDomain(Company company, string tiker, int amount, double unitCost, DateTime dateBuy)
         {
             ExceptionDomainValidation.When(company == null, "Company is null");
             ExceptionDomainValidation.When(!company.ExistsTicker(tiker), "Ticker not found");

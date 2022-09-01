@@ -15,7 +15,7 @@ namespace Domain.Core.Test
         public void TickerIsNotFound()
         {
             var company = CompanyTest.GetMagazineLuiza();
-            Action action = () => new Stocks(company, "egi3", 52, 39.79);
+            Action action = () => new Stocks(company, "egi3", 52, 39.79, DateTime.Now);
             action.Should().Throw<ExceptionDomainValidation>().WithMessage("Ticker not found");
         }
 
@@ -24,7 +24,7 @@ namespace Domain.Core.Test
         {
             var company = CompanyTest.GetPetrobras();
 
-            Action action = () => new Stocks(company, "Petr4", 52, 39.79);
+            Action action = () => new Stocks(company, "Petr4", 52, 39.79, DateTime.Now);
 
             action.Should().NotThrow<ExceptionDomainValidation>();
 
@@ -35,7 +35,7 @@ namespace Domain.Core.Test
         {
             var magazine = CompanyTest.GetMagazineLuiza();
 
-            Action action = () => new Stocks(magazine, null, 52, 39.79);
+            Action action = () => new Stocks(magazine, null, 52, 39.79, DateTime.Now);
 
             action.Should().Throw<ExceptionDomainValidation>();
         }
@@ -45,17 +45,17 @@ namespace Domain.Core.Test
         {
             var magazine = CompanyTest.GetMagazineLuiza();
 
-            Action action = () => new Stocks(null, "MGLU3", 52, 39.79);
+            Action action = () => new Stocks(null, "MGLU3", 52, 39.79, DateTime.Now);
 
             action.Should().Throw<ExceptionDomainValidation>().WithMessage("company is null");
 
         }
 
         [Theory]
-        [InlineData(EnumTypeTicker.Ordinaria, "petr3")]
-        [InlineData(EnumTypeTicker.Preferencial, "petr4")]
-        [InlineData(EnumTypeTicker.Units, "petr11")]
-        public void GetTikersLengtMaxZero(EnumTypeTicker type, string ticker)
+        [InlineData(EnumActionTypeTicker.Ordinaria, "petr3")]
+        [InlineData(EnumActionTypeTicker.Preferencial, "petr4")]
+        [InlineData(EnumActionTypeTicker.Units, "petr11")]
+        public void GetTikersLengtMaxZero(EnumActionTypeTicker type, string ticker)
         {
             var company = CompanyTest.GetPetrobras();
             Assert.Equal(ticker.ToUpper(), company.GettTiker(type));
@@ -73,11 +73,11 @@ namespace Domain.Core.Test
 
 
         [Theory]
-        [InlineData(EnumTypeTicker.Ordinaria, "CPLE3")]
-        [InlineData(EnumTypeTicker.Preferencial, "CPLE4")]
-        [InlineData(EnumTypeTicker.ClasseB, "CPLE6")]
-        [InlineData(EnumTypeTicker.Units, "CPLE11")]
-        public void CheckTickersClassA(EnumTypeTicker type, string ticker)
+        [InlineData(EnumActionTypeTicker.Ordinaria, "CPLE3")]
+        [InlineData(EnumActionTypeTicker.Preferencial, "CPLE4")]
+        [InlineData(EnumActionTypeTicker.ClasseB, "CPLE6")]
+        [InlineData(EnumActionTypeTicker.Units, "CPLE11")]
+        public void CheckTickersClassA(EnumActionTypeTicker type, string ticker)
         {
             var company = CompanyTest.GetCopel();
             Assert.Equal(ticker.ToUpper(), company.GettTiker(type));
@@ -89,10 +89,10 @@ namespace Domain.Core.Test
         [InlineData(50, 100, 5000)]
         public static void SuccessTotalCost(int amount, double unitCost, double expected)
         {
-            var wallet = new Wallet("Ativos BR");
+            var wallet = new Wallet(1, "Ativos BR");
             var magazine = CompanyTest.GetMagazineLuiza();
 
-            var actions = new Actions(magazine, magazine.GettTiker(), amount, unitCost);          
+            var actions = new Actions(magazine, magazine.GettTiker(), amount, unitCost, DateTime.Now);          
 
             Assert.Equal(expected, actions.TotalCost);
 

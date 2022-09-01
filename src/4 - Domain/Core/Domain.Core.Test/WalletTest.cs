@@ -32,8 +32,6 @@ namespace Domain.Core.Test
             Assert.Equal(expect, wallet.TotalCost());
         }
 
-
-
         public static Wallet NewWallet()
         {
             var wallet = new Wallet(1, "Ativos BR");
@@ -46,7 +44,12 @@ namespace Domain.Core.Test
             wallet.Buy(new Actions(petrobras, petrobras.GettTiker(EnumActionTypeTicker.Preferencial), 60, 22, DateTime.Now));
 
             var habt11 = CompanyTest.GetHabt11();
-            wallet.Buy(new Fiis(habt11, habt11.GettTiker(),  50, 100, DateTime.Now)); 
+            wallet.Buy(new Fiis(habt11, habt11.GettTiker(),  50, 100, DateTime.Now));
+
+            //poderi ser assim?
+            //wallat.Buy(magazine.BuildAction(EnumActionTypeTicker.Ordinaria), 20, 12.50, DateTime.Now);
+            //wallat.Sale(magazine.BuildAction(EnumActionTypeTicker.Ordinaria), 20, 11.50, DateTime.Now.AddDays(1));
+
 
             return wallet;
         }        

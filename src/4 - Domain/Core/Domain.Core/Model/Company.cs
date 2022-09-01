@@ -1,4 +1,5 @@
-﻿using Domain.Core.Validate;
+﻿using Domain.Core.Model.Actives;
+using Domain.Core.Validate;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,10 +13,8 @@ namespace Domain.Core.Model
 
         private readonly IDictionary<EnumActionTypeTicker, string> _ticker = new Dictionary<EnumActionTypeTicker, string>();
 
-        public Company(int id, string name, List<string> tickers, string cnpj = null)
-        {
-            ExceptionDomainValidation.When(id<=0, "Id is min or egual 0");
-            Id = id;
+        public Company(int id, string name, List<string> tickers, string cnpj = null):base(id)
+        {            
             ValidateDomain(name, tickers, cnpj);
         }
 
@@ -81,7 +80,16 @@ namespace Domain.Core.Model
 
             Name = name;
             CNPJ = cnpj;
-        }       
+        }
+
     }
-    
+
+    public enum EnumActionTypeTicker
+    {
+        Ordinaria = 0, //Final 3 
+        Preferencial = 1, // final 4
+        Units = 3, //final 11
+        ClasseB = 4  // final 6   
+    }
+
 }

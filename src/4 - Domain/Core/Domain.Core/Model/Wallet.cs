@@ -17,13 +17,9 @@ namespace Domain.Core.Model
 
         private List<AbstractActives> _actives;
 
-        public Wallet(int id, int owner, string name)
+        public Wallet(int id, int owner, string name):base(id)
         {
-            ExceptionDomainValidation.When(id <= 0, "Id is min or egual 0");
-            Id = id;
-
-            ValidateDomain(owner, name);
-           
+            ValidateDomain(owner, name);           
         }
 
         public Wallet(int owner, string name)

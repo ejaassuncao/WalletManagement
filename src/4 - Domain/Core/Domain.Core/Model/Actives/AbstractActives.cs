@@ -5,10 +5,9 @@ namespace Domain.Core.Model.Actives
 {
     public abstract class AbstractActives: EntityBase
     {
-        public AbstractActives(int id, Company company, string ticker, int amount, double unitCost, DateTime dateBuy)
-        {
-            ExceptionDomainValidation.When(id <= 0, "Id is min or egual 0");
-            Id = id;
+        public AbstractActives(int id, Company company, string ticker, int amount,
+            double unitCost, DateTime dateBuy):base(id)
+        {        
             ValidateDomain(company, ticker, amount, unitCost, dateBuy);
         }
 

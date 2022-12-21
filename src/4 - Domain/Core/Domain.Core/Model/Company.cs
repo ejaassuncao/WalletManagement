@@ -1,11 +1,11 @@
-﻿using Domain.Core.Model.Actives;
-using Domain.Core.Validate;
+﻿using Domain.Commons.Entity;
+using Domain.Commons.Validate;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Domain.Core.Model
 {
-    public sealed class Company :EntityBase
+    public sealed class Company : EntityBase
     {
         public string Name { get; private set; }
 
@@ -13,29 +13,29 @@ namespace Domain.Core.Model
 
         private readonly IDictionary<EnumActionTypeTicker, string> _ticker = new Dictionary<EnumActionTypeTicker, string>();
 
-        public Company(int id, string name, List<string> tickers, string cnpj = null):base(id)
-        {            
+        public Company(int id, string name, List<string> tickers, string cnpj = null) : base(id)
+        {
             ValidateDomain(name, tickers, cnpj);
         }
 
-        public Company(string name, List<string> tickers, string cnpj=null) 
+        public Company(string name, List<string> tickers, string cnpj = null)
         {
             ValidateDomain(name, tickers, cnpj);
-        }       
+        }
 
         public string GettTiker(EnumActionTypeTicker type)
-        {            
+        {
             ExceptionDomainValidation.When(!_ticker.ContainsKey(type), "Ticker not found");
             return _ticker[type];
         }
 
         public string GettTiker()
         {
-            return _ticker.Values.ToList()[0];           
+            return _ticker.Values.ToList()[0];
         }
 
         public bool ExistsTicker(string ticker)
-        {  
+        {
             return _ticker.Values.Any(x => x == ticker?.ToUpper());
         }
 
@@ -46,8 +46,8 @@ namespace Domain.Core.Model
             ExceptionDomainValidation.When(name.Length > 255, "Name is max length 255");
 
 
-            ExceptionDomainValidation.When(tickers==null, "Tickers is not null");
-            ExceptionDomainValidation.When(tickers.Count ==0, "Tickers not found");
+            ExceptionDomainValidation.When(tickers == null, "Tickers is not null");
+            ExceptionDomainValidation.When(tickers.Count == 0, "Tickers not found");
 
             foreach (var ticker in tickers)
             {
@@ -56,24 +56,24 @@ namespace Domain.Core.Model
                 ExceptionDomainValidation.When(ticker.Length < 5, "Name is min length 5");
                 ExceptionDomainValidation.When(ticker.Length > 6, "Name is max length 5");
 
-                
-                var lastCharacter = (ticker.Length == 5)? ticker[^1..] : ticker[^2..];
-               
+
+                var lastCharacter = (ticker.Length == 5) ? ticker[^1..] : ticker[^2..];
+
                 ExceptionDomainValidation.When(!lastCharacter.All(char.IsDigit), "Ticker invalid");
 
                 switch (lastCharacter)
                 {
                     case "3":
-                        _ticker.Add(EnumActionTypeTicker.Ordinaria, ticker.ToUpper());
+                        _ticker.Add(EnumActionTypeTicker.ON, ticker.ToUpper());
                         break;
                     case "4":
-                        _ticker.Add(EnumActionTypeTicker.Preferencial, ticker.ToUpper());
+                        _ticker.Add(EnumActionTypeTicker.PN, ticker.ToUpper());
                         break;
                     case "11":
                         _ticker.Add(EnumActionTypeTicker.Units, ticker.ToUpper());
                         break;
                     case "6":
-                        _ticker.Add(EnumActionTypeTicker.ClasseB, ticker.ToUpper());
+                        _ticker.Add(EnumActionTypeTicker.ClassB, ticker.ToUpper());
                         break;
                 }
             }
@@ -81,15 +81,13 @@ namespace Domain.Core.Model
             Name = name;
             CNPJ = cnpj;
         }
-
     }
 
     public enum EnumActionTypeTicker
     {
-        Ordinaria = 0, //Final 3 
-        Preferencial = 1, // final 4
+        ON = 0, //Final 3 
+        PN = 1, // final 4
         Units = 3, //final 11
-        ClasseB = 4  // final 6   
+        ClassB = 4  // final 6   
     }
-
 }

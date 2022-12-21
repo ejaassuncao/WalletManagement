@@ -2,8 +2,8 @@
 
 namespace Domain.core.IRepository
 {
-    public interface IWalletRespository:IRepository<Wallet>
+    public interface IWalletRespository : IRepository<Wallet>
     {
-        
+
     }
 }

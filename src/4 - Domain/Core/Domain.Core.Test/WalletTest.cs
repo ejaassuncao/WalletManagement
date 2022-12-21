@@ -1,4 +1,6 @@
-﻿using Domain.Core.Model;
+﻿using Domain.Commons.Entity;
+using Domain.Commons.Test;
+using Domain.Core.Model;
 using Domain.Core.Model.Actives;
 using Domain.Core.Test.Mock;
 using FluentAssertions;
@@ -9,49 +11,61 @@ using Action = System.Action;
 namespace Domain.Core.Test
 {
     public class WalletTest
-    {      
+    {
         /// <summary>
         /// Crei uma carteira e adicionei dois ativos
         /// </summary>
         [Fact]
         public void CreateWallatSucess()
         {
-            Action cenario = () => NewWallet(); 
+            Action cenario = () => NewWallet();
             cenario.Should().NotThrow<Exception>();
         }
-
 
         /// <summary>
         /// verificando o total do patrimonio
         /// </summary>
-        [Fact]        
+        [Fact]
         public void TotalCostWallate()
         {
-            Wallet wallet =  NewWallet();
+            Wallet wallet = NewWallet();
             double expect = 7280;
             Assert.Equal(expect, wallet.TotalCost());
         }
 
+
+        [Theory]
+        [InlineData(60, 16, 960)]
+        [InlineData(50, 100, 5000)]
+        public static void SuccessTotalCost(int amount, double unitCost, double expected)
+        {
+            var user = UserTest.GetNewInstanceMock();
+            var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
+            var magazine = CompanyTest.GetMagazineLuizaMock();
+
+            wallet.Buy(new Actions(magazine, magazine.GettTiker()), amount, unitCost, DateTime.Now, user);
+
+            Assert.Equal(expected, wallet.TotalCost());
+        }
+
+
         public static Wallet NewWallet()
         {
-            var wallet = new Wallet(1, "Ativos BR");
+            User user = UserTest.GetNewInstanceMock();
 
-            var magazine = CompanyTest.GetMagazineLuiza();
+            var wallet = new Wallet(user, "Ativos BR");
 
-            wallet.Buy(new Actions(magazine, magazine.GettTiker(EnumActionTypeTicker.Ordinaria), 60, 16, DateTime.Now)); 
+            var magazine = CompanyTest.GetMagazineLuizaMock();
+
+            wallet.Buy(new Actions(magazine, magazine.GettTiker(EnumActionTypeTicker.ON)), 60, 16.00, DateTime.Now, user);
 
             var petrobras = CompanyTest.GetPetrobras();
-            wallet.Buy(new Actions(petrobras, petrobras.GettTiker(EnumActionTypeTicker.Preferencial), 60, 22, DateTime.Now));
+            wallet.Buy(new Actions(petrobras, petrobras.GettTiker(EnumActionTypeTicker.PN)), 60, 22.00, DateTime.Now, user);
 
             var habt11 = CompanyTest.GetHabt11();
-            wallet.Buy(new Fiis(habt11, habt11.GettTiker(),  50, 100, DateTime.Now));
-
-            //poderi ser assim?
-            //wallat.Buy(magazine.BuildAction(EnumActionTypeTicker.Ordinaria), 20, 12.50, DateTime.Now);
-            //wallat.Sale(magazine.BuildAction(EnumActionTypeTicker.Ordinaria), 20, 11.50, DateTime.Now.AddDays(1));
-
-
+            wallet.Buy(new Fiis(habt11, habt11.GettTiker()), 50, 100.00, DateTime.Now, user);
+                    
             return wallet;
-        }        
+        }
     }
 }

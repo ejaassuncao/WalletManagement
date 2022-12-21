@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.Core.Validate
+namespace Domain.Commons.Validate
 {
     public class ExceptionDomainValidation:Exception
     {

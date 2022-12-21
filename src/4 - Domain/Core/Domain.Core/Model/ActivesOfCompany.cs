@@ -44,14 +44,17 @@ namespace Domain.Core.Model
             ExceptionDomainValidation.When(dateBuy == default, "invalid date");
             ExceptionDomainValidation.When(user is null, "usert not found");
 
+            amount = (operation == EnumOperationWallet.SALES) ? (amount * -1) : amount;
+
             Active = active;
             Amount = amount;
             UnitCost = unitCost;
+            TotalCost = (amount * unitCost);
             //Caso for valor de venda negativa TotalCost
-            TotalCost = (operation == EnumOperationWallet.SALES) ? ((amount * unitCost) * -1) : (amount * unitCost);
             DateBuy = dateBuy;
             User = user;
             Operation = operation;
+
         }
     }
 }

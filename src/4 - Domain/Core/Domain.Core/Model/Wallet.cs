@@ -13,11 +13,19 @@ namespace Domain.Core.Model
     /// </summary>
     public sealed class Wallet : EntityBase
     {
+        #region MSG Validate
+        //todo: colocar todas  como contantes aplicar em outras classes
+        public static string MSG_SALES_LARGER_BUY = "The number of shares being sold is greater than the value of the portfolio";
+        public static string MSG_NOT_EXIST_ACTIVE = "The number of shares being sold is greater than the value of the portfolio";       
+
+        #endregion
+
         public User Owner { get; set; }
 
         public string Name { get; private set; }
 
         private List<ActivesOfCompany> _actives;
+      
 
         public Wallet(int id, User owner, string name) : base(id)
         {
@@ -35,10 +43,20 @@ namespace Domain.Core.Model
         /// </summary>
         /// <param name="typeActives">The type actives.</param>
         /// <returns></returns>
+        public double TotalCost(AbstractActives actives)
+        {
+            return _actives.Where(x=>x.Active.Ticker== actives.Ticker).Sum(x => x.TotalCost);
+        }
+
+        /// <summary>
+        /// Totals the cost.
+        /// soma do custo total da cateria
+        /// </summary>
+        /// <param name="typeActives">The type actives.</param>
+        /// <returns></returns>
         public double TotalCost()
         {
             return _actives.Sum(x => x.TotalCost);
-
         }
 
         /// <summary>
@@ -50,6 +68,29 @@ namespace Domain.Core.Model
         public double TotalCost(EnumTypeActives typeActives)
         {
             return _actives.Where(a => a.Active.TypeActives == typeActives).Sum(x => x.TotalCost);
+        }
+
+
+        /// <summary>
+        /// Totals the cost.
+        /// Quantidade de ativos pro ticker
+        /// </summary>
+        /// <param name="typeActives">The type actives.</param>
+        /// <returns></returns>
+        public int TotalAmount(AbstractActives actives)
+        {          
+            return _actives.Where(a => a.Active.Ticker == actives.Ticker).Sum(x => x.Amount);
+        }
+
+        /// <summary>
+        /// Totals the cost.
+        /// Quantidade de ativos na carteira
+        /// </summary>
+        /// <param name="typeActives">The type actives.</param>
+        /// <returns></returns>
+        public int TotalAmount()
+        {
+            return _actives.Sum(x => x.Amount);
         }
 
         /// <summary>
@@ -74,6 +115,17 @@ namespace Domain.Core.Model
         }
 
         /// <summary>
+        /// Exists the active.
+        /// Se existe o attivo na carteria
+        /// </summary>
+        /// <param name="active">The active.</param>
+        /// <returns></returns>
+        public bool ExistActive(AbstractActives active)
+        {
+            return _actives.Any(x => x.Active.Ticker == active.Ticker);
+        }
+
+        /// <summary>
         /// Sales the specified active.
         /// Adicionar uma venda na carteria de um determinado ativo
         /// </summary>
@@ -84,6 +136,9 @@ namespace Domain.Core.Model
         /// <param name="user">The user.</param>
         public void Sale(AbstractActives active, int amount, double unitSales, DateTime dateBuy, User user)
         {
+            ExceptionDomainValidation.When(!this.ExistActive(active), MSG_NOT_EXIST_ACTIVE);                        
+            ExceptionDomainValidation.When(this.TotalAmount(active) < amount, MSG_SALES_LARGER_BUY);
+
             _actives.Add(new ActivesOfCompany(
                 active: active,
                 amount: amount,
@@ -92,7 +147,7 @@ namespace Domain.Core.Model
                 user: user,
                 operation: EnumOperationWallet.SALES
             ));
-        }
+        }       
 
         private void ValidateDomain(User owner, string name)
         {

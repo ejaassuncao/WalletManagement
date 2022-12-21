@@ -15,5 +15,9 @@ namespace Domain.Commons.Validate
                 throw new ExceptionDomainValidation(message);
         }
 
+        public static void When(object p, string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

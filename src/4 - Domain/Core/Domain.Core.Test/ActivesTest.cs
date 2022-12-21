@@ -59,7 +59,6 @@ namespace Domain.Core.Test
             Assert.Equal(ticker.ToUpper(), company.GettTiker(type));
         }
 
-
         [Theory]
         [InlineData("petr3")]
         [InlineData("petr4")]
@@ -68,7 +67,6 @@ namespace Domain.Core.Test
             var company = CompanyTest.GetPetrobras();
             Assert.True(company.ExistsTicker(ticker));
         }
-
 
         [Theory]
         [InlineData(EnumActionTypeTicker.ON, "CPLE3")]

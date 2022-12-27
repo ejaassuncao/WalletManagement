@@ -34,7 +34,12 @@ namespace Domain.Core.Test
             Assert.Equal(expect, wallet.TotalCost());
         }
 
-
+        /// <summary>
+        /// Testa o custo total da carteria
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="unitCost"></param>
+        /// <param name="expected"></param>
         [Theory]
         [InlineData(60, 16, 960)]
         [InlineData(50, 100, 5000)]
@@ -49,10 +54,14 @@ namespace Domain.Core.Test
             Assert.Equal(expected, wallet.TotalCost());
         }
 
+        /// <summary>
+        /// Testa a validaçõa da carteria onde venda não poder ser maior que a compra
+        /// </summary>
         [Fact]
         public void SalesLargerBuyException()
         {
-            Action cene = () => { 
+            Action cene = () =>
+            {
                 var user = UserTest.GetNewInstanceMock();
                 var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
                 var magazine = CompanyTest.GetMagazineLuizaMock();
@@ -72,12 +81,15 @@ namespace Domain.Core.Test
             cene.Should().Throw<ExceptionDomainValidation>().WithMessage(Wallet.MSG_SALES_LARGER_BUY);
         }
 
+        /// <summary>
+        /// Verifica se a quantidade total condiz com as compras e vendas da carteira
+        /// </summary>
         [Fact]
         public void TotalAmountBuyAndSales()
         {
             var user = UserTest.GetNewInstanceMock();
             var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
-           
+
             var magazineCompany = CompanyTest.GetMagazineLuizaMock();
             var petrobrasCompany = CompanyTest.GetPetrobras();
 
@@ -98,6 +110,9 @@ namespace Domain.Core.Test
             Assert.Equal(expected, wallet.TotalAmount());
         }
 
+        /// <summary>
+        /// Verifica se a quantidade total condiz com as compras e vendas de um determinado ativo
+        /// </summary>
         [Fact]
         public void TotalAmountBuyAndSalesByActive()
         {
@@ -124,13 +139,15 @@ namespace Domain.Core.Test
             Assert.Equal(expected, wallet.TotalAmount(magazineActive));
         }
 
-
+        /// <summary>
+        /// Verifica se o total de custo condiz com as compras e vendas da carteira
+        /// </summary>
         [Fact]
         public void TotalCostBuyAndSales()
         {
             var user = UserTest.GetNewInstanceMock();
             var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
-           
+
             var magazineCompany = CompanyTest.GetMagazineLuizaMock();
             var petrobrasCompany = CompanyTest.GetPetrobras();
 
@@ -151,12 +168,14 @@ namespace Domain.Core.Test
             Assert.Equal(expected, wallet.TotalCost());
         }
 
-
+        /// <summary>
+        /// Verifica se o total de custo condiz com as compras e vendas de um determinado ativo
+        /// </summary>
         [Fact]
         public void TotalCostBuyAndSalesByActive()
         {
             var user = UserTest.GetNewInstanceMock();
-            var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");       
+            var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
 
             var magazineCompany = CompanyTest.GetMagazineLuizaMock();
             var petrobrasCompany = CompanyTest.GetPetrobras();
@@ -178,6 +197,9 @@ namespace Domain.Core.Test
             Assert.Equal(expected, wallet.TotalCost(magazineActive));
         }
 
+        /// <summary>
+        /// Testa função que verifica se um determinado Existe em carteira
+        /// </summary>
         [Fact]
         public void ExisteActive()
         {
@@ -186,13 +208,16 @@ namespace Domain.Core.Test
             var magazine = CompanyTest.GetMagazineLuizaMock();
             var action = new Actions(magazine, magazine.GettTiker());
 
-            wallet.Buy(action, 5, 12.50, DateTime.Now, user); 
+            wallet.Buy(action, 5, 12.50, DateTime.Now, user);
 
-            var expected = true;              
-       
-            Assert.Equal(expected, wallet.ExistActive(action));
+            var expected = true;
+
+            Assert.Equal(expected, wallet.ExistsActive(action));
         }
 
+        /// <summary>
+        /// Testa função que verifica se um determinado NÂO existe em carteira
+        /// </summary>
         [Fact]
         public void NotExisteActive()
         {
@@ -201,13 +226,16 @@ namespace Domain.Core.Test
 
             var magazine = CompanyTest.GetMagazineLuizaMock();
             var action = new Actions(magazine, magazine.GettTiker());
-               
+
             var expected = false;
 
-            Assert.Equal(expected, wallet.ExistActive(action));
+            Assert.Equal(expected, wallet.ExistsActive(action));
         }
 
-
+        /// <summary>
+        /// cria uma carteria com compras e Vendas
+        /// </summary>
+        /// <returns></returns>
         public static Wallet NewWallet()
         {
             User user = UserTest.GetNewInstanceMock();
@@ -223,7 +251,7 @@ namespace Domain.Core.Test
 
             var habt11 = CompanyTest.GetHabt11();
             wallet.Buy(new Fiis(habt11, habt11.GettTiker()), 50, 100.00, DateTime.Now, user);
-                    
+
             return wallet;
         }
     }

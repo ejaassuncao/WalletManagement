@@ -16,8 +16,14 @@ namespace Domain.Core.Model
         #region MSG Validate
         //todo: colocar todas  como contantes aplicar em outras classes
         public static string MSG_SALES_LARGER_BUY = "The number of shares being sold is greater than the value of the portfolio";
-        public static string MSG_NOT_EXIST_ACTIVE = "The number of shares being sold is greater than the value of the portfolio";       
+        public static string MSG_NOT_EXIST_ACTIVE = "The number of shares being sold is greater than the value of the portfolio";
+        public static string MSG_OWNER_NOT_FOUND = "Owner not found";
+        public static string MSG_NAME_IS_NULL_OR_EMPTY = "Name is null or empty";
+        public static string MSG_NAME_IS_MIN_LENGTH_3 = "Name is min length 3";
+        public static string MSG_NAME_IS_MAX_LENGTH_255 = "Name is max length 255";
 
+
+        
         #endregion
 
         public User Owner { get; set; }
@@ -120,7 +126,7 @@ namespace Domain.Core.Model
         /// </summary>
         /// <param name="active">The active.</param>
         /// <returns></returns>
-        public bool ExistActive(AbstractActives active)
+        public bool ExistsActive(AbstractActives active)
         {
             return _actives.Any(x => x.Active.Ticker == active.Ticker);
         }
@@ -136,7 +142,7 @@ namespace Domain.Core.Model
         /// <param name="user">The user.</param>
         public void Sale(AbstractActives active, int amount, double unitSales, DateTime dateBuy, User user)
         {
-            ExceptionDomainValidation.When(!this.ExistActive(active), MSG_NOT_EXIST_ACTIVE);                        
+            ExceptionDomainValidation.When(!this.ExistsActive(active), MSG_NOT_EXIST_ACTIVE);                        
             ExceptionDomainValidation.When(this.TotalAmount(active) < amount, MSG_SALES_LARGER_BUY);
 
             _actives.Add(new ActivesOfCompany(
@@ -151,13 +157,13 @@ namespace Domain.Core.Model
 
         private void ValidateDomain(User owner, string name)
         {
-            ExceptionDomainValidation.When(owner is null, "owner not found");
+            ExceptionDomainValidation.When(owner is null, MSG_OWNER_NOT_FOUND);
 
-            ExceptionDomainValidation.When(string.IsNullOrEmpty(name), "Name is null or empty");
+            ExceptionDomainValidation.When(string.IsNullOrEmpty(name), MSG_NAME_IS_NULL_OR_EMPTY);
 
-            ExceptionDomainValidation.When(name.Length < 3, "Name is min length 3");
+            ExceptionDomainValidation.When(name.Length < 3, MSG_NAME_IS_MIN_LENGTH_3);
 
-            ExceptionDomainValidation.When(name.Length > 255, "Name is max length 255");
+            ExceptionDomainValidation.When(name.Length > 255, MSG_NAME_IS_MAX_LENGTH_255);
 
             Owner = owner;
             Name = name;

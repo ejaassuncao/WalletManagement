@@ -2,9 +2,10 @@
 using System;
 
 namespace Domain.Commons.Entity
-{
-    public abstract class EntityBase
+{    public abstract class EntityBase
     {
+        public static string MSG_ID_IS_MIN_OR_EGUAL_0 = "Id is min or egual 0";
+
         protected EntityBase() { }
 
         protected EntityBase(int id)
@@ -30,7 +31,6 @@ namespace Domain.Commons.Entity
         Disabled = 0,
         Enabled = 1
     }
-
 }
 
 

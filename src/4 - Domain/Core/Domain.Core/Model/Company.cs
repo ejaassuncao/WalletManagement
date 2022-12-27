@@ -7,25 +7,45 @@ namespace Domain.Core.Model
 {
     public sealed class Company : EntityBase
     {
+        #region MSG Validate   
+        public static string MSG_NAME_IS_NULL_OR_EMPTY = "Name is null or empty";
+        public static string MSG_NAME_IS_MIN_LENGTH_3 = "Name is min length 3";
+        public static string MSG_NAME_IS_MAX_LENGTH_255 = "Name is max length 255";
+        public static string MSG_TICKERS_IS_NOT_NULL = "Tickers is not null";
+        public static string MSG_TICKERS_NOT_FOUND = "Tickers not found";
+        public static string MSG_TICKERS_IS_NOT_NULL_OR_EMPTY = "Ticker is null or empty";
+        public static string MSG_NAME_IS_MIN_LENGTH_5 = "Name is min length 5";
+        public static string MSG_NAME_IS_MAX_LENGTH_5 = "Name is max length 5";
+        public static string MSG_TICKERS_INVALID = "Ticker invalid";
+        #endregion
+
+        #region properties
         public string Name { get; private set; }
 
         public string CNPJ { get; private set; }
 
+        public Sector Setor { get; private set; }
+
         private readonly IDictionary<EnumActionTypeTicker, string> _ticker = new Dictionary<EnumActionTypeTicker, string>();
 
-        public Company(int id, string name, List<string> tickers, string cnpj = null) : base(id)
+        #endregion
+
+        #region metods
+        public Company(int id, string name, List<string> tickers, string cnpj = null, Sector setor = null) : base(id)
         {
             ValidateDomain(name, tickers, cnpj);
+            Setor = setor;
         }
 
-        public Company(string name, List<string> tickers, string cnpj = null)
+        public Company(string name, List<string> tickers, string cnpj = null, Sector setor = null)
         {
             ValidateDomain(name, tickers, cnpj);
+            Setor = setor;
         }
 
         public string GettTiker(EnumActionTypeTicker type)
         {
-            ExceptionDomainValidation.When(!_ticker.ContainsKey(type), "Ticker not found");
+            ExceptionDomainValidation.When(!_ticker.ContainsKey(type), MSG_TICKERS_NOT_FOUND);
             return _ticker[type];
         }
 
@@ -41,25 +61,23 @@ namespace Domain.Core.Model
 
         private void ValidateDomain(string name, List<string> tickers, string cnpj)
         {
-            ExceptionDomainValidation.When(string.IsNullOrEmpty(name), "Name is null or empty");
-            ExceptionDomainValidation.When(name.Length < 3, "Name is min length 3");
-            ExceptionDomainValidation.When(name.Length > 255, "Name is max length 255");
-
-
-            ExceptionDomainValidation.When(tickers == null, "Tickers is not null");
-            ExceptionDomainValidation.When(tickers.Count == 0, "Tickers not found");
+            ExceptionDomainValidation.When(string.IsNullOrEmpty(name), MSG_NAME_IS_NULL_OR_EMPTY);
+            ExceptionDomainValidation.When(name.Length < 3, MSG_NAME_IS_MIN_LENGTH_3);
+            ExceptionDomainValidation.When(name.Length > 255, MSG_NAME_IS_MAX_LENGTH_255);
+            ExceptionDomainValidation.When(tickers == null, MSG_TICKERS_IS_NOT_NULL);
+            ExceptionDomainValidation.When(tickers.Count == 0, MSG_TICKERS_NOT_FOUND);
 
             foreach (var ticker in tickers)
             {
                 //regras para ticker BR
-                ExceptionDomainValidation.When(string.IsNullOrEmpty(ticker), "Ticker is null or empty");
-                ExceptionDomainValidation.When(ticker.Length < 5, "Name is min length 5");
-                ExceptionDomainValidation.When(ticker.Length > 6, "Name is max length 5");
+                ExceptionDomainValidation.When(string.IsNullOrEmpty(ticker), MSG_TICKERS_IS_NOT_NULL_OR_EMPTY);
+                ExceptionDomainValidation.When(ticker.Length < 5, MSG_NAME_IS_MIN_LENGTH_5);
+                ExceptionDomainValidation.When(ticker.Length > 6, MSG_NAME_IS_MAX_LENGTH_5);
 
 
                 var lastCharacter = (ticker.Length == 5) ? ticker[^1..] : ticker[^2..];
 
-                ExceptionDomainValidation.When(!lastCharacter.All(char.IsDigit), "Ticker invalid");
+                ExceptionDomainValidation.When(!lastCharacter.All(char.IsDigit), MSG_TICKERS_INVALID);
 
                 switch (lastCharacter)
                 {
@@ -81,9 +99,10 @@ namespace Domain.Core.Model
             Name = name;
             CNPJ = cnpj;
         }
+        #endregion
     }
 
-    public enum EnumActionTypeTicker
+    public enum EnumActionTypeTicker : byte
     {
         ON = 0, //Final 3 
         PN = 1, // final 4

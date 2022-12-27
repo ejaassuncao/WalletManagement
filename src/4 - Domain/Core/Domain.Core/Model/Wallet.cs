@@ -13,26 +13,28 @@ namespace Domain.Core.Model
     /// </summary>
     public sealed class Wallet : EntityBase
     {
-        #region MSG Validate
-        //todo: colocar todas  como contantes aplicar em outras classes
+        #region MSG Validate        
         public static string MSG_SALES_LARGER_BUY = "The number of shares being sold is greater than the value of the portfolio";
-        public static string MSG_NOT_EXIST_ACTIVE = "The number of shares being sold is greater than the value of the portfolio";
+        public static string MSG_NOT_EXIST_ACTIVE = "Active not found";
         public static string MSG_OWNER_NOT_FOUND = "Owner not found";
         public static string MSG_NAME_IS_NULL_OR_EMPTY = "Name is null or empty";
         public static string MSG_NAME_IS_MIN_LENGTH_3 = "Name is min length 3";
         public static string MSG_NAME_IS_MAX_LENGTH_255 = "Name is max length 255";
-
-
-        
         #endregion
 
-        public User Owner { get; set; }
+        #region properties
 
         public string Name { get; private set; }
 
-        private List<ActivesOfCompany> _actives;
-      
+        public User Owner { get; private set; }
 
+        public Broker Broker { get; private set; }
+
+        private List<ActivesOfCompany> _actives;
+
+        #endregion
+
+        #region Metod
         public Wallet(int id, User owner, string name) : base(id)
         {
             ValidateDomain(owner, name);
@@ -40,7 +42,7 @@ namespace Domain.Core.Model
 
         public Wallet(User owner, string name)
         {
-            ValidateDomain(owner, name);
+            ValidateDomain(owner, name);           
         }
 
         /// <summary>
@@ -51,7 +53,7 @@ namespace Domain.Core.Model
         /// <returns></returns>
         public double TotalCost(AbstractActives actives)
         {
-            return _actives.Where(x=>x.Active.Ticker== actives.Ticker).Sum(x => x.TotalCost);
+            return _actives.Where(x => x.Active.Ticker == actives.Ticker).Sum(x => x.TotalCost);
         }
 
         /// <summary>
@@ -76,7 +78,6 @@ namespace Domain.Core.Model
             return _actives.Where(a => a.Active.TypeActives == typeActives).Sum(x => x.TotalCost);
         }
 
-
         /// <summary>
         /// Totals the cost.
         /// Quantidade de ativos pro ticker
@@ -84,7 +85,7 @@ namespace Domain.Core.Model
         /// <param name="typeActives">The type actives.</param>
         /// <returns></returns>
         public int TotalAmount(AbstractActives actives)
-        {          
+        {
             return _actives.Where(a => a.Active.Ticker == actives.Ticker).Sum(x => x.Amount);
         }
 
@@ -108,7 +109,7 @@ namespace Domain.Core.Model
         /// <param name="unitCost">The unit cost.</param>
         /// <param name="dateBuy">The date buy.</param>
         /// <param name="user">The user.</param>
-        public void Buy(AbstractActives active, int amount, double unitCost, DateTime dateBuy, User user)
+        public void Buy(AbstractActives active, int amount, double unitCost, DateTime dateBuy, User user, Broker broker)
         {
             _actives.Add(new ActivesOfCompany(
                 active: active,
@@ -116,6 +117,7 @@ namespace Domain.Core.Model
                 unitCost: unitCost,
                 dateBuy: dateBuy,
                 user: user,
+                broker: broker,
                 operation: EnumOperationWallet.BUY
             ));
         }
@@ -142,7 +144,7 @@ namespace Domain.Core.Model
         /// <param name="user">The user.</param>
         public void Sale(AbstractActives active, int amount, double unitSales, DateTime dateBuy, User user)
         {
-            ExceptionDomainValidation.When(!this.ExistsActive(active), MSG_NOT_EXIST_ACTIVE);                        
+            ExceptionDomainValidation.When(!this.ExistsActive(active), MSG_NOT_EXIST_ACTIVE);
             ExceptionDomainValidation.When(this.TotalAmount(active) < amount, MSG_SALES_LARGER_BUY);
 
             _actives.Add(new ActivesOfCompany(
@@ -153,7 +155,7 @@ namespace Domain.Core.Model
                 user: user,
                 operation: EnumOperationWallet.SALES
             ));
-        }       
+        }
 
         private void ValidateDomain(User owner, string name)
         {
@@ -169,5 +171,7 @@ namespace Domain.Core.Model
             Name = name;
             _actives = new List<ActivesOfCompany>();
         }
+
+        #endregion
     }
 }

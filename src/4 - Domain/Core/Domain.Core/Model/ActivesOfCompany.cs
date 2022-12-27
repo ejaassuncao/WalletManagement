@@ -35,8 +35,9 @@ namespace Domain.Core.Model
         /// </summary>
         public User User { get; protected set; }
         public EnumOperationWallet Operation { get; protected set; }
+        public Broker Broker { get; protected set; }
 
-        public ActivesOfCompany(AbstractActives active, int amount, double unitCost, DateTime dateBuy, User user, EnumOperationWallet operation)
+        public ActivesOfCompany(AbstractActives active, int amount, double unitCost, DateTime dateBuy, User user, EnumOperationWallet operation, Broker broker = null)
         {
             ExceptionDomainValidation.When(active is null, "active not found");
             ExceptionDomainValidation.When(amount <= 0, "amount is min or egual 0");
@@ -54,7 +55,7 @@ namespace Domain.Core.Model
             DateBuy = dateBuy;
             User = user;
             Operation = operation;
-
+            Broker = broker;
         }
     }
 }

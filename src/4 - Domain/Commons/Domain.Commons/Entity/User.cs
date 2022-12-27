@@ -5,7 +5,7 @@ namespace Domain.Commons.Entity
     public class User : EntityBase
     {  
         public string Login { get; set; }
-        public String Password { get; set; }
+        public string Password { get; set; }
 
         public User(int id, string login, string password) : base(id)
         {

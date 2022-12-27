@@ -152,7 +152,6 @@ namespace Domain.Core.Test
         }
 
 
-
         [Fact]
         public void TotalCostBuyAndSalesByActive()
         {

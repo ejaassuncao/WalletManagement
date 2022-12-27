@@ -20,8 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\4 - Domain\Core\Domain.Core.Test\Domain.Core.Test.csproj" />
-    <ProjectReference Include="..\Domain.Service\Service.Core.csproj" />
+    <ProjectReference Include="..\Domain.Commons\Domain.Commons.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
-﻿using Domain.Core.Model;
-using Domain.Core.Validate;
+﻿using Domain.Commons.Validate;
+using Domain.Core.Model;
 using FluentAssertions;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace Domain.Core.Test.Mock
 {
     public class CompanyTest
     {
-        internal static  Company GetMagazineLuiza()
+        internal static  Company GetMagazineLuizaMock()
         {
             return new Company("magazine luiza", new List<string>  { "Mglu3" });         
            
@@ -35,7 +35,7 @@ namespace Domain.Core.Test.Mock
         public void GetTiker()
         {
             Action cene = () => {
-                GetPetrobras().GettTiker(EnumActionTypeTicker.Preferencial);
+                GetPetrobras().GettTiker(EnumActionTypeTicker.PN);
             };
 
             cene.Should().NotThrow<Exception>();         
@@ -69,11 +69,9 @@ namespace Domain.Core.Test.Mock
             Action cene = () => {
                 GetCopel();
                 GetPetrobras();
-                GetMagazineLuiza();
+                GetMagazineLuizaMock();
             };
             cene.Should().NotThrow<ExceptionDomainValidation>();
         }
-
-
     }
 }

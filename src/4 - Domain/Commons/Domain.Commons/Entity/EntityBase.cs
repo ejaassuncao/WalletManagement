@@ -1,14 +1,11 @@
-﻿using Domain.Core.Validate;
+﻿using Domain.Commons.Validate;
 using System;
 
-namespace Domain.Core
+namespace Domain.Commons.Entity
 {
     public abstract class EntityBase
     {
-        protected EntityBase()
-        {
-
-        }
+        protected EntityBase() { }
 
         protected EntityBase(int id)
         {
@@ -16,9 +13,9 @@ namespace Domain.Core
             ExceptionDomainValidation.When(id <= 0, "Id is min or egual 0");
         }
 
-        public int Id { get; protected set; }   
+        public int Id { get; protected set; }
         public DateTime DCreated { get; protected set; }
-        
+
         public DateTime LastUpdate { get; protected set; }
 
         public string CIdUserCreated { get; protected set; }

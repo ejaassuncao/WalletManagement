@@ -1,5 +1,5 @@
 ﻿using Domain.Core.Model;
-using Domain.Core.Model.Actives;
+using Domain.Core.Model.Enumerables;
 using System;
 using System.Collections.Generic;
 
@@ -16,7 +16,7 @@ namespace Service.Core
             List<TotalPriceTypeActives> totalprice =  new List<TotalPriceTypeActives>();
 
             double valueTotal = wallat.TotalCost();
-            foreach (TypeActives typeActives in (TypeActives[])Enum.GetValues(typeof(TypeActives)))
+            foreach (EnumTypeActives typeActives in (EnumTypeActives[])Enum.GetValues(typeof(EnumTypeActives)))
             {
                 var valueUnit = wallat.TotalCost(typeActives);
                 totalprice.Add(new TotalPriceTypeActives

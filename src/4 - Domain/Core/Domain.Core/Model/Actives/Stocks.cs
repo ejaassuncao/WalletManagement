@@ -1,21 +1,20 @@
-﻿using System;
+﻿using Domain.Core.Model.Enumerables;
 
 namespace Domain.Core.Model.Actives
 {
     /// <summary>
-    /// Ativos
+    /// Ação internacionais
     /// </summary>
     public sealed class Stocks : AbstractActives
     {
-        public Stocks(Company company, string ticker, int amount, double unitCost, DateTime dateBuy) : base(company, ticker, amount, unitCost, dateBuy)
+        public Stocks(Company company, string ticker) : base(company, ticker)
         {
         }
 
-        public Stocks(int id, Company company, string ticker, int amount, double unitCost, DateTime dateBuy) : base(id, company, ticker, amount, unitCost, dateBuy)
+        public Stocks(int id, Company company, string ticker) : base(id, company, ticker)
         {
         }
 
-        public override TypeActives TypeActives => TypeActives.Stockes;
-
+        public override EnumTypeActives TypeActives => EnumTypeActives.Stockes;
     }
 }

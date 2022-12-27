@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.Core.Validate
+namespace Domain.Commons.Validate
 {
     public class ExceptionDomainValidation:Exception
     {
@@ -15,5 +15,9 @@ namespace Domain.Core.Validate
                 throw new ExceptionDomainValidation(message);
         }
 
+        public static void When(object p, string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

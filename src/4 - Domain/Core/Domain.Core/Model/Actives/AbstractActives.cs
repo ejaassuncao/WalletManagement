@@ -1,6 +1,7 @@
 ﻿using Domain.Commons.Entity;
 using Domain.Commons.Validate;
 using Domain.Core.Model.Enumerables;
+using System;
 
 namespace Domain.Core.Model.Actives
 {
@@ -43,5 +44,10 @@ namespace Domain.Core.Model.Actives
             Company = company;
             Ticker = tiker;
         }
-    }  
+
+        public void UpdateCounting(double counting)
+        {
+            this.Counting = counting;
+        }
+    }
 }

@@ -6,6 +6,7 @@ using Domain.Core.Model.Actives;
 using Domain.Core.Test.Mock;
 using FluentAssertions;
 using System;
+using System.Collections.Generic;
 using Xunit;
 using Action = System.Action;
 
@@ -48,8 +49,9 @@ namespace Domain.Core.Test
             var user = UserTest.GetNewInstanceMock();
             var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
             var magazine = CompanyTest.GetMagazineLuizaMock();
+            var broker = new Broker("Rico", "Rico", "21457878");
 
-            wallet.Buy(new Actions(magazine, magazine.GettTiker()), amount, unitCost, DateTime.Now, user);
+            wallet.Buy(new Actions(magazine, magazine.GettTiker()), amount, unitCost, DateTime.Now, user, broker);
 
             Assert.Equal(expected, wallet.TotalCost());
         }
@@ -65,9 +67,10 @@ namespace Domain.Core.Test
                 var user = UserTest.GetNewInstanceMock();
                 var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
                 var magazine = CompanyTest.GetMagazineLuizaMock();
+                var broker = new Broker("Rico", "Rico", "21457878");
 
-                wallet.Buy(new Actions(magazine, magazine.GettTiker()), 4, 10, DateTime.Now, user); //40
-                wallet.Buy(new Actions(magazine, magazine.GettTiker()), 5, 12.50, DateTime.Now, user); //62.50
+                wallet.Buy(new Actions(magazine, magazine.GettTiker()), 4, 10, DateTime.Now, user, broker); //40
+                wallet.Buy(new Actions(magazine, magazine.GettTiker()), 5, 12.50, DateTime.Now, user, broker); //62.50
 
                 wallet.Sale(new Actions(magazine, magazine.GettTiker()), 2, 8, DateTime.Now, user); //16
                 wallet.Sale(new Actions(magazine, magazine.GettTiker()), 5, 7, DateTime.Now, user);// 35
@@ -89,6 +92,7 @@ namespace Domain.Core.Test
         {
             var user = UserTest.GetNewInstanceMock();
             var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
+            var broker = new Broker("Rico", "Rico", "21457878");
 
             var magazineCompany = CompanyTest.GetMagazineLuizaMock();
             var petrobrasCompany = CompanyTest.GetPetrobras();
@@ -97,9 +101,9 @@ namespace Domain.Core.Test
             var petrobrasActive = new Actions(petrobrasCompany, petrobrasCompany.GettTiker());
 
             //total 19
-            wallet.Buy(magazineActive, 4, 10, DateTime.Now, user);
-            wallet.Buy(magazineActive, 5, 12.50, DateTime.Now, user);
-            wallet.Buy(petrobrasActive, 10, 10, DateTime.Now, user);
+            wallet.Buy(magazineActive, 4, 10, DateTime.Now, user, broker);
+            wallet.Buy(magazineActive, 5, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(petrobrasActive, 10, 10, DateTime.Now, user, broker);
 
             //total 7
             wallet.Sale(magazineActive, 2, 8, DateTime.Now, user);
@@ -118,6 +122,7 @@ namespace Domain.Core.Test
         {
             var user = UserTest.GetNewInstanceMock();
             var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
+            var broker = new Broker("Rico", "Rico", "21457878");
 
             var magazineCompany = CompanyTest.GetMagazineLuizaMock();
             var petrobrasCompany = CompanyTest.GetPetrobras();
@@ -126,9 +131,9 @@ namespace Domain.Core.Test
             var petrobrasActive = new Actions(petrobrasCompany, petrobrasCompany.GettTiker());
 
             //total 19
-            wallet.Buy(magazineActive, 4, 10, DateTime.Now, user);
-            wallet.Buy(magazineActive, 5, 12.50, DateTime.Now, user);
-            wallet.Buy(petrobrasActive, 10, 10, DateTime.Now, user);
+            wallet.Buy(magazineActive, 4, 10, DateTime.Now, user, broker);
+            wallet.Buy(magazineActive, 5, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(petrobrasActive, 10, 10, DateTime.Now, user, broker);
 
             //total 7
             wallet.Sale(magazineActive, 2, 8, DateTime.Now, user);
@@ -147,6 +152,7 @@ namespace Domain.Core.Test
         {
             var user = UserTest.GetNewInstanceMock();
             var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
+            var broker = new Broker("Rico", "Rico", "21457878");
 
             var magazineCompany = CompanyTest.GetMagazineLuizaMock();
             var petrobrasCompany = CompanyTest.GetPetrobras();
@@ -155,9 +161,9 @@ namespace Domain.Core.Test
             var petrobrasActive = new Actions(petrobrasCompany, petrobrasCompany.GettTiker());
 
             //total 202,50
-            wallet.Buy(magazineActive, 4, 10, DateTime.Now, user);
-            wallet.Buy(magazineActive, 5, 12.50, DateTime.Now, user);
-            wallet.Buy(petrobrasActive, 10, 10, DateTime.Now, user);
+            wallet.Buy(magazineActive, 4, 10, DateTime.Now, user, broker);
+            wallet.Buy(magazineActive, 5, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(petrobrasActive, 10, 10, DateTime.Now, user, broker);
 
             //total 51
             wallet.Sale(magazineActive, 2, 8, DateTime.Now, user);
@@ -176,6 +182,7 @@ namespace Domain.Core.Test
         {
             var user = UserTest.GetNewInstanceMock();
             var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
+            var broker = new Broker("Rico", "Rico", "21457878");
 
             var magazineCompany = CompanyTest.GetMagazineLuizaMock();
             var petrobrasCompany = CompanyTest.GetPetrobras();
@@ -184,9 +191,9 @@ namespace Domain.Core.Test
             var petrobrasActive = new Actions(petrobrasCompany, petrobrasCompany.GettTiker());
 
             //total 102,5 de magalu
-            wallet.Buy(magazineActive, 4, 10, DateTime.Now, user);
-            wallet.Buy(magazineActive, 5, 12.50, DateTime.Now, user);
-            wallet.Buy(petrobrasActive, 10, 10, DateTime.Now, user);
+            wallet.Buy(magazineActive, 4, 10, DateTime.Now, user, broker);
+            wallet.Buy(magazineActive, 5, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(petrobrasActive, 10, 10, DateTime.Now, user, broker);
 
             //total 51
             wallet.Sale(magazineActive, 2, 8, DateTime.Now, user);
@@ -207,8 +214,9 @@ namespace Domain.Core.Test
             var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
             var magazine = CompanyTest.GetMagazineLuizaMock();
             var action = new Actions(magazine, magazine.GettTiker());
+            var broker = new Broker("Rico", "Rico", "21457878");
 
-            wallet.Buy(action, 5, 12.50, DateTime.Now, user);
+            wallet.Buy(action, 5, 12.50, DateTime.Now, user, broker);
 
             var expected = true;
 
@@ -233,24 +241,103 @@ namespace Domain.Core.Test
         }
 
         /// <summary>
+        /// Quero saber quando eu tenho de patrimonio caso vender minhas açõoes
+        /// </summary>
+        [Theory]
+        [InlineData(9.90, 23.50)]
+        [InlineData(7.80, 23.80)]
+        [InlineData(7.50, 22.85)]
+        [InlineData(8.90, 22.60)]
+        public void GetPatrimony(double countingMagazine, double countingPetrobras)
+        {
+            var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
+            var user = UserTest.GetNewInstanceMock();
+            var magazineCompany = CompanyTest.GetMagazineLuizaMock();
+            var petrobrasCompany = CompanyTest.GetPetrobras();
+
+            var broker = new Broker("Rico", "Rico", "21457878");
+
+            var magazineActive = new Actions(magazineCompany, magazineCompany.GettTiker());
+            magazineActive.UpdateCounting(countingMagazine);
+
+            var petrobrasActive = new Actions(petrobrasCompany, petrobrasCompany.GettTiker());
+            petrobrasActive.UpdateCounting(countingPetrobras);
+
+            //total 102,5 de magalu
+            wallet.Buy(magazineActive, 4, 10, DateTime.Now, user, broker);
+            wallet.Buy(magazineActive, 5, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(magazineActive, 10, 8, DateTime.Now, user, broker);
+
+            wallet.Buy(petrobrasActive, 8, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(petrobrasActive, 15, 8, DateTime.Now, user, broker);
+
+            var result = Math.Round(wallet.GetPatrimony(), 2);
+            double expected = Math.Round((19 * countingMagazine) + (23 * countingPetrobras), 2);
+
+            Assert.Equal(expected, result);
+
+        }
+
+        /// <summary>
+        /// Quero saber se estou com lucro / prejuizo de patrimonio
+        /// </summary>
+        [Theory]
+        [InlineData(9.90, 23.50)]
+        [InlineData(7.80, 23.80)]
+        [InlineData(7.50, 22.85)]
+        [InlineData(8.90, 22.60)]
+        public void GetProfit(double countingMagazine, double countingPetrobras)
+        {
+            var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
+            var user = UserTest.GetNewInstanceMock();
+            var magazineCompany = CompanyTest.GetMagazineLuizaMock();
+            var petrobrasCompany = CompanyTest.GetPetrobras();
+
+            var broker = new Broker("Rico", "Rico", "21457878");
+
+            var magazineActive = new Actions(magazineCompany, magazineCompany.GettTiker());
+            magazineActive.UpdateCounting(countingMagazine);
+
+            var petrobrasActive = new Actions(petrobrasCompany, petrobrasCompany.GettTiker());
+            petrobrasActive.UpdateCounting(countingPetrobras);
+
+            //total 102,5 de magalu
+            wallet.Buy(magazineActive, 4, 10, DateTime.Now, user, broker);
+            wallet.Buy(magazineActive, 5, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(magazineActive, 10, 8, DateTime.Now, user, broker);
+
+            wallet.Buy(petrobrasActive, 8, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(petrobrasActive, 15, 8, DateTime.Now, user, broker);
+
+            var result = wallet.GetProfit();
+
+            var patrimony = wallet.GetPatrimony();
+            var totalCost = wallet.TotalCost();
+
+            var expected = (patrimony - totalCost);
+
+            Assert.Equal(Math.Round(expected, 2), Math.Round(result, 2));
+
+        }
+
+        /// <summary>
         /// cria uma carteria com compras e Vendas
         /// </summary>
         /// <returns></returns>
         public static Wallet NewWallet()
         {
             User user = UserTest.GetNewInstanceMock();
-
-            var wallet = new Wallet(user, "Ativos BR");
-
             var magazine = CompanyTest.GetMagazineLuizaMock();
+            var wallet = new Wallet(user, "Ativos BR");
+            var broker = new Broker("Rico", "Rico", "21457878");
 
-            wallet.Buy(new Actions(magazine, magazine.GettTiker(EnumActionTypeTicker.ON)), 60, 16.00, DateTime.Now, user);
+            wallet.Buy(new Actions(magazine, magazine.GettTiker(EnumActionTypeTicker.ON)), 60, 16.00, DateTime.Now, user, broker);
 
             var petrobras = CompanyTest.GetPetrobras();
-            wallet.Buy(new Actions(petrobras, petrobras.GettTiker(EnumActionTypeTicker.PN)), 60, 22.00, DateTime.Now, user);
+            wallet.Buy(new Actions(petrobras, petrobras.GettTiker(EnumActionTypeTicker.PN)), 60, 22.00, DateTime.Now, user, broker);
 
             var habt11 = CompanyTest.GetHabt11();
-            wallet.Buy(new Fiis(habt11, habt11.GettTiker()), 50, 100.00, DateTime.Now, user);
+            wallet.Buy(new Fiis(habt11, habt11.GettTiker()), 50, 100.00, DateTime.Now, user, broker);
 
             return wallet;
         }

@@ -8,7 +8,7 @@ namespace Domain.Core.Model
     public sealed class Company : EntityBase
     {
         #region MSG Validate   
-        public static string MSG_NAME_IS_NULL_OR_EMPTY = "Name is null or empty";
+        public const string MSG_NAME_IS_NULL_OR_EMPTY = "Name is null or empty";
         public static string MSG_NAME_IS_MIN_LENGTH_3 = "Name is min length 3";
         public static string MSG_NAME_IS_MAX_LENGTH_255 = "Name is max length 255";
         public static string MSG_TICKERS_IS_NOT_NULL = "Tickers is not null";
@@ -20,11 +20,11 @@ namespace Domain.Core.Model
         #endregion
 
         #region properties
-        public string Name { get; private set; }
+        public string Name { get; init; }
 
-        public string CNPJ { get; private set; }
+        public string CNPJ { get; init; }
 
-        public Sector Setor { get; private set; }
+        public Sector Setor { get; init; }
 
         private readonly IDictionary<EnumActionTypeTicker, string> _ticker = new Dictionary<EnumActionTypeTicker, string>();
 
@@ -34,12 +34,16 @@ namespace Domain.Core.Model
         public Company(int id, string name, List<string> tickers, string cnpj = null, Sector setor = null) : base(id)
         {
             ValidateDomain(name, tickers, cnpj);
+            Name = name;
+            CNPJ = cnpj;
             Setor = setor;
         }
 
         public Company(string name, List<string> tickers, string cnpj = null, Sector setor = null)
         {
             ValidateDomain(name, tickers, cnpj);
+            Name = name;
+            CNPJ = cnpj;
             Setor = setor;
         }
 
@@ -94,10 +98,7 @@ namespace Domain.Core.Model
                         _ticker.Add(EnumActionTypeTicker.ClassB, ticker.ToUpper());
                         break;
                 }
-            }
-
-            Name = name;
-            CNPJ = cnpj;
+            }        
         }
         #endregion
     }

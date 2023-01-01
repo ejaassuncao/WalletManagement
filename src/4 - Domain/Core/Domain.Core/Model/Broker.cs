@@ -7,9 +7,9 @@ namespace Domain.Core.Model
     /// </summary>
     public sealed class Broker : EntityBase
     {
-        public string NomeFantasia { get; set; }
-        public string RazãoSocial { get; set; }
-        public string CNPJ { get; set; }
+        public string NomeFantasia { get; init; }
+        public string RazãoSocial { get; init; }
+        public string CNPJ { get; init; }
 
         public Broker(string nomeFantasia, string razãoSocial, string cnpj)
         {

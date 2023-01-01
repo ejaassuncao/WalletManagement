@@ -24,11 +24,11 @@ namespace Domain.Core.Model
 
         #region properties
 
-        public string Name { get; private set; }
+        public string Name { get; init; }
 
-        public User Owner { get; private set; }
+        public User Owner { get; init; }
 
-        public Broker Broker { get; private set; }
+        public Broker Broker { get; init; }
 
         private List<ActivesOfCompany> _actives;
 
@@ -38,11 +38,17 @@ namespace Domain.Core.Model
         public Wallet(int id, User owner, string name) : base(id)
         {
             ValidateDomain(owner, name);
+            Owner = owner;
+            Name = name;
+            _actives = new List<ActivesOfCompany>();
         }
 
         public Wallet(User owner, string name)
         {
-            ValidateDomain(owner, name);           
+            ValidateDomain(owner, name);
+            Owner = owner;
+            Name = name;
+            _actives = new List<ActivesOfCompany>();
         }
 
         /// <summary>
@@ -58,7 +64,7 @@ namespace Domain.Core.Model
 
         /// <summary>
         /// Totals the cost.
-        /// soma do custo total da cateria
+        /// soma do custo total da carteria
         /// </summary>
         /// <param name="typeActives">The type actives.</param>
         /// <returns></returns>
@@ -166,10 +172,29 @@ namespace Domain.Core.Model
             ExceptionDomainValidation.When(name.Length < 3, MSG_NAME_IS_MIN_LENGTH_3);
 
             ExceptionDomainValidation.When(name.Length > 255, MSG_NAME_IS_MAX_LENGTH_255);
+        }
 
-            Owner = owner;
-            Name = name;
-            _actives = new List<ActivesOfCompany>();
+        /// <summary>
+        /// Retorna o valor do patrimonio da carteira
+        /// pega todo as ações e soma a cotação atual
+        /// </summary>
+        /// <returns></returns>
+        public double GetPatrimony()
+        {           
+            return _actives.Sum(x => (x.Active.Counting * x.Amount));
+        }
+
+        /// <summary>
+        /// Retorna Lucro/Prejetujo patrimonio
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public double GetProfit()
+        {
+            var patrimony = this.GetPatrimony();
+            var totalCost = this.TotalCost();
+
+            return patrimony - totalCost;
         }
 
         #endregion

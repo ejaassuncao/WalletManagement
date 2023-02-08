@@ -1,0 +1,2 @@
+Parte relacioandas a Infra estutura 
+* Mediator

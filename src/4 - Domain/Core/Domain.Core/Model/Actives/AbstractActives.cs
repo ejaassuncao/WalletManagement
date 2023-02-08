@@ -2,6 +2,7 @@
 using Domain.Commons.Validate;
 using Domain.Core.Model.Enumerables;
 using System;
+using System.Threading.Tasks;
 
 namespace Domain.Core.Model.Actives
 {
@@ -48,6 +49,16 @@ namespace Domain.Core.Model.Actives
         public void UpdateCounting(double counting)
         {
             this.Counting = counting;
+        }
+
+        public static AbstractActives Parser(Task<string> content)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static AbstractActives Parser(string content)
+        {
+            throw new NotImplementedException();
         }
     }
 }

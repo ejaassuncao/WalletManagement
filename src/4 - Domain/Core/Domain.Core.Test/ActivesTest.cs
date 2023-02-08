@@ -1,8 +1,10 @@
 using Domain.Commons.Validate;
+using Domain.Core.Interfaces;
 using Domain.Core.Model;
 using Domain.Core.Model.Actives;
 using Domain.Core.Test.Mock;
 using FluentAssertions;
+using System.ComponentModel.Design;
 using Xunit;
 using Action = System.Action;
 
@@ -78,5 +80,7 @@ namespace Domain.Core.Test
             var company = CompanyTest.GetCopel();
             Assert.Equal(ticker.ToUpper(), company.GettTiker(type));
         }
+
+       
     }
 }

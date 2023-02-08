@@ -1,0 +1,5 @@
+- Aqui está também relacionado a regra de negocio(domain.service).
+- Porém coloquei apenas service.
+- Esse cara responsável pela comunicação dos Modelos (alguns lugaresa chama-se de user-case. A rigor, o termo "Domain Service" não existe na Uncle Bob's Clean Architecture, mas sim no DDD.);
+- Cada repositorio tem o seu serviço responsável
+- Relatórios são feitos aqui.

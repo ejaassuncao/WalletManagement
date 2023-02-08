@@ -6,7 +6,6 @@ using Domain.Core.Model.Actives;
 using Domain.Core.Test.Mock;
 using FluentAssertions;
 using System;
-using System.Collections.Generic;
 using Xunit;
 using Action = System.Action;
 

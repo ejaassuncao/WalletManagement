@@ -1,0 +1,53 @@
+﻿@using System.Diagnostics.CodeAnalysis;
+@typeparam TItem
+
+<style>
+    table > thead > tr {
+        background-color: black;
+        color: white;
+    }
+</style>
+
+@if (DataBind == null)
+{ 
+    <LoadingComponent/>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                @foreach (var item in Columns.Split(","))
+                {
+                    <th>@item</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in DataBind)
+            {
+                if (RowTemplate is not null)
+                {
+                    <tr>
+                        @RowTemplate(item)
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    [Parameter, AllowNull]
+    public string Columns { get; set; }
+
+    [Parameter]
+    public RenderFragment<TItem>? RowTemplate { get; set; }
+
+
+    [Parameter, AllowNull]
+    public IReadOnlyList<TItem> DataBind { get; set; }
+
+}
+

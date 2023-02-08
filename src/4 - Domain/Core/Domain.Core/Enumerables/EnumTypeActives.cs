@@ -2,9 +2,10 @@
 {
     public enum EnumTypeActives
     {
-        Action,
-        Stockes,
-        Fiis,
-        Reits,
+        ACTION,
+        STOCKES,
+        FIIS,
+        REITS,
+        ALL
     }
 }

@@ -1,0 +1,21 @@
+﻿@page "/counter"
+
+<PageTitle>Contador</PageTitle>
+
+<h1>@Titulo</h1>
+
+<p role="status">Contador Corrente: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Clique aqui</button>
+
+@code {
+    private int currentCount = 0;
+
+    private string Titulo = "Contador";
+
+    private void IncrementCount()
+    {
+        currentCount++;
+        
+    }
+}

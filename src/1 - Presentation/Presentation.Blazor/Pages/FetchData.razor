@@ -1,0 +1,46 @@
+﻿@page "/fetchdata"
+@using Presentation.Blazor.Component
+@inject HttpClient Http
+
+<PageTitle>@Title</PageTitle>
+
+<h1>
+    @Title
+</h1>
+
+<p>Teste componente demonstra a obtenção de dados do servidor.</p>
+
+<TableComponent columns="Date, Temp. (C), Temp. (F), Summary" DataBind="forecasts" Context="forecast">
+    <RowTemplate>
+        <td>@forecast.Date.ToShortDateString()</td>
+        <td>@forecast.TemperatureC</td>
+        <td>@forecast.TemperatureF</td>
+        <td>@forecast.Summary</td>
+    </RowTemplate>
+</TableComponent>
+
+<pagination>
+    </pagination>
+
+@code {
+    private WeatherForecast[]? forecasts;
+    private string Title = "Previsão do tempo";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(8000);//simulando uma demora
+
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+    }
+
+    public class WeatherForecast
+    {
+        public DateOnly Date { get; set; }
+
+        public int TemperatureC { get; set; }
+
+        public string? Summary { get; set; }
+
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
+}

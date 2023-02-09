@@ -30,7 +30,6 @@ namespace Domain.Core.Test.Mock
             return new Company("Habitat II - Fundo de Investimento Imobiliario", new List<string> { "HABT11"});
         }
 
-
         [Fact]
         public void GetTiker()
         {

@@ -8,36 +8,58 @@
     }
 </style>
 
-@if (DataBind == null)
-{ 
-    <LoadingComponent/>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                @foreach (var item in Columns.Split(","))
-                {
-                    <th>@item</th>
-                }
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in DataBind)
+<table class="table">
+    <thead>
+        <tr>
+            @foreach (var item in Columns.Split(","))
             {
-                if (RowTemplate is not null)
+                <th>@item</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @if (Loading)
+        {
+            <tr>
+                <td colspan="@Columns.Split(",").Length" class="text-center">
+                    <LoadingComponent Message="@MessageLoading"></LoadingComponent>
+                </td>
+            </tr>
+        }
+        else
+        {
+            if (DataBind == null || DataBind.Count==0)
+            {
+                <tr>
+                    <td colspan="@Columns.Split(",").Length" class="text-center">@MessageEmpty</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in DataBind)
                 {
-                    <tr>
-                        @RowTemplate(item)
-                    </tr>
+                    if (RowTemplate is not null)
+                    {
+                        <tr>
+                            @RowTemplate(item)
+                        </tr>
+                    }
                 }
             }
-        </tbody>
-    </table>
-}
+        }
+    </tbody>
+</table>
 
 @code {
+
+    [Parameter, AllowNull]
+    public string MessageLoading { get; set; }
+
+    [Parameter, AllowNull]
+    public bool Loading { get; set; }
+
+    [Parameter, AllowNull]
+    public string MessageEmpty { get; set; }
 
     [Parameter, AllowNull]
     public string Columns { get; set; }
@@ -45,9 +67,7 @@ else
     [Parameter]
     public RenderFragment<TItem>? RowTemplate { get; set; }
 
-
     [Parameter, AllowNull]
     public IReadOnlyList<TItem> DataBind { get; set; }
-
 }
 

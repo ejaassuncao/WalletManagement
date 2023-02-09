@@ -9,8 +9,15 @@
 </h1>
 
 <p>Teste componente demonstra a obtenção de dados do servidor.</p>
+<button class="btn btn-primary" @onclick="Find">Pesquisar</button>
+<br />
 
-<TableComponent columns="Date, Temp. (C), Temp. (F), Summary" DataBind="forecasts" Context="forecast">
+<TableComponent Columns="Date, Temp. (C), Temp. (F), Summary"
+                DataBind="forecasts"
+                Context="forecast"
+                MessageEmpty="Not found"
+                Loading=@loading
+                MessageLoading="Loadinng...">
     <RowTemplate>
         <td>@forecast.Date.ToShortDateString()</td>
         <td>@forecast.TemperatureC</td>
@@ -19,18 +26,22 @@
     </RowTemplate>
 </TableComponent>
 
-<pagination>
-    </pagination>
 
 @code {
     private WeatherForecast[]? forecasts;
     private string Title = "Previsão do tempo";
+    private bool loading;
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    //init
+    //}
 
-    protected override async Task OnInitializedAsync()
+    public async Task Find()
     {
+        loading = true;
         await Task.Delay(8000);//simulando uma demora
-
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        loading = false;
     }
 
     public class WeatherForecast

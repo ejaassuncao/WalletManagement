@@ -23,7 +23,7 @@ namespace Domain.Core.Test
         [Fact]
         public void TickerIsValid()
         {
-            var company = CompanyTest.GetPetrobras();
+            var company = CompanyTest.GetPetrobrasMock();
 
             Action action = () => new Stocks(company, "Petr4");
 
@@ -57,7 +57,7 @@ namespace Domain.Core.Test
         [InlineData(EnumActionTypeTicker.Units, "petr11")]
         public void GetTikersLengtMaxZero(EnumActionTypeTicker type, string ticker)
         {
-            var company = CompanyTest.GetPetrobras();
+            var company = CompanyTest.GetPetrobrasMock();
             Assert.Equal(ticker.ToUpper(), company.GettTiker(type));
         }
 
@@ -66,7 +66,7 @@ namespace Domain.Core.Test
         [InlineData("petr4")]
         public void CheckTickers(string ticker)
         {
-            var company = CompanyTest.GetPetrobras();
+            var company = CompanyTest.GetPetrobrasMock();
             Assert.True(company.ExistsTicker(ticker));
         }
 
@@ -77,7 +77,7 @@ namespace Domain.Core.Test
         [InlineData(EnumActionTypeTicker.Units, "CPLE11")]
         public void CheckTickersClassA(EnumActionTypeTicker type, string ticker)
         {
-            var company = CompanyTest.GetCopel();
+            var company = CompanyTest.GetCopelMock();
             Assert.Equal(ticker.ToUpper(), company.GettTiker(type));
         }
 

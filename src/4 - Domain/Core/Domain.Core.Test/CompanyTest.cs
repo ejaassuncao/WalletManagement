@@ -14,18 +14,18 @@ namespace Domain.Core.Test.Mock
             return new Company("magazine luiza", new List<string>  { "Mglu3" });         
            
         }
-        internal static Company GetPetrobras()
+        internal static Company GetPetrobrasMock()
         {
             return new Company("Petrobrás", new List<string> { "PETR4", "PETR3", "PETR11" });
         }
 
-        internal static Company GetCopel()
+        internal static Company GetCopelMock()
         {
            return new Company("Copel", new List<string> { "CPLE3", "CPLE4", "CPLE6", "CPLE11" });
            
         }
 
-        public static Company GetHabt11()
+        public static Company GetHabt11Mock()
         {
             return new Company("Habitat II - Fundo de Investimento Imobiliario", new List<string> { "HABT11"});
         }
@@ -35,7 +35,7 @@ namespace Domain.Core.Test.Mock
         public void GetTiker()
         {
             Action cene = () => {
-                GetPetrobras().GettTiker(EnumActionTypeTicker.PN);
+                GetPetrobrasMock().GettTiker(EnumActionTypeTicker.PN);
             };
 
             cene.Should().NotThrow<Exception>();         
@@ -45,7 +45,7 @@ namespace Domain.Core.Test.Mock
         public void GetTikerUniq()
         {
             Action cene = () => {
-                GetHabt11().GettTiker();
+                GetHabt11Mock().GettTiker();
             };
 
             cene.Should().NotThrow<Exception>();
@@ -67,8 +67,8 @@ namespace Domain.Core.Test.Mock
         public void CreateCompanySucess()
         {
             Action cene = () => {
-                GetCopel();
-                GetPetrobras();
+                GetCopelMock();
+                GetPetrobrasMock();
                 GetMagazineLuizaMock();
             };
             cene.Should().NotThrow<ExceptionDomainValidation>();

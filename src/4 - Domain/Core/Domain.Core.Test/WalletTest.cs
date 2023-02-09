@@ -94,7 +94,7 @@ namespace Domain.Core.Test
             var broker = new Broker("Rico", "Rico", "21457878");
 
             var magazineCompany = CompanyTest.GetMagazineLuizaMock();
-            var petrobrasCompany = CompanyTest.GetPetrobras();
+            var petrobrasCompany = CompanyTest.GetPetrobrasMock();
 
             var magazineActive = new Actions(magazineCompany, magazineCompany.GettTiker());
             var petrobrasActive = new Actions(petrobrasCompany, petrobrasCompany.GettTiker());
@@ -124,7 +124,7 @@ namespace Domain.Core.Test
             var broker = new Broker("Rico", "Rico", "21457878");
 
             var magazineCompany = CompanyTest.GetMagazineLuizaMock();
-            var petrobrasCompany = CompanyTest.GetPetrobras();
+            var petrobrasCompany = CompanyTest.GetPetrobrasMock();
 
             var magazineActive = new Actions(magazineCompany, magazineCompany.GettTiker());
             var petrobrasActive = new Actions(petrobrasCompany, petrobrasCompany.GettTiker());
@@ -154,7 +154,7 @@ namespace Domain.Core.Test
             var broker = new Broker("Rico", "Rico", "21457878");
 
             var magazineCompany = CompanyTest.GetMagazineLuizaMock();
-            var petrobrasCompany = CompanyTest.GetPetrobras();
+            var petrobrasCompany = CompanyTest.GetPetrobrasMock();
 
             var magazineActive = new Actions(magazineCompany, magazineCompany.GettTiker());
             var petrobrasActive = new Actions(petrobrasCompany, petrobrasCompany.GettTiker());
@@ -184,7 +184,7 @@ namespace Domain.Core.Test
             var broker = new Broker("Rico", "Rico", "21457878");
 
             var magazineCompany = CompanyTest.GetMagazineLuizaMock();
-            var petrobrasCompany = CompanyTest.GetPetrobras();
+            var petrobrasCompany = CompanyTest.GetPetrobrasMock();
 
             var magazineActive = new Actions(magazineCompany, magazineCompany.GettTiker());
             var petrobrasActive = new Actions(petrobrasCompany, petrobrasCompany.GettTiker());
@@ -252,7 +252,7 @@ namespace Domain.Core.Test
             var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
             var user = UserTest.GetNewInstanceMock();
             var magazineCompany = CompanyTest.GetMagazineLuizaMock();
-            var petrobrasCompany = CompanyTest.GetPetrobras();
+            var petrobrasCompany = CompanyTest.GetPetrobrasMock();
 
             var broker = new Broker("Rico", "Rico", "21457878");
 
@@ -290,7 +290,7 @@ namespace Domain.Core.Test
             var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
             var user = UserTest.GetNewInstanceMock();
             var magazineCompany = CompanyTest.GetMagazineLuizaMock();
-            var petrobrasCompany = CompanyTest.GetPetrobras();
+            var petrobrasCompany = CompanyTest.GetPetrobrasMock();
 
             var broker = new Broker("Rico", "Rico", "21457878");
 
@@ -332,10 +332,10 @@ namespace Domain.Core.Test
 
             wallet.Buy(new Actions(magazine, magazine.GettTiker(EnumActionTypeTicker.ON)), 60, 16.00, DateTime.Now, user, broker);
 
-            var petrobras = CompanyTest.GetPetrobras();
+            var petrobras = CompanyTest.GetPetrobrasMock();
             wallet.Buy(new Actions(petrobras, petrobras.GettTiker(EnumActionTypeTicker.PN)), 60, 22.00, DateTime.Now, user, broker);
 
-            var habt11 = CompanyTest.GetHabt11();
+            var habt11 = CompanyTest.GetHabt11Mock();
             wallet.Buy(new Fiis(habt11, habt11.GettTiker()), 50, 100.00, DateTime.Now, user, broker);
 
             return wallet;

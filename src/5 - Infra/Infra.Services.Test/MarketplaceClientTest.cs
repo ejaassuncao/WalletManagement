@@ -7,13 +7,13 @@ using Xunit;
 
 namespace Infra.Services.Test
 {
-    public class TradingViewClientTest
+    public class MarketplaceClientTest
     {
         private readonly IMarketplaceService _marketplaceService;
 
-        public TradingViewClientTest()
+        public MarketplaceClientTest()
         {
-            _marketplaceService = new TradingViewClient();
+            _marketplaceService = new MarketplaceClient();
         }
 
         /// <summary>
@@ -25,11 +25,25 @@ namespace Infra.Services.Test
         [InlineData("CPL")]
         [InlineData("CPLE")]
         [InlineData("CPLE6")]
-        public async Task GetListTicker(string ticker)
+        public async Task FindAllTickers(string ticker)
         {
             var json = await _marketplaceService.FindAllTickers(ticker, EnumTypeActives.ACTION, EnumExchanges.BMFBOVESPA);
 
             Assert.NotNull(json);
+        }
+
+        /// <summary>
+        /// Quero pegar o preço de uma ação ao passar o Ticker
+        /// </summary>
+        [Theory]
+        [InlineData("CPLE3")]
+        [InlineData("MGLU3")]
+        [InlineData("TAEE11")]
+        public async Task GetPriceAsync(string ticker)
+        {
+            var price = await _marketplaceService.GetPriceAsync(ticker, EnumExchanges.BMFBOVESPA);
+
+            Assert.True(price > 0);
         }
     }
 }

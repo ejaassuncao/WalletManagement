@@ -7,19 +7,9 @@ using System.Text.Json;
 
 namespace Infra.Services.Marketplace
 {
-    public class TradingViewClient : IMarketplaceService
+    public partial class MarketplaceClient : IMarketplaceService
     {
-        public string Url => "https://symbol-search.tradingview.com/symbol_search/v3/";
-
-        public Task<dynamic> GetAsync(string ticker)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<dynamic> GetPriceAsync(string ticker)
-        {
-            throw new NotImplementedException();
-        }
+        private const string uriBase = "https://symbol-search.tradingview.com/symbol_search/v3/";
 
         public async Task<IEnumerable<string>> FindAllTickers(string ticker, EnumTypeActives enumTypeActives = EnumTypeActives.ALL, EnumExchanges exchange = EnumExchanges.ALL)
         {
@@ -30,8 +20,9 @@ namespace Infra.Services.Marketplace
                 EnumTypeActives.ALL => "undefined",
                 _ => "undefined",
             };
+           
 
-            var uri = $"{Url}?text={ticker}&hl=1&exchange={exchange}&country=BR&lang=pt&search_type={type}&domain=production&sort_by_country=BR";
+            var uri = $"{uriBase}?text={ticker}&hl=1&exchange={exchange}&country=BR&lang=pt&search_type={type}&domain=production&sort_by_country=BR";
 
             using var client = new HttpClient();
             var json = await client.GetStringAsync(uri);

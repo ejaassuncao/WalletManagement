@@ -1,4 +1,5 @@
 ﻿using Domain.Commons.Entity;
+using System;
 
 namespace Domain.Core.Model
 {
@@ -11,7 +12,7 @@ namespace Domain.Core.Model
             Name = name;
         }
 
-        public Sector(int id, string name) : base(id)
+        public Sector(Guid id, string name) : base(id)
         {
             Name = name;
         }

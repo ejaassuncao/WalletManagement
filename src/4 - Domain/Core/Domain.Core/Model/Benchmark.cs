@@ -12,7 +12,7 @@ namespace Domain.Core.Model
 
         public DateTime Data { get; init; }
 
-        public Benchmark(int id, EnumBenchmark name, double value, DateTime data) : base(id)
+        public Benchmark(Guid id, EnumBenchmark name, double value, DateTime data) : base(id)
         {
             Name = name;
             Value = value;

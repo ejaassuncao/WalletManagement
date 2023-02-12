@@ -1,5 +1,8 @@
-﻿using Presentation.Api.Controllers;
-using Presentation.Api.ViewModel;
+using Domain.Commons;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.Resource;
 
 namespace Presentation.Api
 {
@@ -10,11 +13,17 @@ namespace Presentation.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.InjectService();
+            builder.Services.InjectModel();
+            builder.Services.InjectRepository();
 
             var app = builder.Build();
 
@@ -30,8 +39,6 @@ namespace Presentation.Api
             app.UseAuthorization();
 
             app.MapControllers();
-
-          //  app.MapWeatherForecastEndpoints();
 
             app.Run();
         }

@@ -1,7 +1,9 @@
-﻿namespace Application.Core
+﻿using System.Threading.Tasks;
+
+namespace Application.Core
 {
     public interface IExecuting<T>
     {
-        T Execute(T obj);
-    }
+        Task<T> ExecuteAsync(T obj);
+    }    
 }

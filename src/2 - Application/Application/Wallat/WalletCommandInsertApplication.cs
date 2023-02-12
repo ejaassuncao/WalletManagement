@@ -1,5 +1,6 @@
 ﻿using Domain.core.IRepository;
 using Domain.Core.Model;
+using System.Threading.Tasks;
 
 namespace Application.Core.Wallat
 {
@@ -12,13 +13,15 @@ namespace Application.Core.Wallat
             _WallatRepository = wallatRepository;
         }
 
-        public WalletCommandInsertDTO Execute(WalletCommandInsertDTO obj)
+        public async Task<WalletCommandInsertDTO> ExecuteAsync(WalletCommandInsertDTO obj)
         {          
             Wallet wallet = Mappper<Wallet>.Parse(obj);     
             
-            wallet = _WallatRepository.Insert(wallet);
+            wallet = await _WallatRepository.InsertAsync(wallet);
 
             return Mappper<WalletCommandInsertDTO>.Parse(wallet);
         }
+
+       
     }
 }

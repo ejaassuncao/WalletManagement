@@ -8,7 +8,7 @@ namespace Domain.Core.Model.Actives
 {
     public abstract class AbstractActives : EntityBase
     {
-        public AbstractActives(int id, Company company, string ticker) : base(id)
+        public AbstractActives(Guid id, Company company, string ticker) : base(id)
         {
             ValidateDomain(company, ticker);
         }
@@ -18,6 +18,7 @@ namespace Domain.Core.Model.Actives
             ValidateDomain(company, ticker);
         }
 
+        public Guid CompanyId { get; protected set; }
         public Company Company { get; protected set; }
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using Domain.Commons.Entity;
 using Domain.Commons.Validate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,7 +32,7 @@ namespace Domain.Core.Model
         #endregion
 
         #region metods
-        public Company(int id, string name, List<string> tickers, string cnpj = null, Sector setor = null) : base(id)
+        public Company(Guid id, string name, List<string> tickers, string cnpj = null, Sector setor = null) : base(id)
         {
             ValidateDomain(name, tickers, cnpj);
             Name = name;

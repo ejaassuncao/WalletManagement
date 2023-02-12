@@ -1,4 +1,5 @@
 ﻿using Domain.Core.Model.Enumerables;
+using System;
 
 namespace Domain.Core.Model.Actives
 {
@@ -9,7 +10,7 @@ namespace Domain.Core.Model.Actives
         {
         }
 
-        public Reits(int id, Company company, string ticker) : base(id, company, ticker)
+        public Reits(Guid id, Company company, string ticker) : base(id, company, ticker)
         {
         }
         public override EnumTypeActives TypeActives => EnumTypeActives.REITS;

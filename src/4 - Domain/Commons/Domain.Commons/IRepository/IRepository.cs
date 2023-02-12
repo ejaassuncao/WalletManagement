@@ -1,21 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Domain.Commons.IRepository
 {
-    public interface IRepository<T>
+    public interface IRepository<TEntity>
     {
-        List<T> FindById(int id);
+        //use in reports
+        IQueryable<TEntity> FindAllAsync();
 
-        List<T> FindAll(Func<T, bool> expression , int count, int skype);
+        //use in grids
+        Task<IEnumerable<TEntity>> ListAsync(Func<TEntity, bool> expression, int count, int skype);
 
-        T Insert(T obj);
+        #nullable enable
+        Task<TEntity?> GetByIdAsync(int id);
 
-        T Update(T obj);
+        Task<TEntity> InsertAsync(TEntity obj);
 
-        void Delete(T obj);
+        Task<TEntity> UpdateAsync(TEntity obj);
 
-        void SaveChanges();
+        Task DeleteAsync(TEntity obj);
 
+        void EntityStateDetached(TEntity entity);
     }
 }

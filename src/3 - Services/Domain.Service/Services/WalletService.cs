@@ -1,25 +1,42 @@
-﻿using Domain.Core.Model;
+﻿using Domain.core.IRepository;
+using Domain.Core.Dto;
+using Domain.Core.IServices;
+using Domain.Core.Model;
 using Domain.Core.Model.Enumerables;
 using Service.Core.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Service.Core.Services
 {
-    public sealed class WalletService
+    public sealed class WalletService: IWalletService
     {
+        private readonly IWalletRespository walletRespository;
+
+        public WalletService(IWalletRespository walletRespository)
+        {
+            this.walletRespository = walletRespository;
+        }
+
+        public async Task<IEnumerable<PortifolioDto>> GetPortifolioAsync(EnumTypeActives enumTypeActives)
+        {
+            return await walletRespository.GetPortifolioAsync(enumTypeActives);
+        }
+
         /// <summary>
         /// Visualizar valor total investidos em Grupos de ativos
         /// Posso ver em percentual ou preço
         /// </summary>
         public IEnumerable<TotalPriceTypeActivesDto> GetTotalPriceTypeActives(Wallet wallat)
         {
-            List<TotalPriceTypeActivesDto> totalprice = new List<TotalPriceTypeActivesDto>();
+            var totalprice = new List<TotalPriceTypeActivesDto>();
 
             double valueTotal = wallat.TotalCost();
             foreach (EnumTypeActives typeActives in (EnumTypeActives[])Enum.GetValues(typeof(EnumTypeActives)))
             {
                 var valueUnit = wallat.TotalCost(typeActives);
+
                 totalprice.Add(new TotalPriceTypeActivesDto
                 {
                     TypeActives = typeActives,
@@ -31,6 +48,14 @@ namespace Service.Core.Services
             return totalprice;
         }
 
-
+        /// <summary>
+        /// Visualizar valor total investidos em Grupos de ativos
+        /// Posso ver em percentual ou preço
+        /// </summary>
+        public async Task<IEnumerable<TotalPriceTypeActivesDto>> GetTotalPriceTypeActivesAsync(int id)
+        {
+            var wallat = await walletRespository.GetByIdAsync(id);
+            return GetTotalPriceTypeActives(wallat);
+        }       
     }
 }

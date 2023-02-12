@@ -1,4 +1,5 @@
 ﻿using Domain.Core.Model.Enumerables;
+using System;
 
 namespace Domain.Core.Model.Actives
 {
@@ -11,7 +12,7 @@ namespace Domain.Core.Model.Actives
         {
         }
 
-        public Stocks(int id, Company company, string ticker) : base(id, company, ticker)
+        public Stocks(Guid id, Company company, string ticker) : base(id, company, ticker)
         {
         }
 

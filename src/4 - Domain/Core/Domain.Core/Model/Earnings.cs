@@ -21,7 +21,7 @@ namespace Domain.Core.Model
             Date = date;
         }
 
-        public Earnings(int id, AbstractActives active, string type, DateTime date) : base(id)
+        public Earnings(Guid id, AbstractActives active, string type, DateTime date) : base(id)
         { 
             Active = active;
             Type = type;

@@ -1,4 +1,5 @@
 ﻿using Domain.Commons.Entity;
+using System;
 
 namespace Domain.Core.Model
 {
@@ -18,7 +19,7 @@ namespace Domain.Core.Model
             CNPJ = cnpj;
         }
 
-        public Broker(int id, string nomeFantasia, string razãoSocial, string cnpj) : base(id)
+        public Broker(Guid id, string nomeFantasia, string razãoSocial, string cnpj) : base(id)
         {
             NomeFantasia = nomeFantasia;
             RazãoSocial = razãoSocial;

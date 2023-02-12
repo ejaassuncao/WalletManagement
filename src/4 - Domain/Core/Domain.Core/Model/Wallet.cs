@@ -35,7 +35,7 @@ namespace Domain.Core.Model
         #endregion
 
         #region Metod
-        public Wallet(int id, User owner, string name) : base(id)
+        public Wallet(Guid id, User owner, string name) : base(id)
         {
             ValidateDomain(owner, name);
             Owner = owner;

@@ -7,7 +7,7 @@ namespace Domain.Commons.Entity
         public string Login { get; set; }
         public string Password { get; set; }
 
-        public User(int id, string login, string password) : base(id)
+        public User(Guid id, string login, string password) : base(id)
         {
             Login = login;
             Password = password;

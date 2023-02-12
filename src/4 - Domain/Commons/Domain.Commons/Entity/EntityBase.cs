@@ -8,13 +8,13 @@ namespace Domain.Commons.Entity
 
         protected EntityBase() { }
 
-        protected EntityBase(int id)
+        protected EntityBase(Guid? id)
         {
             Id = id;
-            ExceptionDomainValidation.When(id <= 0, "Id is min or egual 0");
+            ExceptionDomainValidation.When(id ==null, "Id is min or egual 0");
         }
 
-        public int Id { get; protected set; }
+        public Guid? Id { get; protected set; }
         public DateTime DCreated { get; protected set; }
 
         public DateTime LastUpdate { get; protected set; }

@@ -7,6 +7,11 @@ namespace Domain.Core.Model
     {
         public string Name { get; init; }
 
+        public Sector()
+        {
+
+        }
+
         public Sector(string name)
         {
             Name = name;

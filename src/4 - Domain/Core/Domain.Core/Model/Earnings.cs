@@ -13,6 +13,10 @@ namespace Domain.Core.Model
         public string Type { get; init; } //dividendos/juros sobre capital, Bonificação desdobramento, Redimentos
         public DateTime Date { get; init; }
 
+        public Earnings()
+        {
+
+        }
 
         public Earnings(AbstractActives active, string type, DateTime date)
         {

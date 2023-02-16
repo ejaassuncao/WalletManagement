@@ -8,12 +8,21 @@ namespace Infra.Ef.Map
     {
         public void Configure(EntityTypeBuilder<Company> builder)
         {
-            builder.ToTable("cnp_company");
-            builder.HasKey(c => c.Id)
-                .HasName("cnp_id");
+            builder.ToTable("Company");
 
-            builder.Property(c => c.Name).HasMaxLength(60);
-            builder.Property(c => c.CNPJ).HasMaxLength(15);
+            builder.HasKey(c => c.Id)
+                .HasName("cny_id");
+
+            builder.Property(c => c.Name)
+                .HasColumnName("cny_name")
+                .HasMaxLength(60);
+
+            builder.Property(c => c.CNPJ)
+                 .HasColumnName("cny_cnpj")
+                 .HasMaxLength(15);
+
+            builder.HasOne<Sector>().WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

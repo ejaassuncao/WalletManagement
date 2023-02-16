@@ -5,8 +5,9 @@ namespace Infra.Ef.Context
 {
     public class EfRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected readonly DbContext context;
-        public EfRepository(DbContext context)
+        protected readonly AppDBContext context;       
+
+        public EfRepository(AppDBContext context)
         {
             this.context = context;
         }

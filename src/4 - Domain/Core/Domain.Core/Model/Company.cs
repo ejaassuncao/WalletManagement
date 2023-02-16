@@ -32,6 +32,12 @@ namespace Domain.Core.Model
         #endregion
 
         #region metods
+
+        public Company()
+        {
+
+        }
+       
         public Company(Guid id, string name, List<string> tickers, string cnpj = null, Sector setor = null) : base(id)
         {
             ValidateDomain(name, tickers, cnpj);

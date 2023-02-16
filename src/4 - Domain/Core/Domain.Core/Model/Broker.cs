@@ -9,20 +9,25 @@ namespace Domain.Core.Model
     public sealed class Broker : EntityBase
     {
         public string NomeFantasia { get; init; }
-        public string RazãoSocial { get; init; }
+        public string RazaoSocial { get; init; }
         public string CNPJ { get; init; }
+
+        private Broker()
+        {
+
+        }
 
         public Broker(string nomeFantasia, string razãoSocial, string cnpj)
         {
             NomeFantasia = nomeFantasia;
-            RazãoSocial = razãoSocial;
+            RazaoSocial = razãoSocial;
             CNPJ = cnpj;
         }
 
         public Broker(Guid id, string nomeFantasia, string razãoSocial, string cnpj) : base(id)
         {
             NomeFantasia = nomeFantasia;
-            RazãoSocial = razãoSocial;
+            RazaoSocial = razãoSocial;
             CNPJ = cnpj;
         }
     }

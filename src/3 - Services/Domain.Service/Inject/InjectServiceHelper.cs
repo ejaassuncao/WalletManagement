@@ -1,7 +1,8 @@
 ﻿using Domain.Core.IServices;
 using Service.Core.Services;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Domain.Commons
+namespace Service.Core.Inject
 {
     public static class InjectServiceHelper
     {

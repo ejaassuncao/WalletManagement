@@ -1,8 +1,8 @@
-using Domain.Commons;
-using Microsoft.AspNetCore.Authentication;
+using Infra.Ef.Context;
+using Infra.Ef.Inject;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
-using Microsoft.Identity.Web.Resource;
+using Service.Core.Inject;
 
 namespace Presentation.Api
 {
@@ -21,9 +21,9 @@ namespace Presentation.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.InjectService();
-            builder.Services.InjectModel();
+            //builder.Services.InjectModel();
             builder.Services.InjectRepository();
+            builder.Services.InjectService();
 
             var app = builder.Build();
 
@@ -32,6 +32,7 @@ namespace Presentation.Api
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                app.InitializeDatabase();
             }
 
             app.UseHttpsRedirection();

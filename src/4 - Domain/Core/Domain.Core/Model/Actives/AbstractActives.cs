@@ -8,6 +8,10 @@ namespace Domain.Core.Model.Actives
 {
     public abstract class AbstractActives : EntityBase
     {
+        public AbstractActives()
+        {
+
+        }
         public AbstractActives(Guid id, Company company, string ticker) : base(id)
         {
             ValidateDomain(company, ticker);

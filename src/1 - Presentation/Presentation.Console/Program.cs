@@ -3,9 +3,11 @@
 using Presentation.Console;
 using System.Globalization;
 
-foreach (var property in typeof(Pessoa).GetProperties()) 
-{
-    Console.WriteLine(palavra);
-}
+Console.WriteLine("");
 
-    
+//foreach (var property in typeof(Pessoa).GetProperties()) 
+//{
+//   
+//}
+
+

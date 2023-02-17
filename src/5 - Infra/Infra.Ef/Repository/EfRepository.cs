@@ -1,11 +1,12 @@
 ﻿using Domain.Commons.IRepository;
+using Infra.Ef.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infra.Ef.Context
+namespace Infra.Ef.Repository
 {
     public class EfRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected readonly AppDBContext context;       
+        protected readonly AppDBContext context;
 
         public EfRepository(AppDBContext context)
         {
@@ -32,8 +33,8 @@ namespace Infra.Ef.Context
 
         public async Task DeleteAsync(TEntity obj)
         {
-            this.context.Set<TEntity>().Remove(obj);
-            await this.context.SaveChangesAsync();
+            context.Set<TEntity>().Remove(obj);
+            await context.SaveChangesAsync();
         }
 
         public async Task<TEntity> InsertAsync(TEntity obj)

@@ -1,4 +1,4 @@
-#### System of wallet management
+# System of Wallet Management
 1. Create a system to control investment portfolio (Assets)
 2. So which main entities?
 3. Portfolio and Assets
@@ -12,3 +12,9 @@
 11. I can see the total value of my equity
 12. How much I invested
 13. When the portfolio has yielded, whether I am in profit or loss, my price is half, etc..
+
+## Database Patterns
+- Table names: tb_{name table}
+- All tables must have an abbreviation.
+- Columns Table Name: abbreviation_{name column}.The abbreviation must have 3 characters
+- View names: vw_{name view}

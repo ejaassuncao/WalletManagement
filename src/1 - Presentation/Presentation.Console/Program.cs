@@ -1,8 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using Presentation.Console;
 using System.Globalization;
 
+foreach (var property in typeof(Pessoa).GetProperties()) 
+{
+    Console.WriteLine(palavra);
+}
 
-var ApiHighlightPositions = Enumerable.Range(1, 100).ToArray();
-
-Console.WriteLine(string.Join(",", ApiHighlightPositions));
+    

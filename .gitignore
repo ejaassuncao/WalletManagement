@@ -26,3 +26,5 @@ obj/
 *.vspx
 
 
+/src/5 - Infra/Infra.DataBase/Infra.DataBase.jfm
+/src/5 - Infra/Infra.DataBase/Infra.DataBase.dbmdl

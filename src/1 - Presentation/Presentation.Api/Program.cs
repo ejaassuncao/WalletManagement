@@ -1,5 +1,4 @@
-using Infra.Ef.Context;
-using Infra.Ef.Inject;
+using Infra.Repository.Extension;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 using Service.Core.Inject;

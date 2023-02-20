@@ -29,6 +29,7 @@ public partial class TbWallet
     [Unicode(false)]
     public string WalName { get; set; }
 
+    [Required]
     [Column("wal_new")]
     [StringLength(50)]
     [Unicode(false)]

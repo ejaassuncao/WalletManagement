@@ -24,4 +24,8 @@
     <Folder Include="DataModel\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\4 - Domain\Core\Domain.Core\Domain.Core.csproj" />
+  </ItemGroup>
+
 </Project>

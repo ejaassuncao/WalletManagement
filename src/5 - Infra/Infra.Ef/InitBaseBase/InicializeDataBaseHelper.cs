@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Infra.Ef.Context;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Infra.Ef.Context
+namespace Infra.Ef.InitBaseBase
 {
-    public  static class InicializeDataBaseHelper
+    public static class InicializeDataBaseHelper
     {
         public static IApplicationBuilder InitializeDatabase(this IApplicationBuilder app)
         {

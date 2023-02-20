@@ -1,4 +1,5 @@
-﻿using Infra.Repository.Context.Configurations;
+﻿
+using Infra.Repository.Context.Configurations;
 using Infra.Repository.DataModel;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,16 +13,21 @@ public partial class DataBaseContext : DbContext
     {
     }
 
+    public virtual DbSet<Broker> Brokers { get; set; }
+
+    public virtual DbSet<NewTable> NewTables { get; set; }
+
     public virtual DbSet<TbSector> TbSectors { get; set; }
 
     public virtual DbSet<TbWallet> TbWallets { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasAnnotation("Scaffolding:ConnectionString", "Data Source=(local);Initial Catalog=Infra.DataBase;Integrated Security=true");
+            modelBuilder.ApplyConfiguration(new Configurations.BrokerConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.NewTableConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.TbSectorConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.TbWalletConfiguration());
 
-            modelBuilder.ApplyConfiguration(new TbSectorConfiguration());
-            modelBuilder.ApplyConfiguration(new TbWalletConfiguration());
         OnModelCreatingPartial(modelBuilder);
     }
 

@@ -6,30 +6,29 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repository.DataModel;
 
-/// <summary>
-/// abbreviation: sct
-/// Description: table sector
-/// </summary>
-[Table("tb_sector")]
-public partial class TbSector
+[Table("Broker")]
+public partial class Broker
 {
-    /// <summary>
-    /// pk table
-    /// </summary>
     [Key]
-    [Column("sct_Id")]
-    public Guid SctId { get; set; }
+    public Guid Id { get; set; }
 
-    /// <summary>
-    /// sector name
-    /// </summary>
     [Required]
-    [Column("sct_name")]
+    [Column("bkr_nomefantasia")]
     [StringLength(60)]
-    public string SctName { get; set; }
+    public string BkrNomefantasia { get; set; }
 
-    [Column("sct_DCreated")]
-    public DateTime SctDcreated { get; set; }
+    [Required]
+    [Column("bkr_razaosocial")]
+    [StringLength(60)]
+    public string BkrRazaosocial { get; set; }
+
+    [Required]
+    [Column("bkr_cnpj")]
+    [StringLength(15)]
+    public string BkrCnpj { get; set; }
+
+    [Column("DCreated")]
+    public DateTime Dcreated { get; set; }
 
     public DateTime LastUpdate { get; set; }
 

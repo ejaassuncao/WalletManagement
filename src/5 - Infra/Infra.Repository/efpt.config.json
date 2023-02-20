@@ -15,6 +15,14 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
+         "Name": "[dbo].[Broker]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NewTable]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[tb_sector]",
          "ObjectType": 0
       },
@@ -23,7 +31,7 @@
          "ObjectType": 0
       }
    ],
-   "UiHint": "Infra.DataBase\\Infra.DataBase.sqlproj",
+   "UiHint": "82f03db67382.sicof",
    "UncountableWords": null,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,

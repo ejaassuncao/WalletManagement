@@ -43,4 +43,6 @@
 - MCV
 - Blabor
 - WebAPI
-- graphql
+- Graphql
+- Console
+- Desktop

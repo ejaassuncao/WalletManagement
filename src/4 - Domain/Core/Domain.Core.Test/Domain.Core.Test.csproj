@@ -7,13 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Mock\**" />
-    <EmbeddedResource Remove="Mock\**" />
-    <None Remove="Mock\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="6.2.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
@@ -27,9 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Commons\Domain.Commons.Test\Domain.Commons.Test.csproj" />
-    <ProjectReference Include="..\..\Commons\Domain.Commons\Domain.Commons.csproj" />
-    <ProjectReference Include="..\Domain.Core\Domain.Core.csproj" />
+    <ProjectReference Include="..\Domain.Commons\Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>

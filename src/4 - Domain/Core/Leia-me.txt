@@ -1,2 +1,15 @@
-O que o sistema faz de principal
-Business central da empresa.
+BoilerPlaite
+- Configuração/Parametrização
+- Personalização
+- Auditoria/Log
+
+Autenticação/Permissão
+{
+	- Perfil/Permissão
+	- Usuario
+}
+
+//relacioando a arquitetura do proejto
+- Classes de exeption
+- Classes Abstratas
+- Interfaces do sistema

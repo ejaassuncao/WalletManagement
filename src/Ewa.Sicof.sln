@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Domain", "4 - Domain", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Infra", "5 - Infra", "{2498E6BD-0646-4F8E-AFC8-F341595B032E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Core", "4 - Domain\Core\Domain.Core\Domain.Core.csproj", "{E1350FD3-2701-4862-96DE-B2E6C8A735DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Models", "4 - Domain\Core\Domain.Core\Domain.Models.csproj", "{E1350FD3-2701-4862-96DE-B2E6C8A735DD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Core.Test", "4 - Domain\Core\Domain.Core.Test\Domain.Core.Test.csproj", "{FDA1ADD6-6A9E-4658-8B87-8E7204464A0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Models.Test", "4 - Domain\Core\Domain.Core.Test\Domain.Models.Test.csproj", "{FDA1ADD6-6A9E-4658-8B87-8E7204464A0D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7 - Documents", "7 - Documents", "{3CE3C6C7-CBCB-4866-B77E-06D3B331C27C}"
 	ProjectSection(SolutionItems) = preProject
@@ -34,9 +34,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Commons", "4 - Domain\Commons\Domain.Commons\Domain.Commons.csproj", "{E5E1B66F-AC3C-4CAA-95F5-A467AB74391C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Core", "4 - Domain\Commons\Domain.Commons\Domain.Core.csproj", "{E5E1B66F-AC3C-4CAA-95F5-A467AB74391C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Commons.Test", "4 - Domain\Commons\Domain.Commons.Test\Domain.Commons.Test.csproj", "{F471A16E-6933-4CE0-8CB1-6DB66ED8F804}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Core.Test", "4 - Domain\Commons\Domain.Commons.Test\Domain.Core.Test.csproj", "{F471A16E-6933-4CE0-8CB1-6DB66ED8F804}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.Mvc", "1 - Presentation\Presentation.Mvc\Presentation.Mvc.csproj", "{E3A56AD0-F484-434C-B141-57CA483FE58D}"
 EndProject

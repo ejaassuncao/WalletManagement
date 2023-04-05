@@ -23,20 +23,20 @@
 
 ## Modules:
 
-###[Domain]
+### [Domain]
 - Core   -> The basic funcionality (Permission, Autentication, User, Person, Helpers, Extension);
 - Model  -> What application do? (Rules bussines)
 - Usercase(domain.Services) -> communication between models
 
-###[Infra]
+### [Infra]
 - [efcore]
 - [email]
 - [webservices]
 
-###[Application]
+### [Application]
 - CQRS => Communication between Usercase(domain.Services) + infra + events
 
-###[Presentation]
+### [Presentation]
 -MCV
 -Blabor
 -WebAPI

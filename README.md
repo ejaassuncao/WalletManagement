@@ -29,14 +29,18 @@
 - Usercase(domain.Services) -> communication between models
 
 ### [Infra]
-- [efcore]
-- [email]
-- [webservices]
+- efcore
+- dapper
+- nosql
+- email
+- rabbitMq/kafka
+- Redis
 
 ### [Application]
 - CQRS => Communication between Usercase(domain.Services) + infra + events
+- Mediator
 
 ### [Presentation]
--MCV
--Blabor
--WebAPI
+- MCV
+- Blabor
+- WebAPI

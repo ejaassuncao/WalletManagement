@@ -16,10 +16,9 @@
 ## Database Patterns
 - Table names: tb_{name table}
 - All tables must have an abbreviation.
-- Columns Table Name: abbreviation_{name column}.The abbreviation must have 3 characters
+- Columns Table Name: abbreviation_{NameColumn}.The abbreviation must have 3 characters. The column name is unique name in sgdb
 - View names: vw_{name view}
-
-
+- Procedure names: prc_{name procedure}
 
 ## Modules:
 

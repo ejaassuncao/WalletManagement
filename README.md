@@ -18,3 +18,25 @@
 - All tables must have an abbreviation.
 - Columns Table Name: abbreviation_{name column}.The abbreviation must have 3 characters
 - View names: vw_{name view}
+
+
+
+## Modules:
+
+###[Domain]
+- Core   -> The basic funcionality (Permission, Autentication, User, Person, Helpers, Extension);
+- Model  -> What application do? (Rules bussines)
+- Usercase(domain.Services) -> communication between models
+
+###[Infra]
+- [efcore]
+- [email]
+- [webservices]
+
+###[Application]
+- CQRS => Communication between Usercase(domain.Services) + infra + events
+
+###[Presentation]
+-MCV
+-Blabor
+-WebAPI

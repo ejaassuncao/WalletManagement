@@ -75,7 +75,7 @@ namespace Infra.Ef.Migrations
                     cpyid = table.Column<Guid>(name: "cpy_id", type: "uniqueidentifier", nullable: false),
                     cpyname = table.Column<string>(name: "cpy_name", type: "nvarchar(120)", maxLength: 120, nullable: false),
                     cpycnpj = table.Column<string>(name: "cpy_cnpj", type: "nvarchar(18)", maxLength: 18, nullable: false),
-                    SetorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    sctid = table.Column<Guid>(name: "sct_id", type: "uniqueidentifier", nullable: false),
                     enabled = table.Column<bool>(type: "bit", nullable: false),
                     dcreated = table.Column<DateTime>(name: "d_created", type: "datetime2", nullable: false),
                     usercreated = table.Column<int>(name: "user_created", type: "int", nullable: false),
@@ -86,8 +86,8 @@ namespace Infra.Ef.Migrations
                 {
                     table.PrimaryKey("PK_tb_company", x => x.cpyid);
                     table.ForeignKey(
-                        name: "FK_tb_company_tb_sector_SetorId",
-                        column: x => x.SetorId,
+                        name: "FK_tb_company_tb_sector_sct_id",
+                        column: x => x.sctid,
                         principalTable: "tb_sector",
                         principalColumn: "sct_id",
                         onDelete: ReferentialAction.Cascade);
@@ -134,7 +134,7 @@ namespace Infra.Ef.Migrations
                     actticker = table.Column<string>(name: "act_ticker", type: "nvarchar(20)", maxLength: 20, nullable: false),
                     actprice = table.Column<decimal>(name: "act_price", type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     acttypeactives = table.Column<int>(name: "act_typeactives", type: "int", nullable: false),
-                    CompanyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    cpyid = table.Column<Guid>(name: "cpy_id", type: "uniqueidentifier", nullable: false),
                     enabled = table.Column<bool>(type: "bit", nullable: false),
                     dcreated = table.Column<DateTime>(name: "d_created", type: "datetime2", nullable: false),
                     usercreated = table.Column<int>(name: "user_created", type: "int", nullable: false),
@@ -145,8 +145,8 @@ namespace Infra.Ef.Migrations
                 {
                     table.PrimaryKey("PK_tb_actives", x => x.actid);
                     table.ForeignKey(
-                        name: "FK_tb_actives_tb_company_CompanyId",
-                        column: x => x.CompanyId,
+                        name: "FK_tb_actives_tb_company_cpy_id",
+                        column: x => x.cpyid,
                         principalTable: "tb_company",
                         principalColumn: "cpy_id",
                         onDelete: ReferentialAction.Cascade);
@@ -162,9 +162,9 @@ namespace Infra.Ef.Migrations
                     aocunitcost = table.Column<decimal>(name: "aoc_unit_cost", type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     aocdatebuy = table.Column<DateTime>(name: "aoc_date_buy", type: "datetime2", nullable: false),
                     aocoperation = table.Column<int>(name: "aoc_operation", type: "int", nullable: false),
-                    ActiveId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BrokerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    actid = table.Column<Guid>(name: "act_id", type: "uniqueidentifier", nullable: false),
+                    usuid = table.Column<Guid>(name: "usu_id", type: "uniqueidentifier", nullable: false),
+                    bkrid = table.Column<Guid>(name: "bkr_id", type: "uniqueidentifier", nullable: false),
                     TbWalletId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     enabled = table.Column<bool>(type: "bit", nullable: false),
                     dcreated = table.Column<DateTime>(name: "d_created", type: "datetime2", nullable: false),
@@ -176,20 +176,20 @@ namespace Infra.Ef.Migrations
                 {
                     table.PrimaryKey("PK_tb_actives_company", x => x.aocid);
                     table.ForeignKey(
-                        name: "FK_tb_actives_company_tb_actives_ActiveId",
-                        column: x => x.ActiveId,
+                        name: "FK_tb_actives_company_tb_actives_act_id",
+                        column: x => x.actid,
                         principalTable: "tb_actives",
                         principalColumn: "act_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_tb_actives_company_tb_broker_BrokerId",
-                        column: x => x.BrokerId,
+                        name: "FK_tb_actives_company_tb_broker_bkr_id",
+                        column: x => x.bkrid,
                         principalTable: "tb_broker",
                         principalColumn: "bkr_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_tb_actives_company_tb_user_UserId",
-                        column: x => x.UserId,
+                        name: "FK_tb_actives_company_tb_user_usu_id",
+                        column: x => x.usuid,
                         principalTable: "tb_user",
                         principalColumn: "usu_id",
                         onDelete: ReferentialAction.Cascade);
@@ -202,19 +202,19 @@ namespace Infra.Ef.Migrations
                 comment: "sufix: aoc");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tb_actives_CompanyId",
+                name: "IX_tb_actives_cpy_id",
                 table: "tb_actives",
-                column: "CompanyId");
+                column: "cpy_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tb_actives_company_ActiveId",
+                name: "IX_tb_actives_company_act_id",
                 table: "tb_actives_company",
-                column: "ActiveId");
+                column: "act_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tb_actives_company_BrokerId",
+                name: "IX_tb_actives_company_bkr_id",
                 table: "tb_actives_company",
-                column: "BrokerId");
+                column: "bkr_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_tb_actives_company_TbWalletId",
@@ -222,14 +222,14 @@ namespace Infra.Ef.Migrations
                 column: "TbWalletId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tb_actives_company_UserId",
+                name: "IX_tb_actives_company_usu_id",
                 table: "tb_actives_company",
-                column: "UserId");
+                column: "usu_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tb_company_SetorId",
+                name: "IX_tb_company_sct_id",
                 table: "tb_company",
-                column: "SetorId");
+                column: "sct_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_tb_wallet_BrokerId",

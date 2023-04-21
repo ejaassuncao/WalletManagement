@@ -31,10 +31,13 @@ namespace Infra.Ef.DataModel
         [Column("aoc_operation")]
         public EnumOperationWallet Operation { get; set; }
 
+        [ForeignKey("act_id")]
         public TbActive Active { get; set; } = new TbActive();
 
+        [ForeignKey("usu_id")]
         public TbUser User { get; set; } = new TbUser();
 
+        [ForeignKey("bkr_id")]
         public TbBroker Broker { get; set; } = new TbBroker();
 
     }

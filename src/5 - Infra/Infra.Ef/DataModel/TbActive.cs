@@ -29,6 +29,8 @@ namespace Infra.Ef.DataModel
         [Column("act_typeactives")]     
         public EnumCategory TypeActives { get; set; }
 
+
+        [ForeignKey("cpy_id")]
         public TbCompany Company { get; set; } = new TbCompany();
     }
 }

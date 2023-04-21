@@ -29,9 +29,6 @@ namespace Infra.Ef.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("act_id");
 
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("Dcreated")
                         .HasColumnType("datetime2")
                         .HasColumnName("d_created");
@@ -67,9 +64,12 @@ namespace Infra.Ef.Migrations
                         .HasColumnType("int")
                         .HasColumnName("user_last_update");
 
+                    b.Property<Guid>("cpy_id")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
+                    b.HasIndex("cpy_id");
 
                     b.ToTable("tb_actives", t =>
                         {
@@ -84,15 +84,9 @@ namespace Infra.Ef.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("aoc_id");
 
-                    b.Property<Guid>("ActiveId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Amount")
                         .HasColumnType("int")
                         .HasColumnName("aoc_amount");
-
-                    b.Property<Guid>("BrokerId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateBuy")
                         .HasColumnType("datetime2")
@@ -126,22 +120,28 @@ namespace Infra.Ef.Migrations
                         .HasColumnType("int")
                         .HasColumnName("user_created");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int?>("UserLastUpdate")
                         .HasColumnType("int")
                         .HasColumnName("user_last_update");
 
+                    b.Property<Guid>("act_id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("bkr_id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("usu_id")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
-
-                    b.HasIndex("ActiveId");
-
-                    b.HasIndex("BrokerId");
 
                     b.HasIndex("TbWalletId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("act_id");
+
+                    b.HasIndex("bkr_id");
+
+                    b.HasIndex("usu_id");
 
                     b.ToTable("tb_actives_company", t =>
                         {
@@ -233,9 +233,6 @@ namespace Infra.Ef.Migrations
                         .HasColumnType("nvarchar(120)")
                         .HasColumnName("cpy_name");
 
-                    b.Property<Guid>("SetorId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("UserCreated")
                         .HasColumnType("int")
                         .HasColumnName("user_created");
@@ -244,9 +241,12 @@ namespace Infra.Ef.Migrations
                         .HasColumnType("int")
                         .HasColumnName("user_last_update");
 
+                    b.Property<Guid>("sct_id")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("SetorId");
+                    b.HasIndex("sct_id");
 
                     b.ToTable("tb_company", t =>
                         {
@@ -397,7 +397,7 @@ namespace Infra.Ef.Migrations
                 {
                     b.HasOne("Infra.Ef.DataModel.TbCompany", "Company")
                         .WithMany()
-                        .HasForeignKey("CompanyId")
+                        .HasForeignKey("cpy_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -406,25 +406,25 @@ namespace Infra.Ef.Migrations
 
             modelBuilder.Entity("Infra.Ef.DataModel.TbActivesOfCompany", b =>
                 {
+                    b.HasOne("Infra.Ef.DataModel.TbWallet", null)
+                        .WithMany("Actives")
+                        .HasForeignKey("TbWalletId");
+
                     b.HasOne("Infra.Ef.DataModel.TbActive", "Active")
                         .WithMany()
-                        .HasForeignKey("ActiveId")
+                        .HasForeignKey("act_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Infra.Ef.DataModel.TbBroker", "Broker")
                         .WithMany()
-                        .HasForeignKey("BrokerId")
+                        .HasForeignKey("bkr_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infra.Ef.DataModel.TbWallet", null)
-                        .WithMany("Actives")
-                        .HasForeignKey("TbWalletId");
-
                     b.HasOne("Infra.Ef.DataModel.TbUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("usu_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -439,7 +439,7 @@ namespace Infra.Ef.Migrations
                 {
                     b.HasOne("Infra.Ef.DataModel.TbSector", "Setor")
                         .WithMany()
-                        .HasForeignKey("SetorId")
+                        .HasForeignKey("sct_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

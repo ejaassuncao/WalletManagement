@@ -2,7 +2,7 @@
 
 REM  ******CODE_FIRST******
 Add-Migration InitialCreate -s Presentation.Api
-Update-Database
+Update-Database -s Presentation.Api
 
 REM ******DB_FIRST******
 REM link templace class: https://learn.microsoft.com/pt-br/ef/core/managing-schemas/scaffolding/templates?tabs=dotnet-core-cli

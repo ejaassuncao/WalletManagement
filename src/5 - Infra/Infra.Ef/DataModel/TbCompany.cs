@@ -23,6 +23,7 @@ namespace Infra.Ef.DataModel
         [Column("cpy_cnpj")]
         public string CNPJ { get; set; } = string.Empty;
 
+        [ForeignKey("sct_id")]
         public TbSector Setor { get; set; } = new TbSector();
     }
 }

@@ -17,6 +17,7 @@ public partial class AppDBContext : DbContext
     public virtual DbSet<TbActive> TbActives { get; set; }
 
     public virtual DbSet<TbCompany> TbCompanys { get; set; }
+
     public virtual DbSet<TbSector> TbSectors { get; set; }
 
      public virtual DbSet<TbBroker> TbBrokers { get; set; }

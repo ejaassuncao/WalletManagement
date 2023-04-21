@@ -1,7 +1,7 @@
 ﻿REM VISUAL STUDIO -> MENU TOOLS -> NuGet Package Manager -> Package Manager Console (OBS.: ESCOLHER O PROJETO REPOSITORY no combobox)
 
 REM  ******CODE_FIRST******
-Add-Migration InitialCreate
+Add-Migration InitialCreate -s Presentation.Api
 Update-Database
 
 REM ******DB_FIRST******

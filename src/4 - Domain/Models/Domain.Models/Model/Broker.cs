@@ -8,8 +8,8 @@ namespace Domain.Core.Model
     /// </summary>
     public sealed class Broker : EntityBase
     {
-        public string NomeFantasia { get; init; }
-        public string RazaoSocial { get; init; }
+        public string FantasyName { get; init; }
+        public string CorporateName { get; init; }
         public string CNPJ { get; init; }
 
         private Broker()
@@ -17,17 +17,17 @@ namespace Domain.Core.Model
 
         }
 
-        public Broker(string nomeFantasia, string razãoSocial, string cnpj)
+        public Broker(string fantasyName, string corporateName, string cnpj)
         {
-            NomeFantasia = nomeFantasia;
-            RazaoSocial = razãoSocial;
+            FantasyName = fantasyName;
+            CorporateName = corporateName;
             CNPJ = cnpj;
         }
 
-        public Broker(Guid id, string nomeFantasia, string razãoSocial, string cnpj) : base(id)
+        public Broker(Guid id, string fantasyName, string corporateName, string cnpj) : base(id)
         {
-            NomeFantasia = nomeFantasia;
-            RazaoSocial = razãoSocial;
+            FantasyName = fantasyName;
+            CorporateName = corporateName;
             CNPJ = cnpj;
         }
     }

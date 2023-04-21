@@ -8,21 +8,8 @@ namespace Domain.Core.Model.Actives
 {
     public abstract class AbstractActives : EntityBase
     {
-        public AbstractActives()
-        {
 
-        }
-        public AbstractActives(Guid id, Company company, string ticker) : base(id)
-        {
-            ValidateDomain(company, ticker);
-        }
-
-        public AbstractActives(Company company, string ticker)
-        {
-            ValidateDomain(company, ticker);
-        }
-
-        public Guid CompanyId { get; protected set; }
+        #region properties
         public Company Company { get; protected set; }
 
         /// <summary>
@@ -33,12 +20,29 @@ namespace Domain.Core.Model.Actives
         /// <summary>
         /// Cotação
         /// </summary>
-        public double Counting { get; protected set; }
+        public double Price { get; protected set; }
 
         /// <summary>
         /// Tipo de ativos
         /// </summary>       
-        public abstract EnumTypeActives TypeActives { get; }
+        public abstract EnumCategory TypeActives { get; }
+
+        #endregion
+
+        public AbstractActives()
+        {
+
+        }
+
+        public AbstractActives(Guid id, Company company, string ticker) : base(id)
+        {
+            ValidateDomain(company, ticker);
+        }
+
+        public AbstractActives(Company company, string ticker)
+        {
+            ValidateDomain(company, ticker);
+        }
 
         /// <summary>
         /// Validações do modelo
@@ -53,7 +57,7 @@ namespace Domain.Core.Model.Actives
 
         public void UpdateCounting(double counting)
         {
-            this.Counting = counting;
+            this.Price = counting;
         }
 
         public static AbstractActives Parser(Task<string> content)

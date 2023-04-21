@@ -16,6 +16,6 @@ namespace Domain.Core.Model.Actives
         public Actions(Guid id, Company company, string ticker) : base(id, company, ticker)
         {
         }
-        public override EnumTypeActives TypeActives => EnumTypeActives.ACTION;        
+        public override EnumCategory TypeActives => EnumCategory.ACTION;        
     }
 }

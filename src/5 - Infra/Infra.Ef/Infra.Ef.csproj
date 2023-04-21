@@ -21,11 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\4 - Domain\Core\Domain.Core\Domain.Models.csproj" />
+    <ProjectReference Include="..\..\4 - Domain\Models\Domain.Models\Domain.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="EntityData\" />
+    <Folder Include="InitBaseBase\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

@@ -11,13 +11,13 @@ namespace Infra.Services.Marketplace
     {
         private const string uriBase = "https://symbol-search.tradingview.com/symbol_search/v3/";
 
-        public async Task<IEnumerable<string>> FindAllTickers(string ticker, EnumTypeActives enumTypeActives = EnumTypeActives.ALL, EnumExchanges exchange = EnumExchanges.ALL)
+        public async Task<IEnumerable<string>> FindAllTickers(string ticker, EnumCategory enumTypeActives = EnumCategory.ALL, EnumExchanges exchange = EnumExchanges.ALL)
         {
             string type = enumTypeActives switch
             {
-                EnumTypeActives.FIIS or EnumTypeActives.REITS => "fund",
-                EnumTypeActives.ACTION or EnumTypeActives.STOCKES => "stock",
-                EnumTypeActives.ALL => "undefined",
+                EnumCategory.FIIS or EnumCategory.REITS => "fund",
+                EnumCategory.ACTION or EnumCategory.STOCKES => "stock",
+                EnumCategory.ALL => "undefined",
                 _ => "undefined",
             };
            

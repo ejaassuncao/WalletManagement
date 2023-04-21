@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Infra.Ef.EntityData;
+﻿using Infra.Ef.DataModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Ef.Context;
@@ -16,31 +14,17 @@ public partial class AppDBContext : DbContext
     {
     }
 
+    public virtual DbSet<TbActive> TbActives { get; set; }
+
+    public virtual DbSet<TbCompany> TbCompanys { get; set; }
     public virtual DbSet<TbSector> TbSectors { get; set; }
-     
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<TbSector>(entity =>
-        {
-            entity.HasKey(e => e.SctId).HasName("sct_id");
 
-            entity.ToTable("tb_sector", tb => tb.HasComment("abbreviation: sct\r\nDescription: table sector"));
+     public virtual DbSet<TbBroker> TbBrokers { get; set; }
 
-            entity.Property(e => e.SctId)
-                .ValueGeneratedNever()
-                .HasComment("pk table")
-                .HasColumnName("sct_Id");
-            entity.Property(e => e.CidUserCreated).HasColumnName("CIdUserCreated");
-            entity.Property(e => e.CidUserLastUpdate).HasColumnName("CIdUserLastUpdate");
-            entity.Property(e => e.SctDcreated).HasColumnName("sct_DCreated");
-            entity.Property(e => e.SctName)
-                .HasMaxLength(60)
-                .HasComment("sector name")
-                .HasColumnName("sct_name");
-        });
+     public virtual DbSet<TbUser> TbUsers { get; set; }
 
-        OnModelCreatingPartial(modelBuilder);
-    }
+     public virtual DbSet<TbActivesOfCompany> TbActivesOfCompanys { get; set; }
 
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+     public virtual DbSet<TbWallet> TbWallets { get; set; }  
+
 }

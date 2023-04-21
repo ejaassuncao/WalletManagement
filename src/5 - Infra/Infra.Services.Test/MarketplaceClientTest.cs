@@ -27,7 +27,7 @@ namespace Infra.Services.Test
         [InlineData("CPLE6")]
         public async Task FindAllTickers(string ticker)
         {
-            var json = await _marketplaceService.FindAllTickers(ticker, EnumTypeActives.ACTION, EnumExchanges.BMFBOVESPA);
+            var json = await _marketplaceService.FindAllTickers(ticker, EnumCategory.ACTION, EnumExchanges.BMFBOVESPA);
 
             Assert.NotNull(json);
         }

@@ -23,7 +23,7 @@ namespace Presentation.Api.Controllers
         [HttpGet()]
         public async Task<IEnumerable<PortifolioDto>> Get()
         {
-            return await this.walletService.GetPortifolioAsync(EnumTypeActives.ALL);
+            return await this.walletService.GetPortifolioAsync(EnumCategory.ALL);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Infra.Ef.Repository
         {
         }
 
-        public Task<IEnumerable<PortifolioDto>> GetPortifolioAsync(EnumTypeActives enumTypeActives)
+        public Task<IEnumerable<PortifolioDto>> GetPortifolioAsync(EnumCategory enumTypeActives)
         {
             throw new NotImplementedException();
         }

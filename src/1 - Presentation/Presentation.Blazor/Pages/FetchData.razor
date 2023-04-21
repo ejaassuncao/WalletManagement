@@ -1,5 +1,7 @@
 ﻿@page "/fetchdata"
+
 @using Presentation.Blazor.Component
+@using Presentation.Blazor.Configuration;
 @inject HttpClient Http
 
 <PageTitle>@Title</PageTitle>
@@ -9,16 +11,16 @@
 </h1>
 
 <p>Teste componente demonstra a obtenção de dados do servidor.</p>
-<button class="btn btn-primary" @onclick="Find">Pesquisar</button>
+<button id="btnSearch" class="btn btn-primary" @onclick="Find">Pesquisar</button>
 <br />
 
-<TableComponent Columns="Date, Temp. (C), Temp. (F), Summary"
+<TableComponent HeaderColumns="Date, Temp. (C), Temp. (F), Summary"
                 DataBind="forecasts"
                 Context="forecast"
                 MessageEmpty="Not found"
                 Loading=@loading
                 MessageLoading="Loadinng...">
-    <RowTemplate>
+    <RowTemplate>    
         <td>@forecast.Date.ToShortDateString()</td>
         <td>@forecast.TemperatureC</td>
         <td>@forecast.TemperatureF</td>
@@ -40,7 +42,7 @@
     {
         loading = true;
         await Task.Delay(8000);//simulando uma demora
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>(HelperEndPoints.Api("/Portifolios"));
         loading = false;
     }
 

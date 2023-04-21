@@ -1,6 +1,6 @@
 ﻿namespace Domain.Core.Model.Enumerables
 {
-    public enum EnumTypeActives
+    public enum EnumCategory
     {
         ACTION,
         STOCKES,

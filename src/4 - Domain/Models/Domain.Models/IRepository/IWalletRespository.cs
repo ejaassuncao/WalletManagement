@@ -9,6 +9,6 @@ namespace Domain.core.IRepository
 {
     public interface IWalletRespository : IRepository<Wallet>
     {
-        Task<IEnumerable<PortifolioDto>> GetPortifolioAsync(EnumTypeActives enumTypeActives);
+        Task<IEnumerable<PortifolioDto>> GetPortifolioAsync(EnumCategory enumTypeActives);
     }
 }

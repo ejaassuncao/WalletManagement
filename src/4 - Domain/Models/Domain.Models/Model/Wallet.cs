@@ -79,7 +79,7 @@ namespace Domain.Core.Model
         /// </summary>
         /// <param name="typeActives">The type actives.</param>
         /// <returns></returns>
-        public double TotalCost(EnumTypeActives typeActives)
+        public double TotalCost(EnumCategory typeActives)
         {
             return _actives.Where(a => a.Active.TypeActives == typeActives).Sum(x => x.TotalCost);
         }
@@ -181,7 +181,7 @@ namespace Domain.Core.Model
         /// <returns></returns>
         public double GetPatrimony()
         {           
-            return _actives.Sum(x => (x.Active.Counting * x.Amount));
+            return _actives.Sum(x => (x.Active.Price * x.Amount));
         }
 
         /// <summary>

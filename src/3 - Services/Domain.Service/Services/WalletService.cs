@@ -19,7 +19,7 @@ namespace Service.Core.Services
             this.walletRespository = walletRespository;
         }
 
-        public async Task<IEnumerable<PortifolioDto>> GetPortifolioAsync(EnumTypeActives enumTypeActives)
+        public async Task<IEnumerable<PortifolioDto>> GetPortifolioAsync(EnumCategory enumTypeActives)
         {
             return await walletRespository.GetPortifolioAsync(enumTypeActives);
         }
@@ -33,7 +33,7 @@ namespace Service.Core.Services
             var totalprice = new List<TotalPriceTypeActivesDto>();
 
             double valueTotal = wallat.TotalCost();
-            foreach (EnumTypeActives typeActives in (EnumTypeActives[])Enum.GetValues(typeof(EnumTypeActives)))
+            foreach (EnumCategory typeActives in (EnumCategory[])Enum.GetValues(typeof(EnumCategory)))
             {
                 var valueUnit = wallat.TotalCost(typeActives);
 

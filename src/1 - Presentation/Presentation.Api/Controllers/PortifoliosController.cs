@@ -1,17 +1,12 @@
 using Domain.Core.Dto;
 using Domain.Core.IServices;
 using Domain.Core.Model.Enumerables;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Microsoft.Identity.Web.Resource;
 
 namespace Presentation.Api.Controllers
 {
-    [Authorize]
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
-    [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     public class PortifoliosController : ControllerBase
     {
         private readonly IWalletService walletService;
@@ -19,9 +14,9 @@ namespace Presentation.Api.Controllers
         public PortifoliosController(IWalletService walletService)
         {
             this.walletService = walletService;
-        }
-
-        [HttpGet()]
+        }  
+        
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<PortifolioDto>>> Get()
         {
             try
@@ -39,7 +34,7 @@ namespace Presentation.Api.Controllers
         }
 
 
-        [HttpPost()]
+        [HttpPost]
         public async Task Post(PortifolioDto dto)
         {
             await this.walletService.Insert(dto);

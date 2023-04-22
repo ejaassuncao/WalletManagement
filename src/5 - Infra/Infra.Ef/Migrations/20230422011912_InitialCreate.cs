@@ -199,43 +199,43 @@ namespace Infra.Ef.Migrations
             migrationBuilder.InsertData(
                 table: "tb_broker",
                 columns: new[] { "bkr_id", "bkr_cnpj", "bkr_corporate_name", "d_created", "enabled", "bkr_fantasy_name", "last_update", "user_created", "user_last_update" },
-                values: new object[] { new Guid("d626b523-925e-450c-9b9a-2fa5d9cb4609"), "48.537.525/0001-01", "Itau", new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(4957), true, "Itau investimentos", null, new Guid("59380a1e-b482-41ef-b81e-713042de4dea"), null });
+                values: new object[] { new Guid("bfcd16d5-802b-4889-b214-378d114b5afd"), "48.537.525/0001-01", "Itau", new DateTime(2023, 4, 21, 22, 19, 12, 149, DateTimeKind.Local).AddTicks(4017), true, "Itau investimentos", null, new Guid("c2636988-dabd-4ddf-b782-28af250716b3"), null });
 
             migrationBuilder.InsertData(
                 table: "tb_sector",
                 columns: new[] { "sct_id", "d_created", "enabled", "last_update", "sct_name", "user_created", "user_last_update" },
                 values: new object[,]
                 {
-                    { new Guid("2f4f26f3-edc1-4d0b-98eb-954bba05867a"), new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(4921), true, null, "Financeiro", new Guid("59380a1e-b482-41ef-b81e-713042de4dea"), null },
-                    { new Guid("e07d8a92-dede-43ec-ad4b-e5e8c584b485"), new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(4918), true, null, "Varejo", new Guid("59380a1e-b482-41ef-b81e-713042de4dea"), null }
+                    { new Guid("4a5d4eb1-b025-4f1d-8501-4325ac872067"), new DateTime(2023, 4, 21, 22, 19, 12, 149, DateTimeKind.Local).AddTicks(3994), true, null, "Financeiro", new Guid("c2636988-dabd-4ddf-b782-28af250716b3"), null },
+                    { new Guid("f2920b4d-0200-4c81-84ec-56b91f8cd8d2"), new DateTime(2023, 4, 21, 22, 19, 12, 149, DateTimeKind.Local).AddTicks(3991), true, null, "Varejo", new Guid("c2636988-dabd-4ddf-b782-28af250716b3"), null }
                 });
 
             migrationBuilder.InsertData(
                 table: "tb_user",
                 columns: new[] { "usu_id", "d_created", "enabled", "last_update", "usu_login", "usu_password", "user_created", "user_last_update" },
-                values: new object[] { new Guid("59380a1e-b482-41ef-b81e-713042de4dea"), new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(4663), true, null, "elton", "123456", new Guid("59380a1e-b482-41ef-b81e-713042de4dea"), null });
+                values: new object[] { new Guid("c2636988-dabd-4ddf-b782-28af250716b3"), new DateTime(2023, 4, 21, 22, 19, 12, 149, DateTimeKind.Local).AddTicks(3720), true, null, "elton", "123456", new Guid("c2636988-dabd-4ddf-b782-28af250716b3"), null });
 
             migrationBuilder.InsertData(
                 table: "tb_company",
                 columns: new[] { "cpy_id", "cpy_cnpj", "d_created", "enabled", "last_update", "cpy_name", "sct_id", "user_created", "user_last_update" },
                 values: new object[,]
                 {
-                    { new Guid("263952b2-7f75-42b1-ae67-2088b688e4f9"), "48.537.555/0001-01", new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(5599), true, null, "Magazine Luiza", new Guid("e07d8a92-dede-43ec-ad4b-e5e8c584b485"), new Guid("59380a1e-b482-41ef-b81e-713042de4dea"), null },
-                    { new Guid("9d5a9448-b85a-4dc0-b711-1ba7cf6dc90c"), "48.537.523/0001-01", new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(5609), true, null, "Banco do Brasil", new Guid("2f4f26f3-edc1-4d0b-98eb-954bba05867a"), new Guid("59380a1e-b482-41ef-b81e-713042de4dea"), null }
+                    { new Guid("c80d4354-911b-4889-a9ac-94c60045f9d0"), "48.537.555/0001-01", new DateTime(2023, 4, 21, 22, 19, 12, 149, DateTimeKind.Local).AddTicks(4049), true, null, "Magazine Luiza", new Guid("f2920b4d-0200-4c81-84ec-56b91f8cd8d2"), new Guid("c2636988-dabd-4ddf-b782-28af250716b3"), null },
+                    { new Guid("ed4b6c00-5848-4173-9888-d3b9f7fcd3a1"), "48.537.523/0001-01", new DateTime(2023, 4, 21, 22, 19, 12, 149, DateTimeKind.Local).AddTicks(4051), true, null, "Banco do Brasil", new Guid("4a5d4eb1-b025-4f1d-8501-4325ac872067"), new Guid("c2636988-dabd-4ddf-b782-28af250716b3"), null }
                 });
 
             migrationBuilder.InsertData(
                 table: "tb_wallet",
                 columns: new[] { "wal_Id", "bkr_id", "d_created", "enabled", "last_update", "wal_name", "usu_id", "user_created", "user_last_update" },
-                values: new object[] { new Guid("9f616cff-2bc5-4349-b179-3767fa4567d3"), new Guid("d626b523-925e-450c-9b9a-2fa5d9cb4609"), new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(4974), true, null, "Minha Carteira", new Guid("59380a1e-b482-41ef-b81e-713042de4dea"), new Guid("00000000-0000-0000-0000-000000000000"), null });
+                values: new object[] { new Guid("0fadeed8-6373-425c-8cd1-a3a9f53c9e3d"), new Guid("bfcd16d5-802b-4889-b214-378d114b5afd"), new DateTime(2023, 4, 21, 22, 19, 12, 149, DateTimeKind.Local).AddTicks(4031), true, null, "Minha Carteira", new Guid("c2636988-dabd-4ddf-b782-28af250716b3"), new Guid("00000000-0000-0000-0000-000000000000"), null });
 
             migrationBuilder.InsertData(
                 table: "tb_actives",
                 columns: new[] { "act_id", "act_category", "cpy_id", "d_created", "enabled", "last_update", "act_price", "act_ticker", "user_created", "user_last_update" },
                 values: new object[,]
                 {
-                    { new Guid("6bb239aa-288c-4c88-be49-44db2e50436e"), 0, new Guid("263952b2-7f75-42b1-ae67-2088b688e4f9"), new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(5648), true, null, 10.8m, "MGLU3", new Guid("59380a1e-b482-41ef-b81e-713042de4dea"), null },
-                    { new Guid("861f4f24-c553-40ba-beb0-4179fcb8abc1"), 0, new Guid("9d5a9448-b85a-4dc0-b711-1ba7cf6dc90c"), new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(5652), true, null, 40.7m, "BBAS3", new Guid("59380a1e-b482-41ef-b81e-713042de4dea"), null }
+                    { new Guid("acf27b5b-a9f8-4ac0-8fe5-fd0f17941447"), 0, new Guid("ed4b6c00-5848-4173-9888-d3b9f7fcd3a1"), new DateTime(2023, 4, 21, 22, 19, 12, 149, DateTimeKind.Local).AddTicks(4069), true, null, 40.7m, "BBAS3", new Guid("c2636988-dabd-4ddf-b782-28af250716b3"), null },
+                    { new Guid("f9eeca7c-d0e3-4294-a769-b4e36dc82f95"), 0, new Guid("c80d4354-911b-4889-a9ac-94c60045f9d0"), new DateTime(2023, 4, 21, 22, 19, 12, 149, DateTimeKind.Local).AddTicks(4066), true, null, 10.8m, "MGLU3", new Guid("c2636988-dabd-4ddf-b782-28af250716b3"), null }
                 });
 
             migrationBuilder.InsertData(
@@ -243,8 +243,8 @@ namespace Infra.Ef.Migrations
                 columns: new[] { "aoc_id", "act_id", "aoc_amount", "bkr_id", "aoc_date_operation", "d_created", "enabled", "last_update", "aoc_operation", "aoc_unit_cost", "user_created", "usu_id", "user_last_update", "wal_Id" },
                 values: new object[,]
                 {
-                    { new Guid("390901e8-d086-4430-9762-a35c9a011144"), new Guid("6bb239aa-288c-4c88-be49-44db2e50436e"), 50, new Guid("d626b523-925e-450c-9b9a-2fa5d9cb4609"), new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(5678), new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(5678), true, null, 1, 22.5m, new Guid("59380a1e-b482-41ef-b81e-713042de4dea"), new Guid("59380a1e-b482-41ef-b81e-713042de4dea"), null, new Guid("9f616cff-2bc5-4349-b179-3767fa4567d3") },
-                    { new Guid("64d1876b-7124-413e-a164-df628ea87c3f"), new Guid("861f4f24-c553-40ba-beb0-4179fcb8abc1"), 200, new Guid("d626b523-925e-450c-9b9a-2fa5d9cb4609"), new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(5684), new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(5685), true, null, 1, 43.5m, new Guid("59380a1e-b482-41ef-b81e-713042de4dea"), new Guid("59380a1e-b482-41ef-b81e-713042de4dea"), null, new Guid("9f616cff-2bc5-4349-b179-3767fa4567d3") }
+                    { new Guid("31c7a2e3-ffec-4aee-8692-9c215f493ecb"), new Guid("f9eeca7c-d0e3-4294-a769-b4e36dc82f95"), 50, new Guid("bfcd16d5-802b-4889-b214-378d114b5afd"), new DateTime(2023, 4, 21, 22, 19, 12, 149, DateTimeKind.Local).AddTicks(4086), new DateTime(2023, 4, 21, 22, 19, 12, 149, DateTimeKind.Local).AddTicks(4087), true, null, 1, 22.5m, new Guid("c2636988-dabd-4ddf-b782-28af250716b3"), new Guid("c2636988-dabd-4ddf-b782-28af250716b3"), null, new Guid("0fadeed8-6373-425c-8cd1-a3a9f53c9e3d") },
+                    { new Guid("e59eeda6-d77d-44e4-b47e-d5385d65f2a0"), new Guid("acf27b5b-a9f8-4ac0-8fe5-fd0f17941447"), 200, new Guid("bfcd16d5-802b-4889-b214-378d114b5afd"), new DateTime(2023, 4, 21, 22, 19, 12, 149, DateTimeKind.Local).AddTicks(4092), new DateTime(2023, 4, 21, 22, 19, 12, 149, DateTimeKind.Local).AddTicks(4093), true, null, 1, 43.5m, new Guid("c2636988-dabd-4ddf-b782-28af250716b3"), new Guid("c2636988-dabd-4ddf-b782-28af250716b3"), null, new Guid("0fadeed8-6373-425c-8cd1-a3a9f53c9e3d") }
                 });
 
             migrationBuilder.CreateIndex(

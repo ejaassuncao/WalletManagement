@@ -1,8 +1,5 @@
 using Infra.Ef.Extension;
 using Infra.Repository.Extension;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Identity.Web;
 using Service.Core.Inject;
 
 namespace Presentation.Api
@@ -14,8 +11,8 @@ namespace Presentation.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
+            //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -25,7 +22,7 @@ namespace Presentation.Api
             //builder.Services.InjectModel();
             builder.Services.InjectRepository();
             builder.Services.InjectService();
-            builder.Services.AddAutoMapper(typeof(AutoMapping));
+            builder.Services.AddAutoMapper(typeof(AutoMapping));        
 
             var app = builder.Build();
 

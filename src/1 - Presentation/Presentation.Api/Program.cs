@@ -1,5 +1,7 @@
+using Infra.Ef.Extension;
 using Infra.Repository.Extension;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Identity.Web;
 using Service.Core.Inject;
 
@@ -23,6 +25,7 @@ namespace Presentation.Api
             //builder.Services.InjectModel();
             builder.Services.InjectRepository();
             builder.Services.InjectService();
+            builder.Services.AddAutoMapper(typeof(AutoMapping));
 
             var app = builder.Build();
 

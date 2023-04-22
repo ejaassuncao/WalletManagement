@@ -3,6 +3,7 @@ using Domain.Core.Dto;
 using Domain.Core.Model;
 using Domain.Core.Model.Enumerables;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Domain.core.IRepository

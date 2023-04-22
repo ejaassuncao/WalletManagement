@@ -1,4 +1,5 @@
-﻿using Domain.Commons.IRepository;
+﻿using AutoMapper;
+using Domain.Commons.IRepository;
 using Infra.Ef.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,9 +8,9 @@ namespace Infra.Ef.Repository
     public class EfRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         protected readonly AppDBContext context;
-
+      
         public EfRepository(AppDBContext context)
-        {
+        {          
             this.context = context;
         }
 

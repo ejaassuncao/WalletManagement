@@ -57,7 +57,7 @@ namespace Domain.Core.Model
         /// </summary>
         /// <param name="typeActives">The type actives.</param>
         /// <returns></returns>
-        public double TotalCost(AbstractActives actives)
+        public decimal TotalCost(AbstractActives actives)
         {
             return _actives.Where(x => x.Active.Ticker == actives.Ticker).Sum(x => x.TotalCost);
         }
@@ -68,7 +68,7 @@ namespace Domain.Core.Model
         /// </summary>
         /// <param name="typeActives">The type actives.</param>
         /// <returns></returns>
-        public double TotalCost()
+        public decimal TotalCost()
         {
             return _actives.Sum(x => x.TotalCost);
         }
@@ -79,9 +79,9 @@ namespace Domain.Core.Model
         /// </summary>
         /// <param name="typeActives">The type actives.</param>
         /// <returns></returns>
-        public double TotalCost(EnumCategory typeActives)
+        public decimal TotalCost(EnumCategory typeActives)
         {
-            return _actives.Where(a => a.Active.TypeActives == typeActives).Sum(x => x.TotalCost);
+            return _actives.Where(a => a.Active.Category == typeActives).Sum(x => x.TotalCost);
         }
 
         /// <summary>
@@ -115,13 +115,13 @@ namespace Domain.Core.Model
         /// <param name="unitCost">The unit cost.</param>
         /// <param name="dateBuy">The date buy.</param>
         /// <param name="user">The user.</param>
-        public void Buy(AbstractActives active, int amount, double unitCost, DateTime dateBuy, User user, Broker broker)
+        public void Buy(AbstractActives active, int amount, decimal unitCost, DateTime dateBuy, User user, Broker broker)
         {
             _actives.Add(new ActivesOfCompany(
                 active: active,
                 amount: amount,
                 unitCost: unitCost,
-                dateBuy: dateBuy,
+                dateOperation: dateBuy,
                 user: user,
                 broker: broker,
                 operation: EnumOperationWallet.BUY
@@ -148,7 +148,7 @@ namespace Domain.Core.Model
         /// <param name="unitSales">The unit sales.</param>
         /// <param name="dateBuy">The date buy.</param>
         /// <param name="user">The user.</param>
-        public void Sale(AbstractActives active, int amount, double unitSales, DateTime dateBuy, User user)
+        public void Sale(AbstractActives active, int amount, decimal unitSales, DateTime dateBuy, User user)
         {
             ExceptionDomainValidation.When(!this.ExistsActive(active), MSG_NOT_EXIST_ACTIVE);
             ExceptionDomainValidation.When(this.TotalAmount(active) < amount, MSG_SALES_LARGER_BUY);
@@ -157,7 +157,7 @@ namespace Domain.Core.Model
                 active: active,
                 amount: amount,
                 unitCost: unitSales,
-                dateBuy: dateBuy,
+                dateOperation: dateBuy,
                 user: user,
                 operation: EnumOperationWallet.SALES
             ));
@@ -179,7 +179,7 @@ namespace Domain.Core.Model
         /// pega todo as ações e soma a cotação atual
         /// </summary>
         /// <returns></returns>
-        public double GetPatrimony()
+        public decimal GetPatrimony()
         {           
             return _actives.Sum(x => (x.Active.Price * x.Amount));
         }
@@ -189,7 +189,7 @@ namespace Domain.Core.Model
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public double GetProfit()
+        public decimal GetProfit()
         {
             var patrimony = this.GetPatrimony();
             var totalCost = this.TotalCost();

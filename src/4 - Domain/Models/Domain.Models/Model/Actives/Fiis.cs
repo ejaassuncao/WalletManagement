@@ -14,6 +14,6 @@ namespace Domain.Core.Model.Actives
         public Fiis(Guid id, Company company, string ticker) : base(id, company, ticker)
         {
         }
-        public override EnumCategory TypeActives => EnumCategory.FIIS;
+        public override EnumCategory Category => EnumCategory.FIIS;
     }
 }

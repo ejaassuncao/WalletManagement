@@ -10,7 +10,10 @@ namespace Infra.Repository.Extension
     {
         public static IServiceCollection InjectRepository(this IServiceCollection services)
         {
-            services.AddDbContext<AppDBContext>(options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
+            services.AddDbContext<AppDBContext>(options =>
+                options.UseSqlServer("name=ConnectionStrings:DefaultConnection")
+                        .EnableSensitiveDataLogging()
+                );
             services.AddScoped<IWalletRespository, WalletRespository>();
             return services;
         }

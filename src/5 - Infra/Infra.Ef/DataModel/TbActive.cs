@@ -26,11 +26,13 @@ namespace Infra.Ef.DataModel
         public decimal Price { get; set; }
 
         [Required]
-        [Column("act_typeactives")]     
-        public EnumCategory TypeActives { get; set; }
+        [Column("act_category")]     
+        public EnumCategory Category { get; set; }
 
 
-        [ForeignKey("cpy_id")]
-        public TbCompany Company { get; set; } = new TbCompany();
+        [Column("cpy_id")]
+        [ForeignKey("TbCompany")]       
+        public Guid? CompanyId { get; set; }
+        public TbCompany? Company { get; set; }
     }
 }

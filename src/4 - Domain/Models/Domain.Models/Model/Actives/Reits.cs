@@ -13,6 +13,6 @@ namespace Domain.Core.Model.Actives
         public Reits(Guid id, Company company, string ticker) : base(id, company, ticker)
         {
         }
-        public override EnumCategory TypeActives => EnumCategory.REITS;
+        public override EnumCategory Category => EnumCategory.REITS;
     }
 }

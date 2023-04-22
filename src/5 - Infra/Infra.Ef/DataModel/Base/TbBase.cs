@@ -15,12 +15,12 @@ namespace Infra.Ef.DataModel.Base
 
         [Required]
         [Column("user_created")]
-        public int UserCreated { get; set; }
+        public Guid UserCreated { get; set; }
 
         [Column("last_update")]
         public DateTime? LastUpdate { get; set; }
 
         [Column("user_last_update")]
-        public int? UserLastUpdate { get; set; }
+        public Guid? UserLastUpdate { get; set; }
     }
 }

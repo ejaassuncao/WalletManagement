@@ -26,6 +26,7 @@ namespace Infra.Ef.DataModel
         [Required]
         [StringLength(18)]
         [Column("bkr_cnpj")]
-        public string CNPJ { get; init; } = string.Empty;
+        public string CNPJ { get; init; } = string.Empty;    
+
     }
 }

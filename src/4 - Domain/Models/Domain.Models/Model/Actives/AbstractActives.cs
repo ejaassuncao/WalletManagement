@@ -20,12 +20,12 @@ namespace Domain.Core.Model.Actives
         /// <summary>
         /// Cotação
         /// </summary>
-        public double Price { get; protected set; }
+        public decimal Price { get; protected set; }
 
         /// <summary>
         /// Tipo de ativos
         /// </summary>       
-        public abstract EnumCategory TypeActives { get; }
+        public abstract EnumCategory Category { get; }
 
         #endregion
 
@@ -55,7 +55,7 @@ namespace Domain.Core.Model.Actives
             Ticker = tiker;
         }
 
-        public void UpdateCounting(double counting)
+        public void UpdateCounting(decimal counting)
         {
             this.Price = counting;
         }

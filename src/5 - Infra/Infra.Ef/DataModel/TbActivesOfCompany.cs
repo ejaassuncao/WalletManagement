@@ -24,21 +24,34 @@ namespace Infra.Ef.DataModel
         public decimal UnitCost { get; set; }
 
         [Required]
-        [Column("aoc_date_buy")]
-        public DateTime DateBuy { get; set; }
+        [Column("aoc_date_operation")]
+        public DateTime DateOperation { get; set; } = DateTime.Now;
 
         [Required]
         [Column("aoc_operation")]
         public EnumOperationWallet Operation { get; set; }
 
-        [ForeignKey("act_id")]
-        public TbActive Active { get; set; } = new TbActive();
+        [Column("usu_id")]
+        [ForeignKey("TbUser")]
+        public Guid? UserId { get; set; }
+        public TbUser? User { get; set; }
 
-        [ForeignKey("usu_id")]
-        public TbUser User { get; set; } = new TbUser();
 
-        [ForeignKey("bkr_id")]
-        public TbBroker Broker { get; set; } = new TbBroker();
+        [Column("bkr_id")]
+        [ForeignKey("TbBroker")]
+        public Guid? BrokerId { get; set; }
+        public TbBroker? Broker { get; set; }
 
+
+        [Column("wal_Id")]
+        [ForeignKey("TbWallet")]
+        public Guid? WalletId { get; set; }
+        public TbWallet? Wallet { get; set; }
+
+
+        [Column("act_id")]
+        [ForeignKey("TbActive")]
+        public Guid? ActiveId { get; set; }
+        public TbActive? Active { get; set; }
     }
 }

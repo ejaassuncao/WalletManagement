@@ -1,7 +1,5 @@
-﻿using Domain.Core.Model;
-using Infra.Ef.DataModel.Base;
+﻿using Infra.Ef.DataModel.Base;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,11 +11,12 @@ namespace Infra.Ef.DataModel;
 /// </summary>
 [Table("tb_wallet")]
 [Comment("sufix: wal")]
-public partial class TbWallet: TbBase
+public partial class TbWallet : TbBase
 {
     /// <summary>
     /// PK table
     /// </summary>
+    [Key]
     [Column("wal_Id")]
     public Guid Id { get; set; }
 
@@ -29,10 +28,16 @@ public partial class TbWallet: TbBase
     [Column("wal_name")]
     public string Name { get; set; } = string.Empty;
 
-    public TbUser Owner { get; set; } = new TbUser();
 
-    public TbBroker Broker { get; set; } = new TbBroker();
+    [Column("usu_id")]
+    [ForeignKey("TbUser")]
+    public Guid? OwnerId { get; set; }
+    public TbUser? Owner { get; set; }
 
-    public ICollection<TbActivesOfCompany> Actives { get; set; } = new Collection<TbActivesOfCompany>();
-     
+
+    [Column("bkr_id")]
+    [ForeignKey("TbBroker")]
+    public Guid? BrokerId { get; set; }
+    public TbBroker? Broker { get; set; }
+
 }

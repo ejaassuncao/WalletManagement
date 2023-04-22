@@ -2,6 +2,7 @@
 using Domain.Core.Dto;
 using Domain.Core.IServices;
 using Domain.Core.Model;
+using Domain.Core.Model.Actives;
 using Domain.Core.Model.Enumerables;
 using Service.Core.Dtos;
 using System;
@@ -32,7 +33,7 @@ namespace Service.Core.Services
         {
             var totalprice = new List<TotalPriceTypeActivesDto>();
 
-            double valueTotal = wallat.TotalCost();
+            decimal valueTotal = wallat.TotalCost();
             foreach (EnumCategory typeActives in (EnumCategory[])Enum.GetValues(typeof(EnumCategory)))
             {
                 var valueUnit = wallat.TotalCost(typeActives);
@@ -56,6 +57,11 @@ namespace Service.Core.Services
         {
             var wallat = await walletRespository.GetByIdAsync(id);
             return GetTotalPriceTypeActives(wallat);
-        }       
+        }
+
+        public async Task Insert(PortifolioDto dto)
+        {
+           
+        }
     }
 }

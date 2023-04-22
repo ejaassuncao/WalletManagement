@@ -29,6 +29,14 @@ namespace Infra.Ef.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("act_id");
 
+                    b.Property<int>("Category")
+                        .HasColumnType("int")
+                        .HasColumnName("act_category");
+
+                    b.Property<Guid?>("CompanyId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("cpy_id");
+
                     b.Property<DateTime>("Dcreated")
                         .HasColumnType("datetime2")
                         .HasColumnName("d_created");
@@ -52,28 +60,45 @@ namespace Infra.Ef.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("act_ticker");
 
-                    b.Property<int>("TypeActives")
-                        .HasColumnType("int")
-                        .HasColumnName("act_typeactives");
-
-                    b.Property<int>("UserCreated")
-                        .HasColumnType("int")
+                    b.Property<Guid>("UserCreated")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("user_created");
 
-                    b.Property<int?>("UserLastUpdate")
-                        .HasColumnType("int")
+                    b.Property<Guid?>("UserLastUpdate")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("user_last_update");
-
-                    b.Property<Guid>("cpy_id")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("cpy_id");
+                    b.HasIndex("CompanyId");
 
                     b.ToTable("tb_actives", t =>
                         {
                             t.HasComment("sufix: act");
+                        });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("6bb239aa-288c-4c88-be49-44db2e50436e"),
+                            Category = 0,
+                            CompanyId = new Guid("263952b2-7f75-42b1-ae67-2088b688e4f9"),
+                            Dcreated = new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(5648),
+                            Enabled = true,
+                            Price = 10.8m,
+                            Ticker = "MGLU3",
+                            UserCreated = new Guid("59380a1e-b482-41ef-b81e-713042de4dea")
+                        },
+                        new
+                        {
+                            Id = new Guid("861f4f24-c553-40ba-beb0-4179fcb8abc1"),
+                            Category = 0,
+                            CompanyId = new Guid("9d5a9448-b85a-4dc0-b711-1ba7cf6dc90c"),
+                            Dcreated = new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(5652),
+                            Enabled = true,
+                            Price = 40.7m,
+                            Ticker = "BBAS3",
+                            UserCreated = new Guid("59380a1e-b482-41ef-b81e-713042de4dea")
                         });
                 });
 
@@ -84,13 +109,21 @@ namespace Infra.Ef.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("aoc_id");
 
+                    b.Property<Guid?>("ActiveId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("act_id");
+
                     b.Property<int>("Amount")
                         .HasColumnType("int")
                         .HasColumnName("aoc_amount");
 
-                    b.Property<DateTime>("DateBuy")
+                    b.Property<Guid?>("BrokerId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("bkr_id");
+
+                    b.Property<DateTime>("DateOperation")
                         .HasColumnType("datetime2")
-                        .HasColumnName("aoc_date_buy");
+                        .HasColumnName("aoc_date_operation");
 
                     b.Property<DateTime>("Dcreated")
                         .HasColumnType("datetime2")
@@ -108,44 +141,72 @@ namespace Infra.Ef.Migrations
                         .HasColumnType("int")
                         .HasColumnName("aoc_operation");
 
-                    b.Property<Guid?>("TbWalletId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<decimal>("UnitCost")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("aoc_unit_cost");
 
-                    b.Property<int>("UserCreated")
-                        .HasColumnType("int")
+                    b.Property<Guid>("UserCreated")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("user_created");
 
-                    b.Property<int?>("UserLastUpdate")
-                        .HasColumnType("int")
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("usu_id");
+
+                    b.Property<Guid?>("UserLastUpdate")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("user_last_update");
 
-                    b.Property<Guid>("act_id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("bkr_id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("usu_id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<Guid?>("WalletId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("wal_Id");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TbWalletId");
+                    b.HasIndex("ActiveId");
 
-                    b.HasIndex("act_id");
+                    b.HasIndex("BrokerId");
 
-                    b.HasIndex("bkr_id");
+                    b.HasIndex("UserId");
 
-                    b.HasIndex("usu_id");
+                    b.HasIndex("WalletId");
 
                     b.ToTable("tb_actives_company", t =>
                         {
                             t.HasComment("sufix: aoc");
+                        });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("390901e8-d086-4430-9762-a35c9a011144"),
+                            ActiveId = new Guid("6bb239aa-288c-4c88-be49-44db2e50436e"),
+                            Amount = 50,
+                            BrokerId = new Guid("d626b523-925e-450c-9b9a-2fa5d9cb4609"),
+                            DateOperation = new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(5678),
+                            Dcreated = new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(5678),
+                            Enabled = true,
+                            Operation = 1,
+                            UnitCost = 22.5m,
+                            UserCreated = new Guid("59380a1e-b482-41ef-b81e-713042de4dea"),
+                            UserId = new Guid("59380a1e-b482-41ef-b81e-713042de4dea"),
+                            WalletId = new Guid("9f616cff-2bc5-4349-b179-3767fa4567d3")
+                        },
+                        new
+                        {
+                            Id = new Guid("64d1876b-7124-413e-a164-df628ea87c3f"),
+                            ActiveId = new Guid("861f4f24-c553-40ba-beb0-4179fcb8abc1"),
+                            Amount = 200,
+                            BrokerId = new Guid("d626b523-925e-450c-9b9a-2fa5d9cb4609"),
+                            DateOperation = new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(5684),
+                            Dcreated = new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(5685),
+                            Enabled = true,
+                            Operation = 1,
+                            UnitCost = 43.5m,
+                            UserCreated = new Guid("59380a1e-b482-41ef-b81e-713042de4dea"),
+                            UserId = new Guid("59380a1e-b482-41ef-b81e-713042de4dea"),
+                            WalletId = new Guid("9f616cff-2bc5-4349-b179-3767fa4567d3")
                         });
                 });
 
@@ -186,12 +247,12 @@ namespace Infra.Ef.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("last_update");
 
-                    b.Property<int>("UserCreated")
-                        .HasColumnType("int")
+                    b.Property<Guid>("UserCreated")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("user_created");
 
-                    b.Property<int?>("UserLastUpdate")
-                        .HasColumnType("int")
+                    b.Property<Guid?>("UserLastUpdate")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("user_last_update");
 
                     b.HasKey("Id");
@@ -199,6 +260,18 @@ namespace Infra.Ef.Migrations
                     b.ToTable("tb_broker", t =>
                         {
                             t.HasComment("sufix: bkr");
+                        });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d626b523-925e-450c-9b9a-2fa5d9cb4609"),
+                            CNPJ = "48.537.525/0001-01",
+                            CorporateName = "Itau",
+                            Dcreated = new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(4957),
+                            Enabled = true,
+                            FantasyName = "Itau investimentos",
+                            UserCreated = new Guid("59380a1e-b482-41ef-b81e-713042de4dea")
                         });
                 });
 
@@ -233,24 +306,47 @@ namespace Infra.Ef.Migrations
                         .HasColumnType("nvarchar(120)")
                         .HasColumnName("cpy_name");
 
-                    b.Property<int>("UserCreated")
-                        .HasColumnType("int")
+                    b.Property<Guid?>("SetorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("sct_id");
+
+                    b.Property<Guid>("UserCreated")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("user_created");
 
-                    b.Property<int?>("UserLastUpdate")
-                        .HasColumnType("int")
+                    b.Property<Guid?>("UserLastUpdate")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("user_last_update");
-
-                    b.Property<Guid>("sct_id")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("sct_id");
+                    b.HasIndex("SetorId");
 
                     b.ToTable("tb_company", t =>
                         {
                             t.HasComment("sufix: cpy");
+                        });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("263952b2-7f75-42b1-ae67-2088b688e4f9"),
+                            CNPJ = "48.537.555/0001-01",
+                            Dcreated = new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(5599),
+                            Enabled = true,
+                            Name = "Magazine Luiza",
+                            SetorId = new Guid("e07d8a92-dede-43ec-ad4b-e5e8c584b485"),
+                            UserCreated = new Guid("59380a1e-b482-41ef-b81e-713042de4dea")
+                        },
+                        new
+                        {
+                            Id = new Guid("9d5a9448-b85a-4dc0-b711-1ba7cf6dc90c"),
+                            CNPJ = "48.537.523/0001-01",
+                            Dcreated = new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(5609),
+                            Enabled = true,
+                            Name = "Banco do Brasil",
+                            SetorId = new Guid("2f4f26f3-edc1-4d0b-98eb-954bba05867a"),
+                            UserCreated = new Guid("59380a1e-b482-41ef-b81e-713042de4dea")
                         });
                 });
 
@@ -279,12 +375,12 @@ namespace Infra.Ef.Migrations
                         .HasColumnType("nvarchar(120)")
                         .HasColumnName("sct_name");
 
-                    b.Property<int>("UserCreated")
-                        .HasColumnType("int")
+                    b.Property<Guid>("UserCreated")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("user_created");
 
-                    b.Property<int?>("UserLastUpdate")
-                        .HasColumnType("int")
+                    b.Property<Guid?>("UserLastUpdate")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("user_last_update");
 
                     b.HasKey("Id");
@@ -292,6 +388,24 @@ namespace Infra.Ef.Migrations
                     b.ToTable("tb_sector", t =>
                         {
                             t.HasComment("sufix: sct");
+                        });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("e07d8a92-dede-43ec-ad4b-e5e8c584b485"),
+                            Dcreated = new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(4918),
+                            Enabled = true,
+                            Name = "Varejo",
+                            UserCreated = new Guid("59380a1e-b482-41ef-b81e-713042de4dea")
+                        },
+                        new
+                        {
+                            Id = new Guid("2f4f26f3-edc1-4d0b-98eb-954bba05867a"),
+                            Dcreated = new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(4921),
+                            Enabled = true,
+                            Name = "Financeiro",
+                            UserCreated = new Guid("59380a1e-b482-41ef-b81e-713042de4dea")
                         });
                 });
 
@@ -326,12 +440,12 @@ namespace Infra.Ef.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasColumnName("usu_password");
 
-                    b.Property<int>("UserCreated")
-                        .HasColumnType("int")
+                    b.Property<Guid>("UserCreated")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("user_created");
 
-                    b.Property<int?>("UserLastUpdate")
-                        .HasColumnType("int")
+                    b.Property<Guid?>("UserLastUpdate")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("user_last_update");
 
                     b.HasKey("Id");
@@ -339,6 +453,17 @@ namespace Infra.Ef.Migrations
                     b.ToTable("tb_user", t =>
                         {
                             t.HasComment("sufix: usu");
+                        });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("59380a1e-b482-41ef-b81e-713042de4dea"),
+                            Dcreated = new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(4663),
+                            Enabled = true,
+                            Login = "elton",
+                            Password = "123456",
+                            UserCreated = new Guid("59380a1e-b482-41ef-b81e-713042de4dea")
                         });
                 });
 
@@ -349,8 +474,9 @@ namespace Infra.Ef.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("wal_Id");
 
-                    b.Property<Guid>("BrokerId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<Guid?>("BrokerId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("bkr_id");
 
                     b.Property<DateTime>("Dcreated")
                         .HasColumnType("datetime2")
@@ -370,15 +496,16 @@ namespace Infra.Ef.Migrations
                         .HasColumnType("nvarchar(120)")
                         .HasColumnName("wal_name");
 
-                    b.Property<Guid>("OwnerId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<Guid?>("OwnerId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("usu_id");
 
-                    b.Property<int>("UserCreated")
-                        .HasColumnType("int")
+                    b.Property<Guid>("UserCreated")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("user_created");
 
-                    b.Property<int?>("UserLastUpdate")
-                        .HasColumnType("int")
+                    b.Property<Guid?>("UserLastUpdate")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("user_last_update");
 
                     b.HasKey("Id");
@@ -391,57 +518,61 @@ namespace Infra.Ef.Migrations
                         {
                             t.HasComment("sufix: wal");
                         });
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("9f616cff-2bc5-4349-b179-3767fa4567d3"),
+                            BrokerId = new Guid("d626b523-925e-450c-9b9a-2fa5d9cb4609"),
+                            Dcreated = new DateTime(2023, 4, 21, 22, 10, 9, 253, DateTimeKind.Local).AddTicks(4974),
+                            Enabled = true,
+                            Name = "Minha Carteira",
+                            OwnerId = new Guid("59380a1e-b482-41ef-b81e-713042de4dea"),
+                            UserCreated = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("Infra.Ef.DataModel.TbActive", b =>
                 {
                     b.HasOne("Infra.Ef.DataModel.TbCompany", "Company")
                         .WithMany()
-                        .HasForeignKey("cpy_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CompanyId");
 
                     b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Infra.Ef.DataModel.TbActivesOfCompany", b =>
                 {
-                    b.HasOne("Infra.Ef.DataModel.TbWallet", null)
-                        .WithMany("Actives")
-                        .HasForeignKey("TbWalletId");
-
                     b.HasOne("Infra.Ef.DataModel.TbActive", "Active")
                         .WithMany()
-                        .HasForeignKey("act_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ActiveId");
 
                     b.HasOne("Infra.Ef.DataModel.TbBroker", "Broker")
                         .WithMany()
-                        .HasForeignKey("bkr_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BrokerId");
 
                     b.HasOne("Infra.Ef.DataModel.TbUser", "User")
                         .WithMany()
-                        .HasForeignKey("usu_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("Infra.Ef.DataModel.TbWallet", "Wallet")
+                        .WithMany()
+                        .HasForeignKey("WalletId");
 
                     b.Navigation("Active");
 
                     b.Navigation("Broker");
 
                     b.Navigation("User");
+
+                    b.Navigation("Wallet");
                 });
 
             modelBuilder.Entity("Infra.Ef.DataModel.TbCompany", b =>
                 {
                     b.HasOne("Infra.Ef.DataModel.TbSector", "Setor")
                         .WithMany()
-                        .HasForeignKey("sct_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SetorId");
 
                     b.Navigation("Setor");
                 });
@@ -450,24 +581,15 @@ namespace Infra.Ef.Migrations
                 {
                     b.HasOne("Infra.Ef.DataModel.TbBroker", "Broker")
                         .WithMany()
-                        .HasForeignKey("BrokerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BrokerId");
 
                     b.HasOne("Infra.Ef.DataModel.TbUser", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OwnerId");
 
                     b.Navigation("Broker");
 
                     b.Navigation("Owner");
-                });
-
-            modelBuilder.Entity("Infra.Ef.DataModel.TbWallet", b =>
-                {
-                    b.Navigation("Actives");
                 });
 #pragma warning restore 612, 618
         }

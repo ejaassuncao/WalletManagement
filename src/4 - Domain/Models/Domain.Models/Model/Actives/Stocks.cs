@@ -16,6 +16,6 @@ namespace Domain.Core.Model.Actives
         {
         }
 
-        public override EnumCategory TypeActives => EnumCategory.STOCKES;
+        public override EnumCategory Category => EnumCategory.STOCKES;
     }
 }

@@ -30,7 +30,7 @@ namespace Domain.Core.Test
         public void TotalCostWallate()
         {
             Wallet wallet = NewWallet();
-            double expect = 7280;
+            decimal expect = 7280;
             Assert.Equal(expect, wallet.TotalCost());
         }
 
@@ -43,7 +43,7 @@ namespace Domain.Core.Test
         [Theory]
         [InlineData(60, 16, 960)]
         [InlineData(50, 100, 5000)]
-        public void SuccessTotalCost(int amount, double unitCost, double expected)
+        public void SuccessTotalCost(int amount, decimal unitCost, decimal expected)
         {
             var user = UserTest.GetNewInstanceMock();
             var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
@@ -69,13 +69,13 @@ namespace Domain.Core.Test
                 var broker = new Broker("Rico", "Rico", "21457878");
 
                 wallet.Buy(new Actions(magazine, magazine.GettTiker()), 4, 10, DateTime.Now, user, broker); //40
-                wallet.Buy(new Actions(magazine, magazine.GettTiker()), 5, 12.50, DateTime.Now, user, broker); //62.50
+                wallet.Buy(new Actions(magazine, magazine.GettTiker()), 5, (decimal)12.50, DateTime.Now, user, broker); //62.50
 
                 wallet.Sale(new Actions(magazine, magazine.GettTiker()), 2, 8, DateTime.Now, user); //16
                 wallet.Sale(new Actions(magazine, magazine.GettTiker()), 5, 7, DateTime.Now, user);// 35
                 wallet.Sale(new Actions(magazine, magazine.GettTiker()), 10, 10, DateTime.Now, user);//100
 
-                double expected = -48.50;
+                decimal expected = (decimal) -48.50;
 
                 Assert.Equal(expected, wallet.TotalCost());
             };
@@ -101,7 +101,7 @@ namespace Domain.Core.Test
 
             //total 19
             wallet.Buy(magazineActive, 4, 10, DateTime.Now, user, broker);
-            wallet.Buy(magazineActive, 5, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(magazineActive, 5, (decimal)12.50, DateTime.Now, user, broker);
             wallet.Buy(petrobrasActive, 10, 10, DateTime.Now, user, broker);
 
             //total 7
@@ -131,7 +131,7 @@ namespace Domain.Core.Test
 
             //total 19
             wallet.Buy(magazineActive, 4, 10, DateTime.Now, user, broker);
-            wallet.Buy(magazineActive, 5, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(magazineActive, 5, (decimal)12.50, DateTime.Now, user, broker);
             wallet.Buy(petrobrasActive, 10, 10, DateTime.Now, user, broker);
 
             //total 7
@@ -161,14 +161,14 @@ namespace Domain.Core.Test
 
             //total 202,50
             wallet.Buy(magazineActive, 4, 10, DateTime.Now, user, broker);
-            wallet.Buy(magazineActive, 5, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(magazineActive, 5, (decimal)12.50, DateTime.Now, user, broker);
             wallet.Buy(petrobrasActive, 10, 10, DateTime.Now, user, broker);
 
             //total 51
             wallet.Sale(magazineActive, 2, 8, DateTime.Now, user);
             wallet.Sale(magazineActive, 5, 7, DateTime.Now, user);
 
-            double expected = 151.50;
+            decimal expected = (decimal)151.50;
 
             Assert.Equal(expected, wallet.TotalCost());
         }
@@ -191,14 +191,14 @@ namespace Domain.Core.Test
 
             //total 102,5 de magalu
             wallet.Buy(magazineActive, 4, 10, DateTime.Now, user, broker);
-            wallet.Buy(magazineActive, 5, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(magazineActive, 5, (decimal)12.50, DateTime.Now, user, broker);
             wallet.Buy(petrobrasActive, 10, 10, DateTime.Now, user, broker);
 
             //total 51
             wallet.Sale(magazineActive, 2, 8, DateTime.Now, user);
             wallet.Sale(magazineActive, 5, 7, DateTime.Now, user);
 
-            double expected = 51.50;
+            decimal expected = (decimal) 51.50;
 
             Assert.Equal(expected, wallet.TotalCost(magazineActive));
         }
@@ -215,7 +215,7 @@ namespace Domain.Core.Test
             var action = new Actions(magazine, magazine.GettTiker());
             var broker = new Broker("Rico", "Rico", "21457878");
 
-            wallet.Buy(action, 5, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(action, 5, (decimal)12.50, DateTime.Now, user, broker);
 
             var expected = true;
 
@@ -247,7 +247,7 @@ namespace Domain.Core.Test
         [InlineData(7.80, 23.80)]
         [InlineData(7.50, 22.85)]
         [InlineData(8.90, 22.60)]
-        public void GetPatrimony(double countingMagazine, double countingPetrobras)
+        public void GetPatrimony(decimal countingMagazine, decimal countingPetrobras)
         {
             var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
             var user = UserTest.GetNewInstanceMock();
@@ -264,14 +264,14 @@ namespace Domain.Core.Test
 
             //total 102,5 de magalu
             wallet.Buy(magazineActive, 4, 10, DateTime.Now, user, broker);
-            wallet.Buy(magazineActive, 5, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(magazineActive, 5, (decimal)12.50, DateTime.Now, user, broker);
             wallet.Buy(magazineActive, 10, 8, DateTime.Now, user, broker);
 
-            wallet.Buy(petrobrasActive, 8, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(petrobrasActive, 8, (decimal)12.50, DateTime.Now, user, broker);
             wallet.Buy(petrobrasActive, 15, 8, DateTime.Now, user, broker);
 
             var result = Math.Round(wallet.GetPatrimony(), 2);
-            double expected = Math.Round((19 * countingMagazine) + (23 * countingPetrobras), 2);
+            decimal expected = (decimal) Math.Round((19 * countingMagazine) + (23 * countingPetrobras), 2);
 
             Assert.Equal(expected, result);
 
@@ -285,7 +285,7 @@ namespace Domain.Core.Test
         [InlineData(7.80, 23.80)]
         [InlineData(7.50, 22.85)]
         [InlineData(8.90, 22.60)]
-        public void GetProfit(double countingMagazine, double countingPetrobras)
+        public void GetProfit(decimal countingMagazine, decimal countingPetrobras)
         {
             var wallet = new Wallet(UserTest.GetNewInstanceMock(), "Ativos BR");
             var user = UserTest.GetNewInstanceMock();
@@ -301,11 +301,11 @@ namespace Domain.Core.Test
             petrobrasActive.UpdateCounting(countingPetrobras);
 
             //total 102,5 de magalu
-            wallet.Buy(magazineActive, 4, 10, DateTime.Now, user, broker);
-            wallet.Buy(magazineActive, 5, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(magazineActive, 4, (decimal)10, DateTime.Now, user, broker);
+            wallet.Buy(magazineActive, 5, (decimal)12.50, DateTime.Now, user, broker);
             wallet.Buy(magazineActive, 10, 8, DateTime.Now, user, broker);
 
-            wallet.Buy(petrobrasActive, 8, 12.50, DateTime.Now, user, broker);
+            wallet.Buy(petrobrasActive, 8, (decimal)12.50, DateTime.Now, user, broker);
             wallet.Buy(petrobrasActive, 15, 8, DateTime.Now, user, broker);
 
             var result = wallet.GetProfit();
@@ -330,13 +330,13 @@ namespace Domain.Core.Test
             var wallet = new Wallet(user, "Ativos BR");
             var broker = new Broker("Rico", "Rico", "21457878");
 
-            wallet.Buy(new Actions(magazine, magazine.GettTiker(EnumActionTypeTicker.ON)), 60, 16.00, DateTime.Now, user, broker);
+            wallet.Buy(new Actions(magazine, magazine.GettTiker(EnumActionTypeTicker.ON)), 60, (decimal)16.00, DateTime.Now, user, broker);
 
             var petrobras = CompanyTest.GetPetrobrasMock();
-            wallet.Buy(new Actions(petrobras, petrobras.GettTiker(EnumActionTypeTicker.PN)), 60, 22.00, DateTime.Now, user, broker);
+            wallet.Buy(new Actions(petrobras, petrobras.GettTiker(EnumActionTypeTicker.PN)), 60, (decimal)22.00, DateTime.Now, user, broker);
 
             var habt11 = CompanyTest.GetHabt11Mock();
-            wallet.Buy(new Fiis(habt11, habt11.GettTiker()), 50, 100.00, DateTime.Now, user, broker);
+            wallet.Buy(new Fiis(habt11, habt11.GettTiker()), 50, (decimal)100.00, DateTime.Now, user, broker);
 
             return wallet;
         }

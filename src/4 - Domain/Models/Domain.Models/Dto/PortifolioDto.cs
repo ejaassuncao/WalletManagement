@@ -1,14 +1,15 @@
 ﻿namespace Domain.Core.Dto
 {
-    public record PortifolioDto(
-         string Category,
-         string Sector,
-         string Ticker,
-         decimal Price,
-         decimal Amount,
-         decimal Cost,
-         decimal TotalPrice,
-         decimal TotalCost,
-         string LP
-    );
+    public class PortifolioDto
+    {
+        public string Category { get; set; }
+        public string Sector { get; set; }
+        public string Ticker { get; set; }
+        public decimal Price { get; set; }
+        public decimal Amount { get; set; }
+        public decimal UnitCost { get; set; }
+        public decimal TotalPrice { get; set; }
+        public decimal TotalCost { get; set; }
+        public decimal LP { get; set; }
+    }
 }

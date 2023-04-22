@@ -22,5 +22,6 @@ namespace Infra.Ef.DataModel
         [StringLength(255)]
         [Column("usu_password")]
         public string Password { get; set; } = string.Empty;
+
     }
 }

@@ -18,17 +18,17 @@ namespace Domain.Core.Model
         /// <summary>
         /// Custo unitário
         /// </summary>
-        public double UnitCost { get; protected set; }
+        public decimal UnitCost { get; protected set; }
 
         /// <summary>
         /// Custo total
         /// </summary>
-        public double TotalCost { get; protected set; }
+        public decimal TotalCost { get; protected set; }
 
         /// <summary>
-        /// Data da compra
+        /// Data da compra/Venda
         /// </summary>
-        public DateTime DateBuy { get; protected set; }
+        public DateTime DateOperation { get; protected set; }
 
         /// <summary>
         /// Data da compra
@@ -37,12 +37,12 @@ namespace Domain.Core.Model
         public EnumOperationWallet Operation { get; protected set; }
         public Broker Broker { get; protected set; }
 
-        public ActivesOfCompany(AbstractActives active, int amount, double unitCost, DateTime dateBuy, User user, EnumOperationWallet operation, Broker broker = null)
+        public ActivesOfCompany(AbstractActives active, int amount, decimal unitCost, DateTime dateOperation, User user, EnumOperationWallet operation, Broker broker = null)
         {
             ExceptionDomainValidation.When(active is null, "active not found");
             ExceptionDomainValidation.When(amount <= 0, "amount is min or egual 0");
             ExceptionDomainValidation.When(unitCost <= 0, "unitCost is min or egual 0");
-            ExceptionDomainValidation.When(dateBuy == default, "invalid date");
+            ExceptionDomainValidation.When(dateOperation == default, "invalid date");
             ExceptionDomainValidation.When(user is null, "usert not found");
 
             amount = (operation == EnumOperationWallet.SALES) ? (amount * -1) : amount;
@@ -52,7 +52,7 @@ namespace Domain.Core.Model
             UnitCost = unitCost;
             TotalCost = (amount * unitCost);
             //Caso for valor de venda negativa TotalCost
-            DateBuy = dateBuy;
+            DateOperation = dateOperation;
             User = user;
             Operation = operation;
             Broker = broker;

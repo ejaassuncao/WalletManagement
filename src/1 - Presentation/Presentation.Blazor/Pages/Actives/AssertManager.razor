@@ -1,8 +1,10 @@
 ﻿@using System.Collections.Generic;
+@using Domain.Core.Dto;
+@using Domain.Models.Extension;
 @using Presentation.Blazor.Component
-@inject HttpClient Http
 @using System.Globalization
 @using Presentation.Blazor.Configuration;
+@inject HttpClient Http
 @inject IStringLocalizer<Messages> Loc
 
 @page "/assertmanager"
@@ -17,7 +19,7 @@
                 </div>
                 <div class="col-xs-6 col-sm-6">
                     <a class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i><span>@Loc["New"]</span></a>
-                    <a class="btn btn-primary"><i class="fa fa-search" aria-hidden="true" @onclick="Search"></i><span>@Loc["Search"]</span></a>
+                    <a class="btn btn-primary" @onclick="Search"><i class="fa fa-search" aria-hidden="true"></i><span>@Loc["Search"]</span></a>
                 </div>
             </div>
         </div>
@@ -35,12 +37,12 @@
                 <td>@active.Category</td>
                 <td>@active.Sector</td>
                 <td>@active.Ticker</td>
-                <td>@active.Price</td>
-                <td>@active.Amount</td>
-                <td>@active.UnitCost</td>
-                <td>@active.TotalPrice</td>
-                <td>@active.TotalCost</td>
-                <td>@active.LP</td>                
+                <td>@active.Price.ToCurrency()</td>
+                <td>@active.Amount.ToQuantity()</td>
+                <td>@active.UnitCost.ToCurrency()</td>
+                <td>@active.TotalPrice.ToCurrency()</td>
+                <td>@active.TotalCost.ToCurrency()</td>
+                <td>@active.LP.ToCurrency()</td>
                 <td>                   
                     <a href="#newAtivice" class="new" data-toggle="modal"><i class="fa-solid fa-plus"></i></a>
                 </td>
@@ -143,7 +145,7 @@
 
 @code {
 
-    private List<ActivesViewModel> actives = new List<ActivesViewModel>();
+    private List<PortifolioDto> actives = new List<PortifolioDto>();
     private const string Title = "Asset Management";
     private bool loading;
 
@@ -151,19 +153,7 @@
     public async Task Search()
     {
         loading = true;       
-        actives = await Http.GetFromJsonAsync<List<ActivesViewModel>>(HelperEndPoints.Api("Portifolios"));
+        actives = await Http.GetFromJsonAsync<List<PortifolioDto>>(HelperEndPoints.Api("Portifolios"));
         loading = false;
-    }
-
-    public record ActivesViewModel(string Category,
-         string Sector,
-         string Ticker,
-         decimal Price,
-         int Amount,
-         decimal UnitCost,
-         decimal TotalPrice,
-         decimal TotalCost,
-         string LP        
-    );
-
+    }   
 }

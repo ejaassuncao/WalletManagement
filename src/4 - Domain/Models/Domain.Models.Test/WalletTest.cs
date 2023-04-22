@@ -108,7 +108,7 @@ namespace Domain.Core.Test
             wallet.Sale(magazineActive, 2, 8, DateTime.Now, user);
             wallet.Sale(magazineActive, 5, 7, DateTime.Now, user);
 
-            double expected = 12;
+            decimal expected = 12;
 
             Assert.Equal(expected, wallet.TotalAmount());
         }
@@ -138,7 +138,7 @@ namespace Domain.Core.Test
             wallet.Sale(magazineActive, 2, 8, DateTime.Now, user);
             wallet.Sale(magazineActive, 5, 7, DateTime.Now, user);
 
-            double expected = 2;
+            decimal expected = 2;
 
             Assert.Equal(expected, wallet.TotalAmount(magazineActive));
         }

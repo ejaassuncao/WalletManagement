@@ -15,6 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\4 - Domain\Models\Domain.Models\Domain.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Resource\Messages.pt-br.Designer.cs">
       <DependentUpon>Messages.pt-Br.resx</DependentUpon>
       <DesignTime>True</DesignTime>

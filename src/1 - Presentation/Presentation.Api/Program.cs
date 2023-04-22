@@ -13,8 +13,8 @@ namespace Presentation.Api
             // Add services to the container.
             //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             //    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
-
-            builder.Services.AddControllers();
+            builder.Services.AddCors();
+            builder.Services.AddControllers();            
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -25,7 +25,7 @@ namespace Presentation.Api
             builder.Services.AddAutoMapper(typeof(AutoMapping));        
 
             var app = builder.Build();
-
+          
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -39,6 +39,11 @@ namespace Presentation.Api
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.UseCors(
+               options => options.AllowAnyOrigin().AllowAnyMethod()
+            );   
+
 
             app.Run();
         }

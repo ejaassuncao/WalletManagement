@@ -90,7 +90,7 @@ namespace Domain.Core.Model
         /// </summary>
         /// <param name="typeActives">The type actives.</param>
         /// <returns></returns>
-        public int TotalAmount(AbstractActives actives)
+        public decimal TotalAmount(AbstractActives actives)
         {
             return _actives.Where(a => a.Active.Ticker == actives.Ticker).Sum(x => x.Amount);
         }
@@ -101,7 +101,7 @@ namespace Domain.Core.Model
         /// </summary>
         /// <param name="typeActives">The type actives.</param>
         /// <returns></returns>
-        public int TotalAmount()
+        public decimal TotalAmount()
         {
             return _actives.Sum(x => x.Amount);
         }

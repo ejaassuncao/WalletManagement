@@ -16,7 +16,8 @@ namespace Infra.Ef.DataModel
 
         [Required]
         [Column("aoc_amount")]
-        public int Amount { get; set; }
+        [Precision(18, 3)]
+        public decimal Amount { get; set; }
 
         [Required]
         [Column("aoc_unit_cost")]

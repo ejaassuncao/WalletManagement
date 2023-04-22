@@ -13,7 +13,7 @@ namespace Domain.Core.Model
         /// <summary>
         /// Quantidade
         /// </summary>
-        public int Amount { get; protected set; }
+        public decimal Amount { get; protected set; }
 
         /// <summary>
         /// Custo unitário

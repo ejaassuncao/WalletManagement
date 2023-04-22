@@ -7,7 +7,8 @@ using System.Reflection;
 namespace Domain.Models.Extension
 {
     public static class HelperExtension
-    {
+    {       
+
     }
 
 }

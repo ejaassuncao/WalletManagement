@@ -123,7 +123,21 @@ namespace Infra.Ef.InitBaseBase
                 UserId = tbuser.Id,
                 WalletId = wallet.Id
             };
-            modelBuilder.Entity<TbActivesOfCompany>().HasData(tbActivesOfCompany, tbActivesOfCompany2);
+
+            var tbActivesOfCompany3 = new TbActivesOfCompany
+            {
+                Id = Guid.NewGuid(),
+                UserCreated = tbuser.Id,
+                ActiveId = active2.Id,
+                Amount = (decimal)200.121,
+                UnitCost = (decimal)43.50,
+                BrokerId = broker.Id,
+                Operation = EnumOperationWallet.SALES,
+                UserId = tbuser.Id,
+                WalletId = wallet.Id
+            };
+
+            modelBuilder.Entity<TbActivesOfCompany>().HasData(tbActivesOfCompany, tbActivesOfCompany2, tbActivesOfCompany3);
 
         }
     }

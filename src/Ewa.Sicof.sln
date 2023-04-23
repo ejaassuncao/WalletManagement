@@ -22,8 +22,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Core", "2 - App
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.Core", "3 - Services\Domain.Service\Service.Core.csproj", "{4DE6C2C4-8487-4096-B021-8880F9E9DCED}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.Core.Test", "3 - Services\Domain.Service.Test\Service.Core.Test.csproj", "{499A256E-D77A-4D65-A13B-5CCFA76C8B4B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FBEC9505-B2AF-4938-8863-3D79321D8786}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
@@ -48,7 +46,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Models", "4 - Domain
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Models.Test", "4 - Domain\Models\Domain.Models.Test\Domain.Models.Test.csproj", "{08BE9878-C136-4E86-98DA-D32A796790C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.WorkerService", "1 - Presentation\Presentation.WorkerService\Presentation.WorkerService.csproj", "{639B4FCC-EC9E-48FA-971E-50B56109CF99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.WorkerService", "1 - Presentation\Presentation.WorkerService\Presentation.WorkerService.csproj", "{639B4FCC-EC9E-48FA-971E-50B56109CF99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,10 +62,6 @@ Global
 		{4DE6C2C4-8487-4096-B021-8880F9E9DCED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DE6C2C4-8487-4096-B021-8880F9E9DCED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DE6C2C4-8487-4096-B021-8880F9E9DCED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{499A256E-D77A-4D65-A13B-5CCFA76C8B4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{499A256E-D77A-4D65-A13B-5CCFA76C8B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{499A256E-D77A-4D65-A13B-5CCFA76C8B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{499A256E-D77A-4D65-A13B-5CCFA76C8B4B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{522D08DF-13A5-4CE3-85D4-FD5523F8FE81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{522D08DF-13A5-4CE3-85D4-FD5523F8FE81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{522D08DF-13A5-4CE3-85D4-FD5523F8FE81}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -115,7 +109,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{071A7C12-1F86-4BEC-AEC2-572FA07D07A8} = {C33B15CD-7121-40CC-986F-781E6EEA0C2C}
 		{4DE6C2C4-8487-4096-B021-8880F9E9DCED} = {A298F2C9-3183-47D8-B634-318A374B5CF8}
-		{499A256E-D77A-4D65-A13B-5CCFA76C8B4B} = {A298F2C9-3183-47D8-B634-318A374B5CF8}
 		{522D08DF-13A5-4CE3-85D4-FD5523F8FE81} = {D8F88159-D429-4ABC-843B-74E19A8EEFA3}
 		{6DFFC3C4-83D9-4D96-817A-04AA2BF52385} = {2498E6BD-0646-4F8E-AFC8-F341595B032E}
 		{DD09CC22-26B0-44BD-AF73-2F75AAD1B6F7} = {2498E6BD-0646-4F8E-AFC8-F341595B032E}

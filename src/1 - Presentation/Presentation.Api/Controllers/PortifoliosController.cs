@@ -40,12 +40,12 @@ namespace Presentation.Api.Controllers
             {
                 await this.walletService.RefleshActiveAsync();
 
-                return Ok("sucesso!!");
+                return Ok( "sucesso!!");
 
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }        
         }
 

@@ -33,7 +33,13 @@ namespace Infra.Ef.InitBaseBase
                 Name = "Financeiro",
                 UserCreated = tbuser.Id
             };
-            modelBuilder.Entity<TbSector>().HasData(sector, sector2);
+            var sector3 = new TbSector
+            {
+                Id = Guid.NewGuid(),
+                Name = "Eletrico",
+                UserCreated = tbuser.Id
+            };
+            modelBuilder.Entity<TbSector>().HasData(sector, sector2, sector3);
 
             //broker
             var brokerId = Guid.NewGuid();
@@ -75,7 +81,17 @@ namespace Infra.Ef.InitBaseBase
                 SetorId = sector2.Id,
                 UserCreated = tbuser.Id,
             };
-            modelBuilder.Entity<TbCompany>().HasData(company, company2);
+
+            var company3 = new TbCompany
+            {
+                Id = Guid.NewGuid(),
+                CNPJ = "48.566.523/0001-01",
+                Name = "Taeesa transmissão Eletrica",
+                SetorId = sector3.Id,
+                UserCreated = tbuser.Id,
+            };
+            modelBuilder.Entity<TbCompany>().HasData(company, company2, company3);
+
 
             //action
             var active = new TbActive
@@ -83,7 +99,7 @@ namespace Infra.Ef.InitBaseBase
                 Id = Guid.NewGuid(),
                 Category = EnumCategory.ACTION,
                 CompanyId = company.Id,
-                Price = (decimal)10.80,
+                Price = 0,
                 Ticker = "MGLU3",
                 UserCreated = tbuser.Id,
             };
@@ -92,11 +108,21 @@ namespace Infra.Ef.InitBaseBase
                 Id = Guid.NewGuid(),
                 Category = EnumCategory.ACTION,
                 CompanyId = company2.Id,
-                Price = (decimal)40.70,
+                Price = 0,
                 Ticker = "BBAS3",
                 UserCreated = tbuser.Id,
             };
-            modelBuilder.Entity<TbActive>().HasData(active, active2);
+
+            var active3 = new TbActive
+            {
+                Id = Guid.NewGuid(),
+                Category = EnumCategory.ACTION,
+                CompanyId = company3.Id,
+                Price = 0,
+                Ticker = "TAEE3",
+                UserCreated = tbuser.Id,
+            };
+            modelBuilder.Entity<TbActive>().HasData(active, active2, active3);
 
             //ActivesOfCompany
             var tbActivesOfCompany = new TbActivesOfCompany
@@ -107,7 +133,7 @@ namespace Infra.Ef.InitBaseBase
                 Amount = 50,
                 UnitCost = (decimal)22.50,
                 BrokerId = broker.Id,
-                Operation = EnumOperationWallet.SALES,
+                Operation = EnumOperationWallet.BUY,
                 UserId = tbuser.Id,
                 WalletId = wallet.Id
             };
@@ -119,7 +145,7 @@ namespace Infra.Ef.InitBaseBase
                 Amount = 200,
                 UnitCost = (decimal)43.50,
                 BrokerId = broker.Id,
-                Operation = EnumOperationWallet.SALES,
+                Operation = EnumOperationWallet.BUY,
                 UserId = tbuser.Id,
                 WalletId = wallet.Id
             };
@@ -128,11 +154,11 @@ namespace Infra.Ef.InitBaseBase
             {
                 Id = Guid.NewGuid(),
                 UserCreated = tbuser.Id,
-                ActiveId = active2.Id,
-                Amount = (decimal)200.121,
-                UnitCost = (decimal)43.50,
+                ActiveId = active3.Id,
+                Amount = (decimal)600,
+                UnitCost = (decimal)13.50,
                 BrokerId = broker.Id,
-                Operation = EnumOperationWallet.SALES,
+                Operation = EnumOperationWallet.BUY,
                 UserId = tbuser.Id,
                 WalletId = wallet.Id
             };

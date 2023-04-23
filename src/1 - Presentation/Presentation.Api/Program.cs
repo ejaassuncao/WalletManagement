@@ -21,8 +21,8 @@ namespace Presentation.Api
             builder.Services.AddSwaggerGen();
 
             //builder.Services.InjectModel();
-            builder.Services.InjectService();
             builder.Services.InjectRepository();
+            builder.Services.InjectService();
             builder.Services.InjectInfraService();
 
             builder.Services.AddAutoMapper(typeof(AutoMapping));

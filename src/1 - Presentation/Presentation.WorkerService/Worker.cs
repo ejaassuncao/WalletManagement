@@ -15,20 +15,24 @@ namespace Presentation.WorkerService
             this._appSettings = appSettings;
         }
 
-       
+
         public async Task Execute(IJobExecutionContext context)
-        {         
+        {
+            _logger.LogInformation($"======================== INIT EXECUTION {DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")}========================");
+            
             try
             {
-                _logger.LogInformation($"======================== INIT EXECUTION {DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")}========================");
                 using var client = new HttpClient();
+
                 var json = await client.GetStringAsync(_appSettings.ApiExecute);
+
                 _logger.LogInformation($"{json}");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
             }
+
             _logger.LogInformation($"========================END EXECUTION {DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")}========================");
         }
     }

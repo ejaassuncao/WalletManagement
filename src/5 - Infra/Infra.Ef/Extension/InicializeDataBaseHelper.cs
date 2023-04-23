@@ -1,4 +1,5 @@
 ﻿using Infra.Ef.Context;
+using Infra.Ef.InitBaseBase;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

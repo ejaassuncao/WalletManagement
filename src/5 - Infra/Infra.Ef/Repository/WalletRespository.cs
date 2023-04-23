@@ -8,6 +8,8 @@ using Domain.Core.Model.Enumerables;
 using Infra.Ef.Context;
 using Infra.Ef.DataModel;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Infra.Ef.Repository
 {
@@ -41,7 +43,8 @@ namespace Infra.Ef.Repository
 
         public async Task<List<Actions>> GetTickersAsync()
         {           
-            return await _context.TbActives.ProjectTo<Actions>(_mapper.ConfigurationProvider).ToListAsync();
+            return await _context.TbActives.ProjectTo<Actions>(_mapper.ConfigurationProvider)
+                .ToListAsync();
         }
 
         public async Task UpdateTickerAsync(List<Actions> tickers)
@@ -53,6 +56,7 @@ namespace Infra.Ef.Repository
             }
 
             await _context.SaveChangesAsync();
+            //_context.Database. (tickers).State = EntityState.Detached;
         }
     }
 }

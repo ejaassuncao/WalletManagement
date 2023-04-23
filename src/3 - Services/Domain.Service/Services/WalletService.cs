@@ -38,8 +38,12 @@ namespace Service.Core.Services
                 try 
                 { 
                     var price = await this.marketplaceService.GetPriceAsync(action.Ticker, EnumExchanges.BMFBOVESPA);                   
-                    action.UpdatePrice(Convert.ToDecimal(price));                  
-                }catch{ }
+                    action.UpdatePrice(Convert.ToDecimal(price));
+
+                    action.SetLastUpdate(DateTime.Now);
+                    action.SetUserLastUpdate(action.UserCreated);
+                }
+                catch{ }
 
                 await Task.Delay(1000);
             }

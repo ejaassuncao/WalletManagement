@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Ef.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20230423005317_InitialCreate")]
+    [Migration("20230423210050_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -83,25 +83,36 @@ namespace Infra.Ef.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("078602da-0a77-42f0-a6bc-1a2db3be6cf1"),
+                            Id = new Guid("a3dfa9c7-f30c-4900-bf6b-3134a1fa674a"),
                             Category = 0,
-                            CompanyId = new Guid("5de9bdc7-2701-4485-97b0-e0844c86ea68"),
-                            Dcreated = new DateTime(2023, 4, 22, 21, 53, 16, 940, DateTimeKind.Local).AddTicks(1136),
+                            CompanyId = new Guid("c7e5f1dd-1348-4da5-a256-f2cd8df0ff94"),
+                            Dcreated = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2557),
                             Enabled = (byte)1,
-                            Price = 10.8m,
+                            Price = 0m,
                             Ticker = "MGLU3",
-                            UserCreated = new Guid("0b266425-061d-4705-a3b7-f77a2892e85a")
+                            UserCreated = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989")
                         },
                         new
                         {
-                            Id = new Guid("cc22ceb3-cf16-4e08-aafc-d732b8f42317"),
+                            Id = new Guid("95526ac9-8450-453e-9e01-fd55d94cc81c"),
                             Category = 0,
-                            CompanyId = new Guid("04996bb3-502b-41ae-9972-afe76a69f6a2"),
-                            Dcreated = new DateTime(2023, 4, 22, 21, 53, 16, 940, DateTimeKind.Local).AddTicks(1142),
+                            CompanyId = new Guid("fcaa34b7-9ecd-4d57-b6e0-1ad233bfafb0"),
+                            Dcreated = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2559),
                             Enabled = (byte)1,
-                            Price = 40.7m,
+                            Price = 0m,
                             Ticker = "BBAS3",
-                            UserCreated = new Guid("0b266425-061d-4705-a3b7-f77a2892e85a")
+                            UserCreated = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989")
+                        },
+                        new
+                        {
+                            Id = new Guid("ada4a647-af12-46a6-bede-50a7040a4f1d"),
+                            Category = 0,
+                            CompanyId = new Guid("a0b3920e-04f4-4254-9ae6-73a6d915c175"),
+                            Dcreated = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2561),
+                            Enabled = (byte)1,
+                            Price = 0m,
+                            Ticker = "TAEE3",
+                            UserCreated = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989")
                         });
                 });
 
@@ -184,48 +195,48 @@ namespace Infra.Ef.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("00ebd4c8-ca91-4858-9b9d-84d524feafe9"),
-                            ActiveId = new Guid("078602da-0a77-42f0-a6bc-1a2db3be6cf1"),
+                            Id = new Guid("623bedde-768a-49af-ae24-f240f80dbab3"),
+                            ActiveId = new Guid("a3dfa9c7-f30c-4900-bf6b-3134a1fa674a"),
                             Amount = 50m,
-                            BrokerId = new Guid("1a7e5b4e-15b2-4a03-81d4-1f45619d5d1a"),
-                            DateOperation = new DateTime(2023, 4, 22, 21, 53, 16, 940, DateTimeKind.Local).AddTicks(1157),
-                            Dcreated = new DateTime(2023, 4, 22, 21, 53, 16, 940, DateTimeKind.Local).AddTicks(1158),
+                            BrokerId = new Guid("918282dc-5ce2-4d1d-bf76-2430229c4a1b"),
+                            DateOperation = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2580),
+                            Dcreated = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2580),
                             Enabled = (byte)1,
-                            Operation = 1,
+                            Operation = 0,
                             UnitCost = 22.5m,
-                            UserCreated = new Guid("0b266425-061d-4705-a3b7-f77a2892e85a"),
-                            UserId = new Guid("0b266425-061d-4705-a3b7-f77a2892e85a"),
-                            WalletId = new Guid("89856041-3911-44aa-bffd-3a28a4af5464")
+                            UserCreated = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"),
+                            UserId = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"),
+                            WalletId = new Guid("846fde86-40f0-4ac0-994f-baf51ec85e3c")
                         },
                         new
                         {
-                            Id = new Guid("7d3b139b-3022-4ea0-b3af-fd5b744f6e35"),
-                            ActiveId = new Guid("cc22ceb3-cf16-4e08-aafc-d732b8f42317"),
+                            Id = new Guid("d60448e1-6072-4b68-8f4e-c8ce30e1eefc"),
+                            ActiveId = new Guid("95526ac9-8450-453e-9e01-fd55d94cc81c"),
                             Amount = 200m,
-                            BrokerId = new Guid("1a7e5b4e-15b2-4a03-81d4-1f45619d5d1a"),
-                            DateOperation = new DateTime(2023, 4, 22, 21, 53, 16, 940, DateTimeKind.Local).AddTicks(1164),
-                            Dcreated = new DateTime(2023, 4, 22, 21, 53, 16, 940, DateTimeKind.Local).AddTicks(1164),
+                            BrokerId = new Guid("918282dc-5ce2-4d1d-bf76-2430229c4a1b"),
+                            DateOperation = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2590),
+                            Dcreated = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2590),
                             Enabled = (byte)1,
-                            Operation = 1,
+                            Operation = 0,
                             UnitCost = 43.5m,
-                            UserCreated = new Guid("0b266425-061d-4705-a3b7-f77a2892e85a"),
-                            UserId = new Guid("0b266425-061d-4705-a3b7-f77a2892e85a"),
-                            WalletId = new Guid("89856041-3911-44aa-bffd-3a28a4af5464")
+                            UserCreated = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"),
+                            UserId = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"),
+                            WalletId = new Guid("846fde86-40f0-4ac0-994f-baf51ec85e3c")
                         },
                         new
                         {
-                            Id = new Guid("6f1fb3f9-3a95-4a94-b047-5101cb3b12fa"),
-                            ActiveId = new Guid("cc22ceb3-cf16-4e08-aafc-d732b8f42317"),
-                            Amount = 200.121m,
-                            BrokerId = new Guid("1a7e5b4e-15b2-4a03-81d4-1f45619d5d1a"),
-                            DateOperation = new DateTime(2023, 4, 22, 21, 53, 16, 940, DateTimeKind.Local).AddTicks(1167),
-                            Dcreated = new DateTime(2023, 4, 22, 21, 53, 16, 940, DateTimeKind.Local).AddTicks(1167),
+                            Id = new Guid("27959e32-c302-47db-a040-be422c9cc7f3"),
+                            ActiveId = new Guid("ada4a647-af12-46a6-bede-50a7040a4f1d"),
+                            Amount = 600m,
+                            BrokerId = new Guid("918282dc-5ce2-4d1d-bf76-2430229c4a1b"),
+                            DateOperation = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2593),
+                            Dcreated = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2594),
                             Enabled = (byte)1,
-                            Operation = 1,
-                            UnitCost = 43.5m,
-                            UserCreated = new Guid("0b266425-061d-4705-a3b7-f77a2892e85a"),
-                            UserId = new Guid("0b266425-061d-4705-a3b7-f77a2892e85a"),
-                            WalletId = new Guid("89856041-3911-44aa-bffd-3a28a4af5464")
+                            Operation = 0,
+                            UnitCost = 13.5m,
+                            UserCreated = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"),
+                            UserId = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"),
+                            WalletId = new Guid("846fde86-40f0-4ac0-994f-baf51ec85e3c")
                         });
                 });
 
@@ -284,13 +295,13 @@ namespace Infra.Ef.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("1a7e5b4e-15b2-4a03-81d4-1f45619d5d1a"),
+                            Id = new Guid("918282dc-5ce2-4d1d-bf76-2430229c4a1b"),
                             CNPJ = "48.537.525/0001-01",
                             CorporateName = "Itau",
-                            Dcreated = new DateTime(2023, 4, 22, 21, 53, 16, 940, DateTimeKind.Local).AddTicks(1070),
+                            Dcreated = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2494),
                             Enabled = (byte)1,
                             FantasyName = "Itau investimentos",
-                            UserCreated = new Guid("0b266425-061d-4705-a3b7-f77a2892e85a")
+                            UserCreated = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989")
                         });
                 });
 
@@ -349,23 +360,33 @@ namespace Infra.Ef.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5de9bdc7-2701-4485-97b0-e0844c86ea68"),
+                            Id = new Guid("c7e5f1dd-1348-4da5-a256-f2cd8df0ff94"),
                             CNPJ = "48.537.555/0001-01",
-                            Dcreated = new DateTime(2023, 4, 22, 21, 53, 16, 940, DateTimeKind.Local).AddTicks(1121),
+                            Dcreated = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2534),
                             Enabled = (byte)1,
                             Name = "Magazine Luiza",
-                            SetorId = new Guid("aeadc5b3-b681-4292-843e-84a0406163d4"),
-                            UserCreated = new Guid("0b266425-061d-4705-a3b7-f77a2892e85a")
+                            SetorId = new Guid("529b0273-a393-4b42-9e1c-9b659f1d77fd"),
+                            UserCreated = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989")
                         },
                         new
                         {
-                            Id = new Guid("04996bb3-502b-41ae-9972-afe76a69f6a2"),
+                            Id = new Guid("fcaa34b7-9ecd-4d57-b6e0-1ad233bfafb0"),
                             CNPJ = "48.537.523/0001-01",
-                            Dcreated = new DateTime(2023, 4, 22, 21, 53, 16, 940, DateTimeKind.Local).AddTicks(1124),
+                            Dcreated = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2536),
                             Enabled = (byte)1,
                             Name = "Banco do Brasil",
-                            SetorId = new Guid("af835580-fe43-48b3-ac7d-c601e2a61c70"),
-                            UserCreated = new Guid("0b266425-061d-4705-a3b7-f77a2892e85a")
+                            SetorId = new Guid("99daffc0-d045-4a31-8151-5865227dd317"),
+                            UserCreated = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989")
+                        },
+                        new
+                        {
+                            Id = new Guid("a0b3920e-04f4-4254-9ae6-73a6d915c175"),
+                            CNPJ = "48.566.523/0001-01",
+                            Dcreated = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2538),
+                            Enabled = (byte)1,
+                            Name = "Taeesa transmissão Eletrica",
+                            SetorId = new Guid("7276659e-7780-46b2-8479-4ff816e53950"),
+                            UserCreated = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989")
                         });
                 });
 
@@ -412,19 +433,27 @@ namespace Infra.Ef.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("aeadc5b3-b681-4292-843e-84a0406163d4"),
-                            Dcreated = new DateTime(2023, 4, 22, 21, 53, 16, 940, DateTimeKind.Local).AddTicks(1048),
+                            Id = new Guid("529b0273-a393-4b42-9e1c-9b659f1d77fd"),
+                            Dcreated = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2467),
                             Enabled = (byte)1,
                             Name = "Varejo",
-                            UserCreated = new Guid("0b266425-061d-4705-a3b7-f77a2892e85a")
+                            UserCreated = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989")
                         },
                         new
                         {
-                            Id = new Guid("af835580-fe43-48b3-ac7d-c601e2a61c70"),
-                            Dcreated = new DateTime(2023, 4, 22, 21, 53, 16, 940, DateTimeKind.Local).AddTicks(1050),
+                            Id = new Guid("99daffc0-d045-4a31-8151-5865227dd317"),
+                            Dcreated = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2470),
                             Enabled = (byte)1,
                             Name = "Financeiro",
-                            UserCreated = new Guid("0b266425-061d-4705-a3b7-f77a2892e85a")
+                            UserCreated = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989")
+                        },
+                        new
+                        {
+                            Id = new Guid("7276659e-7780-46b2-8479-4ff816e53950"),
+                            Dcreated = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2471),
+                            Enabled = (byte)1,
+                            Name = "Eletrico",
+                            UserCreated = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989")
                         });
                 });
 
@@ -477,12 +506,12 @@ namespace Infra.Ef.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0b266425-061d-4705-a3b7-f77a2892e85a"),
-                            Dcreated = new DateTime(2023, 4, 22, 21, 53, 16, 940, DateTimeKind.Local).AddTicks(754),
+                            Id = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"),
+                            Dcreated = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2004),
                             Enabled = (byte)1,
                             Login = "elton",
                             Password = "123456",
-                            UserCreated = new Guid("0b266425-061d-4705-a3b7-f77a2892e85a")
+                            UserCreated = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989")
                         });
                 });
 
@@ -541,12 +570,12 @@ namespace Infra.Ef.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("89856041-3911-44aa-bffd-3a28a4af5464"),
-                            BrokerId = new Guid("1a7e5b4e-15b2-4a03-81d4-1f45619d5d1a"),
-                            Dcreated = new DateTime(2023, 4, 22, 21, 53, 16, 940, DateTimeKind.Local).AddTicks(1085),
+                            Id = new Guid("846fde86-40f0-4ac0-994f-baf51ec85e3c"),
+                            BrokerId = new Guid("918282dc-5ce2-4d1d-bf76-2430229c4a1b"),
+                            Dcreated = new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2515),
                             Enabled = (byte)1,
                             Name = "Minha Carteira",
-                            OwnerId = new Guid("0b266425-061d-4705-a3b7-f77a2892e85a"),
+                            OwnerId = new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"),
                             UserCreated = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });

@@ -12,7 +12,7 @@ namespace Infra.Repository.Extension
         {
             services.AddDbContext<AppDBContext>(options =>
                 options.UseSqlServer("name=ConnectionStrings:DefaultConnection")
-                        .EnableSensitiveDataLogging()
+                       // .EnableSensitiveDataLogging()
                 );
             services.AddScoped<IWalletRespository, WalletRespository>();
             return services;

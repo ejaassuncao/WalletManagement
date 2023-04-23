@@ -20,7 +20,7 @@ namespace Presentation.WorkerService
         {         
             try
             {
-                _logger.LogInformation($"========================INICIO DA STEP 04 {DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")}========================");
+                _logger.LogInformation($"======================== INIT EXECUTION {DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")}========================");
                 using var client = new HttpClient();
                 var json = await client.GetStringAsync(_appSettings.ApiExecute);
                 _logger.LogInformation($"{json}");
@@ -29,7 +29,7 @@ namespace Presentation.WorkerService
             {
                 _logger.LogError(ex.Message);
             }
-            _logger.LogInformation($"========================FIM DA STEP 04 {DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")}========================");
+            _logger.LogInformation($"========================END EXECUTION {DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")}========================");
         }
     }
 }

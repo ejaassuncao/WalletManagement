@@ -3,6 +3,7 @@ using Quartz;
 
 namespace Presentation.WorkerService
 {
+    [DisallowConcurrentExecution]
     public class Worker : IJob
     {
         private readonly ILogger<Worker> _logger;
@@ -14,6 +15,7 @@ namespace Presentation.WorkerService
             this._appSettings = appSettings;
         }
 
+       
         public async Task Execute(IJobExecutionContext context)
         {         
             try

@@ -37,7 +37,13 @@ namespace Domain.Core.Model
         {
 
         }
-       
+
+        public Company(Guid id, string name, string cnpj = null) : base(id)
+        {           
+            Name = name;
+            CNPJ = cnpj;           
+        }
+
         public Company(Guid id, string name, List<string> tickers, string cnpj = null, Sector setor = null) : base(id)
         {
             ValidateDomain(name, tickers, cnpj);

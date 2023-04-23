@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domain.Commons.Entity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infra.Ef.DataModel.Base
@@ -7,7 +8,7 @@ namespace Infra.Ef.DataModel.Base
     {
         [Required]
         [Column("enabled")]
-        public bool Enabled { get; set; } = true;
+        public EnumEnabled Enabled { get; set; } = EnumEnabled.Enabled;
 
         [Required]
         [Column("d_created")]

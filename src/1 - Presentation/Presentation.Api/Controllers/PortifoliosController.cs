@@ -33,6 +33,21 @@ namespace Presentation.Api.Controllers
             }
         }
 
+        [HttpGet("RefleshActive")]
+        public async Task<ActionResult<string>> RefleshActive()
+        {
+            try
+            {
+                await this.walletService.RefleshActiveAsync();
+
+                return Ok("sucesso!!");
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }        
+        }
 
         [HttpPost]
         public async Task Post(PortifolioDto dto)

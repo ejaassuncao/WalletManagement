@@ -1,21 +1,23 @@
-﻿using Domain.core.IRepository;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Domain.core.IRepository;
 using Domain.Core.Dto;
 using Domain.Core.Model;
+using Domain.Core.Model.Actives;
 using Domain.Core.Model.Enumerables;
 using Infra.Ef.Context;
+using Infra.Ef.DataModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Ef.Repository
 {
     public class WalletRespository : EfRepository<Wallet>, IWalletRespository
     {
-        public WalletRespository(AppDBContext context) : base(context)
-        {
-        }
+        public WalletRespository(AppDBContext context, IMapper mapper) : base(context, mapper) { }       
 
         public async Task<IEnumerable<PortifolioDto>> GetPortifolioAsync(EnumCategory enumTypeActives)
         {
-            var query = context.TbActivesOfCompanys.Include(x => x.Active)
+            var query = _context.TbActivesOfCompanys.Include(x => x.Active)
                 .ThenInclude(a => a.Company)
                 .ThenInclude(c => c.Setor);
 
@@ -35,6 +37,22 @@ namespace Infra.Ef.Repository
                        TotalPrice = x.Amount * x.Active.Price,
                        LP = (x.Amount * x.Active.Price) - (x.Amount * x.UnitCost)
                    }).ToListAsync();
+        }
+
+        public async Task<List<Actions>> GetTickersAsync()
+        {           
+            return await _context.TbActives.ProjectTo<Actions>(_mapper.ConfigurationProvider).ToListAsync();
+        }
+
+        public async Task UpdateTickerAsync(List<Actions> tickers)
+        {
+            foreach (var action in tickers)
+            {
+                var data = _mapper.Map<TbActive>(action);
+                _context.TbActives.Update(data);
+            }
+
+            await _context.SaveChangesAsync();
         }
     }
 }

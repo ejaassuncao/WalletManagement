@@ -257,10 +257,10 @@ namespace Domain.Core.Test
             var broker = new Broker("Rico", "Rico", "21457878");
 
             var magazineActive = new Actions(magazineCompany, magazineCompany.GettTiker());
-            magazineActive.UpdateCounting(countingMagazine);
+            magazineActive.UpdatePrice(countingMagazine);
 
             var petrobrasActive = new Actions(petrobrasCompany, petrobrasCompany.GettTiker());
-            petrobrasActive.UpdateCounting(countingPetrobras);
+            petrobrasActive.UpdatePrice(countingPetrobras);
 
             //total 102,5 de magalu
             wallet.Buy(magazineActive, 4, 10, DateTime.Now, user, broker);
@@ -295,10 +295,10 @@ namespace Domain.Core.Test
             var broker = new Broker("Rico", "Rico", "21457878");
 
             var magazineActive = new Actions(magazineCompany, magazineCompany.GettTiker());
-            magazineActive.UpdateCounting(countingMagazine);
+            magazineActive.UpdatePrice(countingMagazine);
 
             var petrobrasActive = new Actions(petrobrasCompany, petrobrasCompany.GettTiker());
-            petrobrasActive.UpdateCounting(countingPetrobras);
+            petrobrasActive.UpdatePrice(countingPetrobras);
 
             //total 102,5 de magalu
             wallet.Buy(magazineActive, 4, (decimal)10, DateTime.Now, user, broker);

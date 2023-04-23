@@ -7,20 +7,21 @@ namespace Infra.Ef.Repository
 {
     public class EfRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected readonly AppDBContext context;
-      
-        public EfRepository(AppDBContext context)
+        protected readonly AppDBContext _context;
+        protected readonly IMapper _mapper;
+        public EfRepository(AppDBContext context, IMapper mapper)
         {          
-            this.context = context;
+            this._context = context;
+            this._mapper = mapper;
         }
 
         public IQueryable<TEntity> FindAllAsync()
         {
-            return context.Set<TEntity>().AsQueryable();
+            return _context.Set<TEntity>().AsQueryable();
         }
         public async Task<TEntity?> GetByIdAsync(int id)
         {
-            return await context.Set<TEntity>().FindAsync(id);
+            return await _context.Set<TEntity>().FindAsync(id);
         }
 
         public async Task<IEnumerable<TEntity>> ListAsync(Func<TEntity, bool> expression, int count, int skype)
@@ -34,21 +35,21 @@ namespace Infra.Ef.Repository
 
         public async Task DeleteAsync(TEntity obj)
         {
-            context.Set<TEntity>().Remove(obj);
-            await context.SaveChangesAsync();
+            _context.Set<TEntity>().Remove(obj);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<TEntity> InsertAsync(TEntity obj)
         {
-            await context.Set<TEntity>().AddAsync(obj);
-            await context.SaveChangesAsync();
+            await _context.Set<TEntity>().AddAsync(obj);
+            await _context.SaveChangesAsync();
             return obj;
         }
 
         public async Task<TEntity> UpdateAsync(TEntity obj)
         {
-            context.Set<TEntity>().Update(obj);
-            await context.SaveChangesAsync();
+            _context.Set<TEntity>().Update(obj);
+            await _context.SaveChangesAsync();
 
             return obj;
         }
@@ -57,7 +58,7 @@ namespace Infra.Ef.Repository
         {
             if (obj != null)
             {
-                context.Entry(obj).State = EntityState.Detached;
+                _context.Entry(obj).State = EntityState.Detached;
             }
         }
     }

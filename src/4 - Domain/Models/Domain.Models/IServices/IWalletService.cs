@@ -13,5 +13,6 @@ namespace Domain.Core.IServices
         Task<IEnumerable<TotalPriceTypeActivesDto>> GetTotalPriceTypeActivesAsync(int id);
         Task<IEnumerable<PortifolioDto>> GetPortifolioAsync(EnumCategory enumTypeActives);
         Task Insert(PortifolioDto dto);
+        Task RefleshActiveAsync();
     }
 }

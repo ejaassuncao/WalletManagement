@@ -16,6 +16,7 @@ namespace Domain.Core.Model.Actives
         /// Ticker
         /// </summary>
         public string Ticker { get; protected set; }
+   
 
         /// <summary>
         /// Cotação
@@ -49,15 +50,15 @@ namespace Domain.Core.Model.Actives
         /// </summary>        
         private void ValidateDomain(Company company, string tiker)
         {
-            ExceptionDomainValidation.When(company == null, "Company is null");
-            ExceptionDomainValidation.When(!company.ExistsTicker(tiker), "Ticker not found");
+            //ExceptionDomainValidation.When(company == null, "Company is null");
+           // ExceptionDomainValidation.When(!company.ExistsTicker(tiker), "Ticker not found");
             Company = company;
             Ticker = tiker;
         }
 
-        public void UpdateCounting(decimal counting)
+        public void UpdatePrice(decimal price)
         {
-            this.Price = counting;
+            this.Price = price;
         }
 
         public static AbstractActives Parser(Task<string> content)

@@ -1,6 +1,7 @@
 using Infra.Ef.Extension;
 using Infra.Repository.Extension;
-using Service.Core.Inject;
+using Infra.Services.Extension;
+using Service.Core.Extersions;
 
 namespace Presentation.Api
 {
@@ -20,10 +21,12 @@ namespace Presentation.Api
             builder.Services.AddSwaggerGen();
 
             //builder.Services.InjectModel();
-            builder.Services.InjectRepository();
             builder.Services.InjectService();
-            builder.Services.AddAutoMapper(typeof(AutoMapping));        
+            builder.Services.InjectRepository();
+            builder.Services.InjectInfraService();
 
+            builder.Services.AddAutoMapper(typeof(AutoMapping));
+            
             var app = builder.Build();
           
             // Configure the HTTP request pipeline.

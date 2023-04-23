@@ -19,10 +19,9 @@ namespace Infra.Ef.DataModel
         [StringLength(20)]
         [Column("act_ticker")]
         public string Ticker { get; set; } = string.Empty;
-
-        [Required]
+               
         [Column("act_price")]
-        [Precision(18, 2)]
+        [Precision(18, 2)]      
         public decimal Price { get; set; }
 
         [Required]

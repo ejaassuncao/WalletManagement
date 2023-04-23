@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\3 - Services\Domain.Service\Service.Core.csproj" />
     <ProjectReference Include="..\..\5 - Infra\Infra.Ef\Infra.Ef.csproj" />
+    <ProjectReference Include="..\..\5 - Infra\Infra.Services\Infra.Services.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,60 @@
+﻿@using System.Diagnostics.CodeAnalysis;
+<!-- Modal -->
+
+<div class="modal fade" id="@Id" 
+     data-bs-keyboard="@Keyboard" 
+     tabindex="@TabIndex"
+     data-bs-backdrop="@Backdrop"
+     aria-labelledby=@Labelledby
+     aria-hidden="true">
+    <div class="modal-dialog @WidthClass">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">@Title</h1>
+                @if (ButtonCloseVisible)
+                {
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                }
+            </div>
+            <div class="modal-body">
+                @BodyTemplate
+            </div>
+            <div class="modal-footer">
+                @FooterTemplate
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Parameter, AllowNull]
+    public string Id { get; set; }
+
+    private string Labelledby => $"{Id}_label";
+
+    [Parameter, AllowNull]
+    public string Title { get; set; }
+
+    [Parameter, AllowNull]
+    public string Backdrop { get; set; } = "static";
+
+    [Parameter, AllowNull]
+    public bool Keyboard { get; set; } = false;
+
+    [Parameter, AllowNull]
+    public int TabIndex { get; set; } = -1;
+
+    [Parameter, AllowNull]
+    public string WidthClass { get; set; }
+
+    [Parameter, AllowNull]
+    public bool ButtonCloseVisible { get; set; } = true;
+
+    [Parameter, AllowNull]
+    public RenderFragment BodyTemplate { get; set; }
+
+    [Parameter, AllowNull]
+    public RenderFragment FooterTemplate { get; set; }
+
+}

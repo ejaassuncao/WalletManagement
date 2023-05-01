@@ -1,5 +1,7 @@
 ﻿using Infra.Ef.DataModel.Base;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -27,5 +29,7 @@ namespace Infra.Ef.DataModel
         [ForeignKey("TbSector")]
         public Guid? SetorId { get; set; }
         public TbSector? Setor { get; set; }
+
+        public Collection<TbActive>? Actives { get; set; }
     }
 }

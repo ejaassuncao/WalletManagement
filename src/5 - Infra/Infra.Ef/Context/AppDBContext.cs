@@ -31,6 +31,8 @@ public partial class AppDBContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        //modelBuilder.ApplyConfiguration(new TbActive());
+
         new DbInitializer(modelBuilder);
     }
 }

@@ -13,7 +13,7 @@ namespace Domain.Core.IServices
         IEnumerable<TotalPriceTypeActivesDto> GetTotalPriceTypeActives(Wallet wallat);
         Task<IEnumerable<TotalPriceTypeActivesDto>> GetTotalPriceTypeActivesAsync(int id);
         Task<IEnumerable<PortifolioDto>> GetPortifolioAsync(EnumCategory enumTypeActives);
-        Task Insert(PortifolioDto dto);
+        Task Insert(ActiveDto dto);
         Task RefleshActiveAsync();
         Task<IEnumerable<ItemList>> GetActive(string ticker);
     }

@@ -159,7 +159,7 @@ namespace Domain.Core.Model
                 unitCost: unitSales,
                 dateOperation: dateBuy,
                 user: user,
-                operation: EnumOperationWallet.SALES
+                operation: EnumOperationWallet.SELL
             ));
         }
 

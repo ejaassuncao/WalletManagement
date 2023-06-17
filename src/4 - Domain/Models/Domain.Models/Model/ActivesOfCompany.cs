@@ -45,7 +45,7 @@ namespace Domain.Core.Model
             ExceptionDomainValidation.When(dateOperation == default, "invalid date");
             ExceptionDomainValidation.When(user is null, "usert not found");
 
-            amount = (operation == EnumOperationWallet.SALES) ? (amount * -1) : amount;
+            amount = (operation == EnumOperationWallet.SELL) ? (amount * -1) : amount;
 
             Active = active;
             Amount = amount;

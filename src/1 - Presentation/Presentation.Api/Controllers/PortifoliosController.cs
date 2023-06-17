@@ -51,7 +51,8 @@ namespace Presentation.Api.Controllers
         }
 
         [HttpPost]
-        public async Task Post(PortifolioDto dto)
+        [Consumes("text/json")]
+        public async Task Post([FromBody]ActiveDto dto)
         {
             await this.walletService.Insert(dto);
         }

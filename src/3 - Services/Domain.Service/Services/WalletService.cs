@@ -1,4 +1,5 @@
-﻿using Domain.core.IRepository;
+﻿using Domain.Commons.Entity;
+using Domain.core.IRepository;
 using Domain.Core.Dto;
 using Domain.Core.Enumerables;
 using Domain.Core.Interfaces;
@@ -91,9 +92,10 @@ namespace Service.Core.Services
             return GetTotalPriceTypeActives(wallat);
         }
 
-        public async Task Insert(PortifolioDto dto)
+        public async Task Insert(ActiveDto dto)
         {
-            throw new NotImplementedException();
+
+          ///
         }
     }
 }

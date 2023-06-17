@@ -1,5 +1,6 @@
 ﻿@using System.Collections.Generic;
 @using Domain.Core.Dto;
+@using Domain.Core.Model.Enumerables;
 @using Domain.Models.Dto;
 @using Domain.Models.Extension;
 @using Presentation.Blazor.Component;
@@ -9,7 +10,6 @@
 @inject IJSRuntime JSRuntime;
 @inject HttpClient Http;
 @inject IStringLocalizer<Messages> Loc;
-
 
 @page "/assertmanager"
 <PageTitle>@Title</PageTitle>
@@ -57,11 +57,19 @@
     <BodyTemplate>
         <form class="row g-12">
             <div class="col-md-12">
+                <RadzenSelectBar @bind-Value=ActiveDto.Operation>
+                    <Items>
+                        <RadzenSelectBarItem Text="Buy" Value=EnumOperationWallet.BUY Icon="shopping_cart" />
+                        <RadzenSelectBarItem Text="Sell" Value=EnumOperationWallet.SELL Icon="sell" />
+                    </Items>
+                </RadzenSelectBar>
+            </div>          
+            <div class="col-md-12">
                 <RadzenAutoComplete Name="txtTicker"
                                     @bind-Value=ActiveDto.Ticker
                                     LoadData=@LoadTickers
                                     Data=@activesDescription
-                                    TextProperty="Name"
+                                    TextProperty="Name"                                 
                                     MinLength="3"
                                     Placeholder="Select a Active..."
                                     Style="width:100%">
@@ -71,24 +79,23 @@
                 </RadzenAutoComplete>
             </div>
             <div class="col-md-4">
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Date</RadzenText>
-                <RadzenDatePicker @bind-Value=ActiveDto.DateBuy DateFormat="dd/MM/yyyy" />
+                <RadzenLabel Text="Date" />
+                <RadzenDatePicker Name="txtDate" @bind-Value=ActiveDto.Date DateFormat="dd/MM/yyyy" />
             </div>
             <div class="col-md-4">
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Amount</RadzenText>
-                <RadzenNumeric @bind-Value=ActiveDto.Amount TextAlign="TextAlign.Right" />
+                <RadzenLabel Text="Amount" />
+                <RadzenNumeric Name="TxtAmount" @bind-Value=ActiveDto.Amount TextAlign="TextAlign.Right" />
             </div>
-
             <div class="col-md-4">
-                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Price</RadzenText>
-                <RadzenNumeric TValue="decimal" Format="c" @bind-Value=ActiveDto.UnitCost />
+                <RadzenLabel Text="Price" />
+                <RadzenNumeric Name="txtUnitCost" TValue="decimal" Format="c" @bind-Value=ActiveDto.UnitCost />
             </div>
         </form>
     </BodyTemplate>
     <FooterTemplate>
         <div class="row">
             <div class="input-group">
-                <RadzenButton Click=@(args => OnSave()) onclick="txtTicker.focus" Text="Save" ButtonStyle="ButtonStyle.Primary" />
+                <RadzenButton Icon="save" BusyText="Saving ..." IsBusy=@busy Click=@OnSave Text="Save" ButtonStyle="ButtonStyle.Primary" />
                 <RadzenButton Click=@(args => OnNewOrder()) Text="Nova" ButtonStyle="ButtonStyle.Secondary" />
                 <RadzenButton data-bs-dismiss="modal" Text="Close" ButtonStyle="ButtonStyle.Light" />
             </div>
@@ -102,11 +109,17 @@
     private const string Title = "Asset Management";
     private bool loading;
     private string MessageError = string.Empty;
+    private bool busy;
     #endregion
 
     private List<PortifolioDto> actives = new List<PortifolioDto>();
     private List<ItemList> activesDescription = new List<ItemList>();
     private ActiveDto ActiveDto = new ActiveDto();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Search();
+    }
 
     public async Task Search()
     {
@@ -138,29 +151,28 @@
         }
     }
 
-    private void OnSave()
+    private async Task OnSave()
     {
-        var json = ActiveDto;
-        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Info, Summary = "Button Clicked", Detail = "sucesso" });
+        busy = true;
+        try
+        {
+            var result = await Http.PostAsJsonAsync(HelperEndPoints.Api("Portifolios"), ActiveDto);
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "sucess", Detail = "Data saved successfully" });
+        }
+        catch (Exception exp)
+        {
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = exp.Message, Detail = exp?.InnerException?.Message });
+        }
+        finally
+        {
+            busy = false;
+        }
     }
 
     private async void OnNewOrder()
     {
         ActiveDto = new ActiveDto();
         await Focus("txtTicker");
-    }
-
-    protected async override Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await Search();      
-        }
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-         await Search();
     }
 
     public async Task Focus(string elementId)

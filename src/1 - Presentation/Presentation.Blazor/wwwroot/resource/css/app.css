@@ -101,6 +101,9 @@ a, .btn-link {
     content: var(--blazor-load-percentage-text, "Loading");
 }
 
+.col-md-12 {
+    margin:0 0 8px 0;
+}
 
 .table-title {
     padding-bottom: 15px;

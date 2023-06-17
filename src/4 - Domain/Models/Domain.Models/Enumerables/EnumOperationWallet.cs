@@ -3,6 +3,6 @@
     public enum EnumOperationWallet
     {
         BUY,
-        SALES
+        SELL
     }
 }

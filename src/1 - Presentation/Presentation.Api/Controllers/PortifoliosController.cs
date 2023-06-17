@@ -1,6 +1,7 @@
 using Domain.Core.Dto;
 using Domain.Core.IServices;
 using Domain.Core.Model.Enumerables;
+using Domain.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Api.Controllers
@@ -53,6 +54,12 @@ namespace Presentation.Api.Controllers
         public async Task Post(PortifolioDto dto)
         {
             await this.walletService.Insert(dto);
+        }
+
+        [HttpGet("GetActive")]
+        public async Task<IEnumerable<ItemList>> GetActive([FromQuery] string ticker)
+        {
+            return await this.walletService.GetActive(ticker);
         }
     }
 }

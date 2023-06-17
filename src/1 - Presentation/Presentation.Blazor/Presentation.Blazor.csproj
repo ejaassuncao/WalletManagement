@@ -8,6 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\resource\js\application.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\resource\js\application.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\resource\js\application.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.1" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.2" />
@@ -40,5 +52,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>

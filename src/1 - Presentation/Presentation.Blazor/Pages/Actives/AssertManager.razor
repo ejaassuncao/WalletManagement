@@ -1,11 +1,15 @@
 ﻿@using System.Collections.Generic;
 @using Domain.Core.Dto;
+@using Domain.Models.Dto;
 @using Domain.Models.Extension;
-@using Presentation.Blazor.Component
-@using System.Globalization
+@using Presentation.Blazor.Component;
+@using System.Globalization;
 @using Presentation.Blazor.Configuration;
-@inject HttpClient Http
-@inject IStringLocalizer<Messages> Loc
+@inject NotificationService NotificationService
+@inject IJSRuntime JSRuntime;
+@inject HttpClient Http;
+@inject IStringLocalizer<Messages> Loc;
+
 
 @page "/assertmanager"
 <PageTitle>@Title</PageTitle>
@@ -18,101 +22,149 @@
                     <h2>@Title</h2>
                 </div>
                 <div class="col-xs-6 col-sm-6">
-                    <a data-bs-toggle="modal" data-bs-target="#addActive" class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i><span>@Loc["New"]</span></a>
+                    <a data-bs-toggle="modal" @onclick="OnNewOrder" data-bs-target="#addActive" class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i><span>@Loc["New"]</span></a>
                     <a class="btn btn-primary" @onclick="Search"><i class="fa fa-search" aria-hidden="true"></i><span>@Loc["Search"]</span></a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-12">
-        <TableComponent HeaderColumns="Category, Sector, Ticker, Price, Amount, Cost, Total Price, Total Cost, L/P, - "
-                        DataBind="actives"
-                        Context="active"
-                        Loading=@loading
-                        MessageEmpty="@Messages.Not_found"
-                        MessageLoading="@Messages.Loading">
-            <RowTemplate>
-                <td>@active.Category</td>
-                <td>@active.Sector</td>
-                <td>@active.Ticker</td>
-                <td>@active.Price.ToCurrency()</td>
-                <td>@active.Amount.ToQuantity()</td>
-                <td>@active.UnitCost.ToCurrency()</td>
-                <td>@active.TotalPrice.ToCurrency()</td>
-                <td>@active.TotalCost.ToCurrency()</td>
-                <td>@active.LP.ToCurrency()</td>
-                <td>                   
-                    <a href="#addActive?Edit" class="new" data-toggle="modal"><i class="fa-solid fa-plus"></i></a>
-                </td>
-            </RowTemplate>
-        </TableComponent>
-    </div>
-</div>
 
-<ModalComponent Id="addActive" Title="Insert Assets" >
+<TableComponent HeaderColumns="Category, Sector, Ticker, Price, Amount, Cost, Total Price, Total Cost, L/P, - "
+                DataBind="actives"
+                Context="active"
+                Loading=@loading
+                MessageError="@MessageError"
+                MessageEmpty="@Messages.Not_found"
+                MessageLoading="@Messages.Loading">
+    <RowTemplate>
+        <td>@active.Category</td>
+        <td>@active.Sector</td>
+        <td>@active.Ticker</td>
+        <td>@active.Price.ToCurrency()</td>
+        <td>@active.Amount.ToQuantity()</td>
+        <td>@active.UnitCost.ToCurrency()</td>
+        <td>@active.TotalPrice.ToCurrency()</td>
+        <td>@active.TotalCost.ToCurrency()</td>
+        <td>@active.LP.ToCurrency()</td>
+        <td>
+            <a href="#addActive?Edit" class="new" data-toggle="modal"><i class="fa-solid fa-plus"></i></a>
+        </td>
+    </RowTemplate>
+</TableComponent>
+
+<ModalComponent Id="addActive" Title="Insert Assets">
     <BodyTemplate>
-        <form class="row g-3">
+        <form class="row g-12">
             <div class="col-md-12">
-                <label for="inputNameActive" class="form-label">Name Active</label>
-                <input type="text" class="form-control" id="inputNameActive">
-            </div>
-            <div class="col-md-6">
-                <label for="inputPassword4" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword4">
-            </div>
-            <div class="col-12">
-                <label for="inputAddress" class="form-label">Address</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-            </div>
-            <div class="col-12">
-                <label for="inputAddress2" class="form-label">Address 2</label>
-                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-            </div>
-            <div class="col-md-6">
-                <label for="inputCity" class="form-label">City</label>
-                <input type="text" class="form-control" id="inputCity">
+                <RadzenAutoComplete Name="txtTicker"
+                                    @bind-Value=ActiveDto.Ticker
+                                    LoadData=@LoadTickers
+                                    Data=@activesDescription
+                                    TextProperty="Name"
+                                    MinLength="3"
+                                    Placeholder="Select a Active..."
+                                    Style="width:100%">
+                    <Template>
+                        @context.Name - @context.Description
+                    </Template>
+                </RadzenAutoComplete>
             </div>
             <div class="col-md-4">
-                <label for="inputState" class="form-label">State</label>
-                <select id="inputState" class="form-select">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                </select>
+                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Date</RadzenText>
+                <RadzenDatePicker @bind-Value=ActiveDto.DateBuy DateFormat="dd/MM/yyyy" />
             </div>
-            <div class="col-md-2">
-                <label for="inputZip" class="form-label">Zip</label>
-                <input type="text" class="form-control" id="inputZip">
+            <div class="col-md-4">
+                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Amount</RadzenText>
+                <RadzenNumeric @bind-Value=ActiveDto.Amount TextAlign="TextAlign.Right" />
             </div>
-            <div class="col-12">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
-                        Check me out
-                    </label>
-                </div>
-            </div>            
+
+            <div class="col-md-4">
+                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Price</RadzenText>
+                <RadzenNumeric TValue="decimal" Format="c" @bind-Value=ActiveDto.UnitCost />
+            </div>
         </form>
     </BodyTemplate>
     <FooterTemplate>
-        <div class="col-12">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>           
+        <div class="row">
+            <div class="input-group">
+                <RadzenButton Click=@(args => OnSave()) onclick="txtTicker.focus" Text="Save" ButtonStyle="ButtonStyle.Primary" />
+                <RadzenButton Click=@(args => OnNewOrder()) Text="Nova" ButtonStyle="ButtonStyle.Secondary" />
+                <RadzenButton data-bs-dismiss="modal" Text="Close" ButtonStyle="ButtonStyle.Light" />
+            </div>
         </div>
     </FooterTemplate>
 </ModalComponent>
 
 @code {
 
-    private List<PortifolioDto> actives = new List<PortifolioDto>();
+    #region Default
     private const string Title = "Asset Management";
     private bool loading;
+    private string MessageError = string.Empty;
+    #endregion
 
+    private List<PortifolioDto> actives = new List<PortifolioDto>();
+    private List<ItemList> activesDescription = new List<ItemList>();
+    private ActiveDto ActiveDto = new ActiveDto();
 
     public async Task Search()
     {
-        loading = true;       
-        actives = await Http.GetFromJsonAsync<List<PortifolioDto>>(HelperEndPoints.Api("Portifolios"));
-        loading = false;
-    }   
+        loading = true;
+        try
+        {
+            actives = await Http.GetFromJsonAsync<List<PortifolioDto>>(HelperEndPoints.Api("Portifolios"));
+        }
+        catch (Exception exp)
+        {
+            MessageError = exp.Message;
+        }
+        finally
+        {
+            loading = false;
+        }
+    }
+
+    public async Task LoadTickers(LoadDataArgs args)
+    {
+        try
+        {
+            var filtro = args.Filter;
+            activesDescription = await Http.GetFromJsonAsync<List<ItemList>>(HelperEndPoints.Api($"Portifolios/GetActive?ticker={filtro}"));
+        }
+        catch (Exception exp)
+        {
+            MessageError = exp.Message;
+        }
+    }
+
+    private void OnSave()
+    {
+        var json = ActiveDto;
+        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Info, Summary = "Button Clicked", Detail = "sucesso" });
+    }
+
+    private async void OnNewOrder()
+    {
+        ActiveDto = new ActiveDto();
+        await Focus("txtTicker");
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Search();      
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+         await Search();
+    }
+
+    public async Task Focus(string elementId)
+    {
+        await JSRuntime.InvokeVoidAsync("focusById", elementId);
+    }
 }

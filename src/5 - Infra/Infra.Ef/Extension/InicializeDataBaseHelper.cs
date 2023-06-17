@@ -3,6 +3,7 @@ using Infra.Ef.InitBaseBase;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection.Emit;
 
 namespace Infra.Repository.Extension
 {
@@ -24,6 +25,7 @@ namespace Infra.Repository.Extension
                     //context.Database.EnsureCreated(); //Cria o banco e gerar as migrações, porem não gera o historico de versão migrações
 
                     //DbInitializer.Initialize(context); //Popula algumas tabelas
+                    
                 }
                 catch
                 {

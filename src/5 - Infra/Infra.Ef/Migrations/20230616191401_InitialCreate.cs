@@ -130,7 +130,7 @@ namespace Infra.Ef.Migrations
                 columns: table => new
                 {
                     actid = table.Column<Guid>(name: "act_id", type: "uniqueidentifier", nullable: false),
-                    actticker = table.Column<string>(name: "act_ticker", type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    actticker = table.Column<string>(name: "act_ticker", type: "nvarchar(20)", maxLength: 20, nullable: false, comment: "Name Ticker"),
                     actprice = table.Column<decimal>(name: "act_price", type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     actcategory = table.Column<int>(name: "act_category", type: "int", nullable: false),
                     cpyid = table.Column<Guid>(name: "cpy_id", type: "uniqueidentifier", nullable: true),
@@ -199,46 +199,46 @@ namespace Infra.Ef.Migrations
             migrationBuilder.InsertData(
                 table: "tb_broker",
                 columns: new[] { "bkr_id", "bkr_cnpj", "bkr_corporate_name", "d_created", "enabled", "bkr_fantasy_name", "last_update", "user_created", "user_last_update" },
-                values: new object[] { new Guid("918282dc-5ce2-4d1d-bf76-2430229c4a1b"), "48.537.525/0001-01", "Itau", new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2494), (byte)1, "Itau investimentos", null, new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), null });
+                values: new object[] { new Guid("3f936455-e4cb-4887-8a4c-f2f6389f9837"), "48.537.525/0001-01", "Itau", new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7866), (byte)1, "Itau investimentos", null, new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), null });
 
             migrationBuilder.InsertData(
                 table: "tb_sector",
                 columns: new[] { "sct_id", "d_created", "enabled", "last_update", "sct_name", "user_created", "user_last_update" },
                 values: new object[,]
                 {
-                    { new Guid("529b0273-a393-4b42-9e1c-9b659f1d77fd"), new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2467), (byte)1, null, "Varejo", new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), null },
-                    { new Guid("7276659e-7780-46b2-8479-4ff816e53950"), new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2471), (byte)1, null, "Eletrico", new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), null },
-                    { new Guid("99daffc0-d045-4a31-8151-5865227dd317"), new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2470), (byte)1, null, "Financeiro", new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), null }
+                    { new Guid("42f99c91-c3a6-4e59-8473-5d443bcb58ce"), new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7843), (byte)1, null, "Eletrico", new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), null },
+                    { new Guid("6ef7a2cf-9157-48ee-8fa9-e8a5a99f2946"), new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7842), (byte)1, null, "Financeiro", new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), null },
+                    { new Guid("7c3c1968-a503-4c03-b8ee-9526bc2a339b"), new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7839), (byte)1, null, "Varejo", new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), null }
                 });
 
             migrationBuilder.InsertData(
                 table: "tb_user",
                 columns: new[] { "usu_id", "d_created", "enabled", "last_update", "usu_login", "usu_password", "user_created", "user_last_update" },
-                values: new object[] { new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2004), (byte)1, null, "elton", "123456", new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), null });
+                values: new object[] { new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7528), (byte)1, null, "elton", "123456", new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), null });
 
             migrationBuilder.InsertData(
                 table: "tb_company",
                 columns: new[] { "cpy_id", "cpy_cnpj", "d_created", "enabled", "last_update", "cpy_name", "sct_id", "user_created", "user_last_update" },
                 values: new object[,]
                 {
-                    { new Guid("a0b3920e-04f4-4254-9ae6-73a6d915c175"), "48.566.523/0001-01", new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2538), (byte)1, null, "Taeesa transmissão Eletrica", new Guid("7276659e-7780-46b2-8479-4ff816e53950"), new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), null },
-                    { new Guid("c7e5f1dd-1348-4da5-a256-f2cd8df0ff94"), "48.537.555/0001-01", new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2534), (byte)1, null, "Magazine Luiza", new Guid("529b0273-a393-4b42-9e1c-9b659f1d77fd"), new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), null },
-                    { new Guid("fcaa34b7-9ecd-4d57-b6e0-1ad233bfafb0"), "48.537.523/0001-01", new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2536), (byte)1, null, "Banco do Brasil", new Guid("99daffc0-d045-4a31-8151-5865227dd317"), new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), null }
+                    { new Guid("180f672b-bf89-45a7-b31e-c6ed926679e2"), "48.566.523/0001-01", new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7907), (byte)1, null, "Taeesa transmissão Eletrica", new Guid("42f99c91-c3a6-4e59-8473-5d443bcb58ce"), new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), null },
+                    { new Guid("f12f8f13-bec9-4774-b9f2-6bcbbcd65039"), "48.537.523/0001-01", new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7906), (byte)1, null, "Banco do Brasil", new Guid("6ef7a2cf-9157-48ee-8fa9-e8a5a99f2946"), new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), null },
+                    { new Guid("fd4b5d91-8ad0-4323-96fe-8c1573a42b99"), "48.537.555/0001-01", new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7903), (byte)1, null, "Magazine Luiza", new Guid("7c3c1968-a503-4c03-b8ee-9526bc2a339b"), new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), null }
                 });
 
             migrationBuilder.InsertData(
                 table: "tb_wallet",
                 columns: new[] { "wal_Id", "bkr_id", "d_created", "enabled", "last_update", "wal_name", "usu_id", "user_created", "user_last_update" },
-                values: new object[] { new Guid("846fde86-40f0-4ac0-994f-baf51ec85e3c"), new Guid("918282dc-5ce2-4d1d-bf76-2430229c4a1b"), new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2515), (byte)1, null, "Minha Carteira", new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), new Guid("00000000-0000-0000-0000-000000000000"), null });
+                values: new object[] { new Guid("1dc38a0e-b977-43cc-a4b2-59303bf432da"), new Guid("3f936455-e4cb-4887-8a4c-f2f6389f9837"), new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7883), (byte)1, null, "Minha Carteira", new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), new Guid("00000000-0000-0000-0000-000000000000"), null });
 
             migrationBuilder.InsertData(
                 table: "tb_actives",
                 columns: new[] { "act_id", "act_category", "cpy_id", "d_created", "enabled", "last_update", "act_price", "act_ticker", "user_created", "user_last_update" },
                 values: new object[,]
                 {
-                    { new Guid("95526ac9-8450-453e-9e01-fd55d94cc81c"), 0, new Guid("fcaa34b7-9ecd-4d57-b6e0-1ad233bfafb0"), new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2559), (byte)1, null, 0m, "BBAS3", new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), null },
-                    { new Guid("a3dfa9c7-f30c-4900-bf6b-3134a1fa674a"), 0, new Guid("c7e5f1dd-1348-4da5-a256-f2cd8df0ff94"), new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2557), (byte)1, null, 0m, "MGLU3", new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), null },
-                    { new Guid("ada4a647-af12-46a6-bede-50a7040a4f1d"), 0, new Guid("a0b3920e-04f4-4254-9ae6-73a6d915c175"), new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2561), (byte)1, null, 0m, "TAEE3", new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), null }
+                    { new Guid("1b0f4b1f-828c-4936-ab72-1122b3f5d7ab"), 0, new Guid("fd4b5d91-8ad0-4323-96fe-8c1573a42b99"), new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7925), (byte)1, null, 0m, "MGLU3", new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), null },
+                    { new Guid("433853d2-c779-42a0-86c7-5022394ec58b"), 0, new Guid("f12f8f13-bec9-4774-b9f2-6bcbbcd65039"), new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7928), (byte)1, null, 0m, "BBAS3", new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), null },
+                    { new Guid("d2aaeddb-aad5-402b-8cba-c1b5f87d41bf"), 0, new Guid("180f672b-bf89-45a7-b31e-c6ed926679e2"), new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7930), (byte)1, null, 0m, "TAEE3", new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), null }
                 });
 
             migrationBuilder.InsertData(
@@ -246,9 +246,9 @@ namespace Infra.Ef.Migrations
                 columns: new[] { "aoc_id", "act_id", "aoc_amount", "bkr_id", "aoc_date_operation", "d_created", "enabled", "last_update", "aoc_operation", "aoc_unit_cost", "user_created", "usu_id", "user_last_update", "wal_Id" },
                 values: new object[,]
                 {
-                    { new Guid("27959e32-c302-47db-a040-be422c9cc7f3"), new Guid("ada4a647-af12-46a6-bede-50a7040a4f1d"), 600m, new Guid("918282dc-5ce2-4d1d-bf76-2430229c4a1b"), new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2593), new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2594), (byte)1, null, 0, 13.5m, new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), null, new Guid("846fde86-40f0-4ac0-994f-baf51ec85e3c") },
-                    { new Guid("623bedde-768a-49af-ae24-f240f80dbab3"), new Guid("a3dfa9c7-f30c-4900-bf6b-3134a1fa674a"), 50m, new Guid("918282dc-5ce2-4d1d-bf76-2430229c4a1b"), new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2580), new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2580), (byte)1, null, 0, 22.5m, new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), null, new Guid("846fde86-40f0-4ac0-994f-baf51ec85e3c") },
-                    { new Guid("d60448e1-6072-4b68-8f4e-c8ce30e1eefc"), new Guid("95526ac9-8450-453e-9e01-fd55d94cc81c"), 200m, new Guid("918282dc-5ce2-4d1d-bf76-2430229c4a1b"), new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2590), new DateTime(2023, 4, 23, 18, 0, 50, 425, DateTimeKind.Local).AddTicks(2590), (byte)1, null, 0, 43.5m, new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), new Guid("2ad284fe-82e4-4d37-a242-75e54ece0989"), null, new Guid("846fde86-40f0-4ac0-994f-baf51ec85e3c") }
+                    { new Guid("08a346ca-4f7c-4c75-8563-2573cdf55608"), new Guid("d2aaeddb-aad5-402b-8cba-c1b5f87d41bf"), 600m, new Guid("3f936455-e4cb-4887-8a4c-f2f6389f9837"), new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7956), new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7956), (byte)1, null, 0, 13.5m, new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), null, new Guid("1dc38a0e-b977-43cc-a4b2-59303bf432da") },
+                    { new Guid("15e159dd-990c-4f0a-ac5d-21e3975a609d"), new Guid("433853d2-c779-42a0-86c7-5022394ec58b"), 200m, new Guid("3f936455-e4cb-4887-8a4c-f2f6389f9837"), new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7953), new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7953), (byte)1, null, 0, 43.5m, new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), null, new Guid("1dc38a0e-b977-43cc-a4b2-59303bf432da") },
+                    { new Guid("87eb1def-1515-4020-9081-5f17b6475cdd"), new Guid("1b0f4b1f-828c-4936-ab72-1122b3f5d7ab"), 50m, new Guid("3f936455-e4cb-4887-8a4c-f2f6389f9837"), new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7945), new DateTime(2023, 6, 16, 16, 14, 1, 678, DateTimeKind.Local).AddTicks(7946), (byte)1, null, 0, 22.5m, new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), new Guid("4dd0c335-6a75-49fd-b2ad-e0b6ddbb2435"), null, new Guid("1dc38a0e-b977-43cc-a4b2-59303bf432da") }
                 });
 
             migrationBuilder.CreateIndex(

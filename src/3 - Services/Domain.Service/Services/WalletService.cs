@@ -6,6 +6,7 @@ using Domain.Core.IServices;
 using Domain.Core.Model;
 using Domain.Core.Model.Actives;
 using Domain.Core.Model.Enumerables;
+using Domain.Models.Dto;
 using Service.Core.Dtos;
 using System;
 using System.Collections.Generic;
@@ -15,29 +16,29 @@ namespace Service.Core.Services
 {
     public sealed class WalletService : IWalletService
     {
-        private readonly IWalletRespository walletRespository;
-        private readonly IMarketplaceService marketplaceService;
+        private readonly IWalletRespository _walletRespository;
+        private readonly IMarketplaceService _marketplaceService;
 
         public WalletService(IWalletRespository walletRespository, IMarketplaceService marketplaceService)
         {
-            this.walletRespository = walletRespository;
-            this.marketplaceService = marketplaceService;
+            this._walletRespository = walletRespository;
+            this._marketplaceService = marketplaceService;
         }
 
         public async Task<IEnumerable<PortifolioDto>> GetPortifolioAsync(EnumCategory enumTypeActives)
         {
-            return await walletRespository.GetPortifolioAsync(enumTypeActives);
+            return await _walletRespository.GetPortifolioAsync(enumTypeActives);
         }
 
         public async Task RefleshActiveAsync()
         {
-            List<Actions> actions = await walletRespository.GetTickersAsync();
+            List<Actions> actions = await _walletRespository.GetTickersAsync();
 
             foreach (Actions action in actions)
             {
                 try 
                 { 
-                    var price = await this.marketplaceService.GetPriceAsync(action.Ticker, EnumExchanges.BMFBOVESPA);                   
+                    var price = await this._marketplaceService.GetPriceAsync(action.Ticker, EnumExchanges.BMFBOVESPA);                   
                     action.UpdatePrice(Convert.ToDecimal(price));
 
                     action.SetLastUpdate(DateTime.Now);
@@ -48,9 +49,13 @@ namespace Service.Core.Services
                 await Task.Delay(1000);
             }
 
-            await walletRespository.UpdateTickerAsync(actions);
+            await _walletRespository.UpdateTickerAsync(actions);
         }
 
+        public async Task<IEnumerable<ItemList>> GetActive(string ticker)
+        {
+            return await _marketplaceService.FindAllTickersItemListAsync(ticker, EnumCategory.ACTION, EnumExchanges.BMFBOVESPA);
+        }
 
         /// <summary>
         /// Visualizar valor total investidos em Grupos de ativos
@@ -82,7 +87,7 @@ namespace Service.Core.Services
         /// </summary>
         public async Task<IEnumerable<TotalPriceTypeActivesDto>> GetTotalPriceTypeActivesAsync(int id)
         {
-            var wallat = await walletRespository.GetByIdAsync(id);
+            var wallat = await _walletRespository.GetByIdAsync(id);
             return GetTotalPriceTypeActives(wallat);
         }
 

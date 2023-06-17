@@ -48,6 +48,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Models.Test", "4 - D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.WorkerService", "1 - Presentation\Presentation.WorkerService\Presentation.WorkerService.csproj", "{639B4FCC-EC9E-48FA-971E-50B56109CF99}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsApp1", "1 - Presentation\WinFormsApp1\WinFormsApp1.csproj", "{97D7946E-ED9B-425D-8DF5-37FF1C871F34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +104,10 @@ Global
 		{639B4FCC-EC9E-48FA-971E-50B56109CF99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{639B4FCC-EC9E-48FA-971E-50B56109CF99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{639B4FCC-EC9E-48FA-971E-50B56109CF99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97D7946E-ED9B-425D-8DF5-37FF1C871F34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97D7946E-ED9B-425D-8DF5-37FF1C871F34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97D7946E-ED9B-425D-8DF5-37FF1C871F34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97D7946E-ED9B-425D-8DF5-37FF1C871F34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +125,7 @@ Global
 		{8013851E-E50D-4209-B0C3-0EBD693D5393} = {0A468E48-F791-4BB7-BB7F-20A52C5BE2EF}
 		{08BE9878-C136-4E86-98DA-D32A796790C0} = {0A468E48-F791-4BB7-BB7F-20A52C5BE2EF}
 		{639B4FCC-EC9E-48FA-971E-50B56109CF99} = {D8F88159-D429-4ABC-843B-74E19A8EEFA3}
+		{97D7946E-ED9B-425D-8DF5-37FF1C871F34} = {D8F88159-D429-4ABC-843B-74E19A8EEFA3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {88571D0F-562C-467E-B482-FABB850C7E20}

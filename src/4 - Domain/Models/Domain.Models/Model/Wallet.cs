@@ -148,7 +148,7 @@ namespace Domain.Core.Model
         /// <param name="unitSales">The unit sales.</param>
         /// <param name="dateBuy">The date buy.</param>
         /// <param name="user">The user.</param>
-        public void Sale(AbstractActives active, int amount, decimal unitSales, DateTime dateBuy, User user)
+        public void Sell(AbstractActives active, int amount, decimal unitSales, DateTime dateBuy, User user)
         {
             ExceptionDomainValidation.When(!this.ExistsActive(active), MSG_NOT_EXIST_ACTIVE);
             ExceptionDomainValidation.When(this.TotalAmount(active) < amount, MSG_SALES_LARGER_BUY);

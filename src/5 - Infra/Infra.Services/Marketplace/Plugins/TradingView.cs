@@ -1,18 +1,18 @@
 ﻿using Domain.Core.Enumerables;
-using Domain.Core.Interfaces;
 using Domain.Core.Model.Enumerables;
 using Domain.Models.Dto;
 using Infra.Services.Marketplace.Dtos;
 using Infra.Services.Resources;
 using System.Text.Json;
 
-namespace Infra.Services.Marketplace
+namespace Infra.Services.Marketplace.Plugins
 {
-    public partial class MarketplaceClient : IMarketplaceService
+    internal class TradingView
     {
         private const string uriBase = "https://symbol-search.tradingview.com/symbol_search/v3/";
 
-        private async Task<TradingViewRoot> ExecuteGetAPI(string ticker, EnumCategory enumTypeActives = EnumCategory.ALL, EnumExchanges exchange = EnumExchanges.ALL) {
+        private async Task<TradingViewRoot> ExecuteGetAPI(string ticker, EnumCategory enumTypeActives = EnumCategory.ALL, EnumExchanges exchange = EnumExchanges.ALL)
+        {
 
             string type = enumTypeActives switch
             {
@@ -36,7 +36,6 @@ namespace Infra.Services.Marketplace
 
             return tradingViewRoot;
         }
-
 
         public async Task<IEnumerable<string>> FindAllTickersAsync(string ticker, EnumCategory enumTypeActives = EnumCategory.ALL, EnumExchanges exchange = EnumExchanges.ALL)
         {

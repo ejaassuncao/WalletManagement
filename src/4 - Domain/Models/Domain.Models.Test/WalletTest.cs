@@ -71,9 +71,9 @@ namespace Domain.Core.Test
                 wallet.Buy(new Actions(magazine, magazine.GettTiker()), 4, 10, DateTime.Now, user, broker); //40
                 wallet.Buy(new Actions(magazine, magazine.GettTiker()), 5, (decimal)12.50, DateTime.Now, user, broker); //62.50
 
-                wallet.Sale(new Actions(magazine, magazine.GettTiker()), 2, 8, DateTime.Now, user); //16
-                wallet.Sale(new Actions(magazine, magazine.GettTiker()), 5, 7, DateTime.Now, user);// 35
-                wallet.Sale(new Actions(magazine, magazine.GettTiker()), 10, 10, DateTime.Now, user);//100
+                wallet.Sell(new Actions(magazine, magazine.GettTiker()), 2, 8, DateTime.Now, user); //16
+                wallet.Sell(new Actions(magazine, magazine.GettTiker()), 5, 7, DateTime.Now, user);// 35
+                wallet.Sell(new Actions(magazine, magazine.GettTiker()), 10, 10, DateTime.Now, user);//100
 
                 decimal expected = (decimal) -48.50;
 
@@ -105,8 +105,8 @@ namespace Domain.Core.Test
             wallet.Buy(petrobrasActive, 10, 10, DateTime.Now, user, broker);
 
             //total 7
-            wallet.Sale(magazineActive, 2, 8, DateTime.Now, user);
-            wallet.Sale(magazineActive, 5, 7, DateTime.Now, user);
+            wallet.Sell(magazineActive, 2, 8, DateTime.Now, user);
+            wallet.Sell(magazineActive, 5, 7, DateTime.Now, user);
 
             decimal expected = 12;
 
@@ -135,8 +135,8 @@ namespace Domain.Core.Test
             wallet.Buy(petrobrasActive, 10, 10, DateTime.Now, user, broker);
 
             //total 7
-            wallet.Sale(magazineActive, 2, 8, DateTime.Now, user);
-            wallet.Sale(magazineActive, 5, 7, DateTime.Now, user);
+            wallet.Sell(magazineActive, 2, 8, DateTime.Now, user);
+            wallet.Sell(magazineActive, 5, 7, DateTime.Now, user);
 
             decimal expected = 2;
 
@@ -165,8 +165,8 @@ namespace Domain.Core.Test
             wallet.Buy(petrobrasActive, 10, 10, DateTime.Now, user, broker);
 
             //total 51
-            wallet.Sale(magazineActive, 2, 8, DateTime.Now, user);
-            wallet.Sale(magazineActive, 5, 7, DateTime.Now, user);
+            wallet.Sell(magazineActive, 2, 8, DateTime.Now, user);
+            wallet.Sell(magazineActive, 5, 7, DateTime.Now, user);
 
             decimal expected = (decimal)151.50;
 
@@ -195,8 +195,8 @@ namespace Domain.Core.Test
             wallet.Buy(petrobrasActive, 10, 10, DateTime.Now, user, broker);
 
             //total 51
-            wallet.Sale(magazineActive, 2, 8, DateTime.Now, user);
-            wallet.Sale(magazineActive, 5, 7, DateTime.Now, user);
+            wallet.Sell(magazineActive, 2, 8, DateTime.Now, user);
+            wallet.Sell(magazineActive, 5, 7, DateTime.Now, user);
 
             decimal expected = (decimal) 51.50;
 

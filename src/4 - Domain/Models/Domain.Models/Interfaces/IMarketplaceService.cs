@@ -8,11 +8,10 @@ namespace Domain.Core.Interfaces
 {
     public interface IMarketplaceService
     {
-        public Task<dynamic> GetPriceAsync(string ticker, EnumExchanges exchange = EnumExchanges.NYSE);       
+        public Task<dynamic> GetPriceAsync(string ticker, EnumExchanges exchange = EnumExchanges.NYSE);
+
         public Task<IEnumerable<string>> FindAllTickersAsync(string ticker, EnumCategory enumTypeActives = EnumCategory.ALL, EnumExchanges exchange = EnumExchanges.ALL);
-
         public Task<IEnumerable<ItemList>> FindAllTickersItemListAsync(string ticker, EnumCategory enumTypeActives = EnumCategory.ALL, EnumExchanges exchange = EnumExchanges.ALL);
-
      
     }
 }

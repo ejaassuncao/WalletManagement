@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Domain.Commons.Entity;
 using Domain.core.IRepository;
 using Domain.Core.Dto;
 using Domain.Core.Model;
@@ -15,7 +16,33 @@ namespace Infra.Ef.Repository
 {
     public class WalletRespository : EfRepository<Wallet>, IWalletRespository
     {
-        public WalletRespository(AppDBContext context, IMapper mapper) : base(context, mapper) { }       
+        public WalletRespository(AppDBContext context, IMapper mapper) : base(context, mapper) { }
+
+        public Task<Broker> GetByIdBrokerAsync(Guid guid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<User> GetByIdUsuarioAsync(Guid id)
+        {
+            var tbuser = await _context.TbUsers.Where(x => x.Id == id).AsNoTracking().FirstOrDefaultAsync();
+            return _mapper.Map<User>(tbuser);
+        }
+
+        public Task<Wallet> GetByIdWalletAsync(Guid guid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Actions> GetByTickerActionAsync(string ticker)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Company> GetByTickerCompanyAsync(string nameCompany)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<IEnumerable<PortifolioDto>> GetPortifolioAsync(EnumCategory enumTypeActives)
         {
@@ -45,6 +72,16 @@ namespace Infra.Ef.Repository
         {           
             return await _context.TbActives.ProjectTo<Actions>(_mapper.ConfigurationProvider)
                 .ToListAsync();
+        }
+
+        public Task InsertActionsAsync(Actions action)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task InsertCompanyAsync(Company companyNew)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task UpdateTickerAsync(List<Actions> tickers)

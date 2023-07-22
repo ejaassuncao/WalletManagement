@@ -1,5 +1,4 @@
-﻿using Domain.Core.Enumerables;
-using Domain.Core.Interfaces;
+﻿using Domain.Core.Interfaces;
 using Domain.Core.Model.Enumerables;
 using Infra.Services.Marketplace;
 using System.Threading.Tasks;
@@ -27,7 +26,7 @@ namespace Infra.Services.Test
         [InlineData("CPLE6")]
         public async Task FindAllTickers(string ticker)
         {
-            var json = await _marketplaceService.FindAllTickersAsync(ticker, EnumCategory.ACTION, EnumExchanges.BMFBOVESPA);
+            var json = await _marketplaceService.FindAllTickersAsync(ticker, EnumCategory.ACTION);
 
             Assert.NotNull(json);
         }
@@ -41,7 +40,7 @@ namespace Infra.Services.Test
         [InlineData("TAEE11")]
         public async Task GetPriceAsync(string ticker)
         {
-            var price = await _marketplaceService.GetPriceAsync(ticker, EnumExchanges.BMFBOVESPA);
+            var price = await _marketplaceService.GetPriceAsync(ticker);
 
             Assert.True(price > 0);
         }

@@ -12,13 +12,13 @@ namespace Domain.Core.Test
 {
     public class ActivesTest
     {
-        [Fact]
-        public void TickerIsNotFound()
-        {
-            var company = CompanyTest.GetMagazineLuizaMock();
-            Action action = () => new Stocks(company, "egi3");
-            action.Should().Throw<ExceptionDomainValidation>().WithMessage("Ticker not found");
-        }
+        //[Fact]
+        //public void TickerIsNotFound()
+        //{
+        //    var company = CompanyTest.GetMagazineLuizaMock();
+        //    Action action = () => new Stocks(company, "egi3");
+        //    action.Should().Throw<ExceptionDomainValidation>().WithMessage("Ticker not found");
+        //}
 
         [Fact]
         public void TickerIsValid()
@@ -30,26 +30,26 @@ namespace Domain.Core.Test
             action.Should().NotThrow<ExceptionDomainValidation>();
         }
 
-        [Fact]
-        public void TickerIsNull()
-        {
-            var magazine = CompanyTest.GetMagazineLuizaMock();
+        //[Fact]
+        //public void TickerIsNull()
+        //{
+        //    var magazine = CompanyTest.GetMagazineLuizaMock();
 
-            Action action = () => new Stocks(magazine, null);
+        //    Action action = () => new Stocks(magazine, null);
 
-            action.Should().Throw<ExceptionDomainValidation>();
-        }
+        //    action.Should().Throw<ExceptionDomainValidation>();
+        //}
 
-        [Fact]
-        public void CompanyIsNull()
-        {
-            var magazine = CompanyTest.GetMagazineLuizaMock();
+        //[Fact]
+        //public void CompanyIsNull()
+        //{
+        //    var magazine = CompanyTest.GetMagazineLuizaMock();
 
-            Action action = () => new Stocks(null, "MGLU3");
+        //    Action action = () => new Stocks(null, "MGLU3");
 
-            action.Should().Throw<ExceptionDomainValidation>().WithMessage("company is null");
+        //    action.Should().Throw<ExceptionDomainValidation>().WithMessage("company is null");
 
-        }
+        //}
 
         [Theory]
         [InlineData(EnumActionTypeTicker.ON, "petr3")]

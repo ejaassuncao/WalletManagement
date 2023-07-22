@@ -94,8 +94,36 @@ namespace Service.Core.Services
 
         public async Task Insert(ActiveDto dto)
         {
+            User user = await _walletRespository.GetByIdUsuarioAsync(Guid.Parse("4DD0C335-6A75-49FD-B2AD-E0B6DDBB2435"));
+            Wallet wallet = await _walletRespository.GetByIdWalletAsync(Guid.Parse("4DD0C335-6A75-49FD-B2AD-E0B6DDBB2435"));
+            Broker broker = await _walletRespository.GetByIdBrokerAsync(Guid.Parse("3F936455-E4CB-4887-8A4C-F2F6389F9837"));
+            Company company = await _walletRespository.GetByTickerCompanyAsync(dto.NameCompany);
 
-          ///
+            //cadastra compania
+            if (company == null)
+            {
+                Guid idcompany = Guid.NewGuid();
+                company = new Company(idcompany, dto.NameCompany, new List<string> { dto.Ticker });
+                await _walletRespository.InsertCompanyAsync(company);
+            }
+
+            Actions action = await _walletRespository.GetByTickerActionAsync(dto.Ticker);
+
+            if (action == null)
+            {
+                Guid idaction = Guid.NewGuid();
+                action = new Actions(idaction, company, dto.Ticker);
+                await _walletRespository.InsertActionsAsync(action);
+            }
+
+            if(dto.Operation == EnumOperationWallet.BUY)
+                wallet.Buy(action, dto.Amount, dto.UnitCost, dto.Date, user, broker);
+            else
+                wallet.Sell(action, dto.Amount, dto.UnitCost, dto.Date, user);
+
+
+            await _walletRespository.InsertAsync(wallet);           
+
         }
     }
 }

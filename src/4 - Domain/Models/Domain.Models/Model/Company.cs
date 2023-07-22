@@ -33,7 +33,7 @@ namespace Domain.Core.Model
 
         #region metods
 
-        public Company()
+        public Company(object nameCompany)
         {
 
         }

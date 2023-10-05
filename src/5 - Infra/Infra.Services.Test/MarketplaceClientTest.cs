@@ -1,5 +1,6 @@
 ﻿using Domain.Core.Interfaces;
 using Domain.Core.Model.Enumerables;
+using Domain.Models.Settings;
 using Infra.Services.Marketplace;
 using System.Threading.Tasks;
 using Xunit;
@@ -10,9 +11,14 @@ namespace Infra.Services.Test
     {
         private readonly IMarketplaceService _marketplaceService;
 
-        public MarketplaceClientTest()
+        public MarketplaceClientTest( )
         {
-            _marketplaceService = new MarketplaceClient();
+            Settings settings = new Settings
+            {
+                BrApi = new BrApi { Token = "9EQfpwBFDFKNJpun6g1NCL" }
+            };
+          
+            _marketplaceService =  new MarketplaceClient(settings);
         }
 
         /// <summary>

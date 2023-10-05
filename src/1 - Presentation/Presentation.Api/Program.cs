@@ -1,3 +1,4 @@
+using Domain.Models.Settings;
 using Infra.Ef.Extension;
 using Infra.Repository.Extension;
 using Infra.Services.Extension;
@@ -14,21 +15,34 @@ namespace Presentation.Api
             // Add services to the container.
             //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             //    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
+
             builder.Services.AddCors();
             builder.Services.AddControllers();            
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            //builder.Services.InjectModel();
+            //builder.Services.Configure<Settings>(builder.Configuration.GetSection("Settings"));  
+
+            Settings settings = new Settings
+            {               
+                BrApi = new BrApi { Token = builder.Configuration.GetSection("Settings:BrApi:Token").Value},
+                ConnectionStrings = new ConnectionStrings
+                {
+                    DefaultConnection = builder.Configuration.GetSection("Settings:ConnectionStrings:DefaultConnection").Value
+                }
+            };
+
+            builder.Services.AddSingleton(settings);
             builder.Services.InjectRepository();
             builder.Services.InjectService();
             builder.Services.InjectInfraService();
 
             builder.Services.AddAutoMapper(typeof(AutoMapping));
-            
+
+
             var app = builder.Build();
-          
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

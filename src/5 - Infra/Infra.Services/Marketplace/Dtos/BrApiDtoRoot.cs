@@ -9,8 +9,11 @@ namespace Infra.Services.Marketplace.Dtos
 
         [JsonPropertyName("requestedAt")]
         public DateTime? RequestedAt { get; set; }
+
+        [JsonPropertyName("took")]
+        public string? Took { get; set; }
     }
-  
+
     public class CashDividend
     {
         [JsonPropertyName("assetIssued")]
@@ -237,6 +240,56 @@ namespace Infra.Services.Marketplace.Dtos
     }
 
 
+    //public class BrApiDtoRoot
+    //{
+    //    public Result[] results { get; set; }
+    //    public DateTime requestedAt { get; set; }
+    //    public string took { get; set; }
+    //}
 
+    //public class Result
+    //{
+    //    public string currency { get; set; }
+    //    public float twoHundredDayAverage { get; set; }
+    //    public float twoHundredDayAverageChange { get; set; }
+    //    public float twoHundredDayAverageChangePercent { get; set; }
+    //    public long marketCap { get; set; }
+    //    public string shortName { get; set; }
+    //    public string longName { get; set; }
+    //    public float regularMarketChange { get; set; }
+    //    public float regularMarketChangePercent { get; set; }
+    //    public DateTime regularMarketTime { get; set; }
+    //    public float regularMarketPrice { get; set; }
+    //    public int regularMarketDayHigh { get; set; }
+    //    public string regularMarketDayRange { get; set; }
+    //    public int regularMarketDayLow { get; set; }
+    //    public int regularMarketVolume { get; set; }
+    //    public float regularMarketPreviousClose { get; set; }
+    //    public int regularMarketOpen { get; set; }
+    //    public int averageDailyVolume3Month { get; set; }
+    //    public int averageDailyVolume10Day { get; set; }
+    //    public float fiftyTwoWeekLowChange { get; set; }
+    //    public string fiftyTwoWeekRange { get; set; }
+    //    public float fiftyTwoWeekHighChange { get; set; }
+    //    public float fiftyTwoWeekHighChangePercent { get; set; }
+    //    public int fiftyTwoWeekLow { get; set; }
+    //    public float fiftyTwoWeekHigh { get; set; }
+    //    public string symbol { get; set; }
+    //    public Historicaldataprice[] historicalDataPrice { get; set; }
+    //    public string[] validRanges { get; set; }
+    //    public string[] validIntervals { get; set; }
+    //}
+
+    //public class Historicaldataprice
+    //{
+    //    public int date { get; set; }
+    //    public int open { get; set; }
+    //    public int high { get; set; }
+    //    public int low { get; set; }
+    //    public float close { get; set; }
+    //    public int volume { get; set; }
+    //    public float adjustedClose { get; set; }
+    //}
 
 }
+

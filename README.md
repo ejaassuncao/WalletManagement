@@ -41,7 +41,7 @@
 
 ### [Presentation]
 - MCV
-- Blabor
+- Blazor
 - WebAPI
 - Graphql
 - Console

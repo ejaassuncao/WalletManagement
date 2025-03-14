@@ -14,7 +14,7 @@ jobs:
 
       # 2️⃣ Compilar o projeto (se for .NET)
       - name: Compilar aplicação .NET
-        run: dotnet publish -c Release -o ./publish
+        run: dotnet publish "/src/1 - Presentation/Presentation.Api/Presentation.Api.csproj" -c Release -o ./publish /p:UseAppHost=false
 
       # 3️⃣ Enviar arquivos via SSH para Windows Server
       - name: Copiar arquivos para o Windows Server

@@ -1,0 +1,39 @@
+name: Deploy para Windows Server com IIS
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # GitHub Actions rodará em um ambiente Linux
+
+    steps:
+      # 1️⃣ Faz checkout do código
+      - name: Checkout do repositório
+        uses: actions/checkout@v3
+
+      # 2️⃣ Compilar o projeto (se for .NET)
+      - name: Compilar aplicação .NET
+        run: dotnet publish -c Release -o ./publish
+
+      # 3️⃣ Enviar arquivos via WinRM
+      - name: Copiar arquivos para o Windows Server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.WIN_HOST }}
+          username: ${{ secrets.WIN_USER }}
+          password: ${{ secrets.WIN_PASS }}
+          source: "./publish/*"
+          target: "C:/inetpub/wwwroot/minhaapp"
+
+      # 4️⃣ Reiniciar o IIS para aplicar mudanças
+      - name: Reiniciar IIS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.WIN_HOST }}
+          username: ${{ secrets.WIN_USER }}
+          password: ${{ secrets.WIN_PASS }}
+          script: |
+            iisreset

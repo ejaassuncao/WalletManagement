@@ -1,9 +1,7 @@
 name: Deploy para Windows Server com IIS
 
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:  # Permite execução manual
 
 jobs:
   deploy:
@@ -36,4 +34,5 @@ jobs:
           username: ${{ secrets.WIN_USER }}
           password: ${{ secrets.WIN_PASS }}
           script: |
+            Copy-Item -Path "C:/inetpub/wwwroot/minhaapp" -Destination "C:/inetpub/wwwroot/backup/$(Get-Date -Format yyyyMMdd_HHmmss)" -Recurse
             iisreset

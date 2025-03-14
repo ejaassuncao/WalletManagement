@@ -24,7 +24,7 @@ jobs:
 
       # 4️⃣ Compilar a aplicação .NET no diretório correto
       - name: Compilar aplicação .NET
-        working-directory: "./src/1 - Presentation/Presentation.Api"
+        working-directory: "src/1 - Presentation/Presentation.Api"
         run: |
           dotnet restore
           dotnet publish Presentation.Api.csproj -c Release -o ../../publish /p:UseAppHost=false

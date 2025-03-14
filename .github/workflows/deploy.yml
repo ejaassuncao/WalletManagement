@@ -11,22 +11,29 @@ jobs:
       # 1️⃣ Faz checkout do código
       - name: Checkout do repositório
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Garante que todo o histórico seja baixado
 
-      # 2️⃣ Criar diretório de publicação
+      # 2️⃣ Listar arquivos do repositório para depuração
+      - name: Listar arquivos do repositório
+        run: ls -R
+
+      # 3️⃣ Criar diretório de publicação
       - name: Criar diretório de publicação
         run: mkdir -p ./publish
 
-      # 3️⃣ Compilar a aplicação .NET
+      # 4️⃣ Compilar a aplicação .NET no diretório correto
       - name: Compilar aplicação .NET
+        working-directory: "./src/1 - Presentation/Presentation.Api"
         run: |
-          dotnet restore "./src/1 - Presentation/Presentation.Api/Presentation.Api.csproj"
-          dotnet publish "./src/1 - Presentation/Presentation.Api/Presentation.Api.csproj" -c Release -o ./publish /p:UseAppHost=false
+          dotnet restore
+          dotnet publish Presentation.Api.csproj -c Release -o ../../publish /p:UseAppHost=false
 
-      # 4️⃣ Listar arquivos publicados para depuração
+      # 5️⃣ Listar arquivos publicados para depuração
       - name: Listar arquivos publicados
         run: ls -l ./publish
 
-      # 5️⃣ Criar backup e limpar a pasta do IIS antes da cópia
+      # 6️⃣ Criar backup e limpar pasta do IIS antes da cópia
       - name: Criar backup e limpar pasta do IIS
         uses: appleboy/ssh-action@master
         with:
@@ -42,7 +49,7 @@ jobs:
             }
             New-Item -Path "C:\inetpub\wwwroot\minhaapp" -ItemType Directory -Force
 
-      # 6️⃣ Transferir arquivos publicados para o servidor Windows
+      # 7️⃣ Transferir arquivos publicados para o servidor Windows
       - name: Transferir arquivos para IIS
         uses: appleboy/scp-action@master
         with:
@@ -52,7 +59,7 @@ jobs:
           source: "./publish/*"
           target: "C:/inetpub/wwwroot/minhaapp"
 
-      # 7️⃣ Reiniciar IIS para aplicar mudanças
+      # 8️⃣ Reiniciar IIS para aplicar mudanças
       - name: Reiniciar IIS
         uses: appleboy/ssh-action@master
         with:

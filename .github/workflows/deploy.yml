@@ -10,26 +10,39 @@ jobs:
     steps:
       # 1️⃣ Faz checkout do código
       - name: Checkout do repositório
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # 2️⃣ Compilar o projeto (se for .NET)
+      # 2️⃣ Criar diretório de publicação
+      - name: Criar diretório de publicação
+        run: mkdir -p ./publish
+
+      # 3️⃣ Compilar a aplicação .NET
       - name: Compilar aplicação .NET
-        run: dotnet publish "./src/1 - Presentation/Presentation.Api/Presentation.Api.csproj" -c Release -o ./publish /p:UseAppHost=false
+        run: |
+          dotnet restore "./src/1 - Presentation/Presentation.Api/Presentation.Api.csproj"
+          dotnet publish "./src/1 - Presentation/Presentation.Api/Presentation.Api.csproj" -c Release -o ./publish /p:UseAppHost=false
 
-      # 3️⃣ Enviar arquivos via SSH para Windows Server
-      - name: Copiar arquivos para o Windows Server
+      # 4️⃣ Listar arquivos publicados para depuração
+      - name: Listar arquivos publicados
+        run: ls -l ./publish
+
+      # 5️⃣ Criar backup e limpar a pasta do IIS antes da cópia
+      - name: Criar backup e limpar pasta do IIS
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.WIN_HOST }}
           username: ${{ secrets.WIN_USER }}
           password: ${{ secrets.WIN_PASS }}
           script: |
-            New-Item -Path "C:\inetpub\wwwroot\backup" -ItemType Directory -Force
-            Copy-Item -Path "C:\inetpub\wwwroot\minhaapp\*" -Destination "C:\inetpub\wwwroot\backup\$(Get-Date -Format yyyyMMdd_HHmmss)" -Recurse -Force
-            Remove-Item -Path "C:\inetpub\wwwroot\minhaapp\*" -Recurse -Force
+            $backupPath = "C:\inetpub\wwwroot\backup\$(Get-Date -Format yyyyMMdd_HHmmss)"
+            New-Item -Path $backupPath -ItemType Directory -Force
+            if (Test-Path "C:\inetpub\wwwroot\minhaapp") {
+              Copy-Item -Path "C:\inetpub\wwwroot\minhaapp\*" -Destination $backupPath -Recurse -Force
+              Remove-Item -Path "C:\inetpub\wwwroot\minhaapp\*" -Recurse -Force
+            }
             New-Item -Path "C:\inetpub\wwwroot\minhaapp" -ItemType Directory -Force
 
-      # 4️⃣ Transferir arquivos do GitHub para o servidor via SSH
+      # 6️⃣ Transferir arquivos publicados para o servidor Windows
       - name: Transferir arquivos para IIS
         uses: appleboy/scp-action@master
         with:
@@ -39,7 +52,7 @@ jobs:
           source: "./publish/*"
           target: "C:/inetpub/wwwroot/minhaapp"
 
-      # 5️⃣ Reiniciar o IIS para aplicar mudanças
+      # 7️⃣ Reiniciar IIS para aplicar mudanças
       - name: Reiniciar IIS
         uses: appleboy/ssh-action@master
         with:
